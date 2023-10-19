@@ -590,8 +590,12 @@
     font-size: 1.2rem;
     color: #FFF;
     cursor: pointer;
-    transition: .3s;
-  }
+    transition: 0.3s;
+}
+
+.btn a{
+  color:#fff;
+}
   
   .btn:hover {
     transform: translateY(-5px);
@@ -936,6 +940,25 @@
     color: red;
 }
 
+
+/*Point History Table*/
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+th {
+  background-color: #eee;
+}
+
+.date-column {
+width: 100px;
+}
 
   
   

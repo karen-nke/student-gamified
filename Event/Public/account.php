@@ -83,6 +83,8 @@ $progress = $levelData['progress'];
     <h2 class="title"><br>Welcome, <?php echo $username; ?>!</h2>
 </div>
 
+<div class ="container">
+
 <div class="profile-info">
     <p class="points">Points: <?php echo $points; ?></p>
     <p class="level">Level: <?php echo $userLevel; ?></p>
@@ -161,24 +163,13 @@ $eventsStmt->close();
         ?>
     </div>
 
-    <!-- Display point history -->
-    <h2>Point History</h2>
-    <?php
-    // Fetch and display point history
-    $pointHistoryQuery = "SELECT * FROM point_history WHERE username = ?";
-    $pointHistoryStmt = $conn->prepare($pointHistoryQuery);
-    $pointHistoryStmt->bind_param("s", $username);
-    $pointHistoryStmt->execute();
-    $pointHistoryResult = $pointHistoryStmt->get_result();
+    <button class="btn"><a href="point_history.php">Point History</a></button>
 
-    while ($row = $pointHistoryResult->fetch_assoc()) {
-        echo "<p>{$row['added_at']} - {$row['event_description']} ({$row['points_added']} points)</p>";
-    }
+   
 
-    $pointHistoryStmt->close();
-    ?>
-
+    
 </div>
+</div>    
 
 </body>
 </html>
