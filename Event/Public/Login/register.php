@@ -63,17 +63,58 @@ if (isset($_POST['submit'])) {
 
     }
 
-    function validatePassword(field){
-        if(field=="") return "No Password Entered.\\n"
-        else if (field.length < 8) return "Password must be at least 8 characters.\n"
-        else if (!/[a-z]/.test(field) || !/[A-Z]/.test(field) || !/[0-9]/.test(field)) return "Password must require at least one uppercase, one lowercase and one number\n." 
-        return ""
-    }
-
     function validateEmail(field){
         if (field=="") return "No Email Entered.\n"
         else if (!((field.indexOf(".")>0) && (field.indexOf("@")>0)) || /[^a-zA-Z0-9.@_-]/.test(field)) return "The Email Address is invalid.\n"
         return""
+    }
+
+    function togglePassword() {
+                var passwordField = document.getElementById("password");
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                } else {
+                    passwordField.type = "password";
+                }
+            }
+
+    function validatePassword(field) {
+        var feedbackElement = document.getElementById("password-feedback");
+        if (field == "") {
+            feedbackElement.innerHTML = "No Password Entered.";
+            feedbackElement.style.color = "red";
+            return false;
+        } else if (field.length < 8) {
+            feedbackElement.innerHTML = "Password must be at least 8 characters.";
+            feedbackElement.style.color = "red";
+            return false;
+        } else if (!/[a-z]/.test(field) || !/[A-Z]/.test(field) || !/[0-9]/.test(field)) {
+            feedbackElement.innerHTML = "Password must require at least one uppercase, one lowercase, and one number.";
+            feedbackElement.style.color = "red";
+            return false;
+        } else {
+            feedbackElement.innerHTML = "Password is valid.";
+            feedbackElement.style.color = "green";
+            return true;
+        }
+    }
+
+    //Hint during input password 
+
+    function onPasswordInput() {
+        var passwordField = document.getElementById("password");
+        validatePassword(passwordField.value);
+    }
+
+    //Checkbox to show typed password 
+
+    function togglePassword() {
+        var passwordField = document.getElementById("password");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
     }
 
 </script>
@@ -126,51 +167,6 @@ if (isset($_POST['submit'])) {
             <p class="login-register-text">Already have account? <a href="login.php"><br>Login Here.</a></p>
         </form>
 
-        <script>
-            function togglePassword() {
-                var passwordField = document.getElementById("password");
-                if (passwordField.type === "password") {
-                    passwordField.type = "text";
-                } else {
-                    passwordField.type = "password";
-                }
-            }
-
-            function validatePassword(field) {
-        var feedbackElement = document.getElementById("password-feedback");
-        if (field == "") {
-            feedbackElement.innerHTML = "No Password Entered.";
-            feedbackElement.style.color = "red";
-            return false;
-        } else if (field.length < 8) {
-            feedbackElement.innerHTML = "Password must be at least 8 characters.";
-            feedbackElement.style.color = "red";
-            return false;
-        } else if (!/[a-z]/.test(field) || !/[A-Z]/.test(field) || !/[0-9]/.test(field)) {
-            feedbackElement.innerHTML = "Password must require at least one uppercase, one lowercase, and one number.";
-            feedbackElement.style.color = "red";
-            return false;
-        } else {
-            feedbackElement.innerHTML = "Password is valid.";
-            feedbackElement.style.color = "green";
-            return true;
-        }
-    }
-
-    function onPasswordInput() {
-        var passwordField = document.getElementById("password");
-        validatePassword(passwordField.value);
-    }
-
-    function togglePassword() {
-        var passwordField = document.getElementById("password");
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-        } else {
-            passwordField.type = "password";
-        }
-    }
-        </script>
 
 
 
