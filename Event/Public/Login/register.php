@@ -110,9 +110,10 @@ if (isset($_POST['submit'])) {
                 <input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
             </div>
             <div class="input-group">
-                <input type="password" placeholder="Password" name="password" id="password" value="<?php echo $_POST['password']; ?>" required>
-             
+            <input type="password" placeholder="Password" name="password" id="password" value="<?php echo $_POST['password']; ?>" required oninput="onPasswordInput()">
+
             </div>
+            <div id="password-feedback"></div>
             <div class="input-group-cb">
                 <input type="checkbox" onclick="togglePassword()"> Show Password   
             </div>
@@ -134,6 +135,41 @@ if (isset($_POST['submit'])) {
                     passwordField.type = "password";
                 }
             }
+
+            function validatePassword(field) {
+        var feedbackElement = document.getElementById("password-feedback");
+        if (field == "") {
+            feedbackElement.innerHTML = "No Password Entered.";
+            feedbackElement.style.color = "red";
+            return false;
+        } else if (field.length < 8) {
+            feedbackElement.innerHTML = "Password must be at least 8 characters.";
+            feedbackElement.style.color = "red";
+            return false;
+        } else if (!/[a-z]/.test(field) || !/[A-Z]/.test(field) || !/[0-9]/.test(field)) {
+            feedbackElement.innerHTML = "Password must require at least one uppercase, one lowercase, and one number.";
+            feedbackElement.style.color = "red";
+            return false;
+        } else {
+            feedbackElement.innerHTML = "Password is valid.";
+            feedbackElement.style.color = "green";
+            return true;
+        }
+    }
+
+    function onPasswordInput() {
+        var passwordField = document.getElementById("password");
+        validatePassword(passwordField.value);
+    }
+
+    function togglePassword() {
+        var passwordField = document.getElementById("password");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
         </script>
 
 
