@@ -25,7 +25,7 @@
                                         
                                         <div class="cta">
                                                 <a href="Login/login.php">Login</a>
-                                                <a href="Login/logout.php">Logout</a>
+                                                <a href="Login/register.php">Register</a>
 
                                         </div>
                                 </div>  

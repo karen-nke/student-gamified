@@ -15,7 +15,7 @@
                         </div>
                 </div>
 
-            <a href="index.php">Leaderboard</a>
+            <a href="leaderboard.php">Leaderboard</a>
           
         
         </div>

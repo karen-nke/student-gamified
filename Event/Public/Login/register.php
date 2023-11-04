@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
                         VALUES ('$username', '$email', '$password')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                echo "<script>alert('Succesfully Registered')</script>";
+                echo "<script>alert('Succesfully Registered'); window.location.href = 'login.php';</script>";
                 $username = "";
                 $email = "";
                 $_POST['password'] = "";
@@ -63,58 +63,17 @@ if (isset($_POST['submit'])) {
 
     }
 
+    function validatePassword(field){
+        if(field=="") return "No Password Entered.\\n"
+        else if (field.length < 8) return "Password must be at least 8 characters.\n"
+        else if (!/[a-z]/.test(field) || !/[A-Z]/.test(field) || !/[0-9]/.test(field)) return "Password must require at least one uppercase, one lowercase and one number\n." 
+        return ""
+    }
+
     function validateEmail(field){
         if (field=="") return "No Email Entered.\n"
         else if (!((field.indexOf(".")>0) && (field.indexOf("@")>0)) || /[^a-zA-Z0-9.@_-]/.test(field)) return "The Email Address is invalid.\n"
         return""
-    }
-
-    function togglePassword() {
-                var passwordField = document.getElementById("password");
-                if (passwordField.type === "password") {
-                    passwordField.type = "text";
-                } else {
-                    passwordField.type = "password";
-                }
-            }
-
-    function validatePassword(field) {
-        var feedbackElement = document.getElementById("password-feedback");
-        if (field == "") {
-            feedbackElement.innerHTML = "No Password Entered.";
-            feedbackElement.style.color = "red";
-            return false;
-        } else if (field.length < 8) {
-            feedbackElement.innerHTML = "Password must be at least 8 characters.";
-            feedbackElement.style.color = "red";
-            return false;
-        } else if (!/[a-z]/.test(field) || !/[A-Z]/.test(field) || !/[0-9]/.test(field)) {
-            feedbackElement.innerHTML = "Password must require at least one uppercase, one lowercase, and one number.";
-            feedbackElement.style.color = "red";
-            return false;
-        } else {
-            feedbackElement.innerHTML = "Password is valid.";
-            feedbackElement.style.color = "green";
-            return true;
-        }
-    }
-
-    //Hint during input password 
-
-    function onPasswordInput() {
-        var passwordField = document.getElementById("password");
-        validatePassword(passwordField.value);
-    }
-
-    //Checkbox to show typed password 
-
-    function togglePassword() {
-        var passwordField = document.getElementById("password");
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-        } else {
-            passwordField.type = "password";
-        }
     }
 
 </script>
@@ -151,12 +110,7 @@ if (isset($_POST['submit'])) {
                 <input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
             </div>
             <div class="input-group">
-            <input type="password" placeholder="Password" name="password" id="password" value="<?php echo $_POST['password']; ?>" required oninput="onPasswordInput()">
-
-            </div>
-            <div id="password-feedback"></div>
-            <div class="input-group-cb">
-                <input type="checkbox" onclick="togglePassword()"> Show Password   
+                <input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>
             </div>
             <div class="input-group">
                 <input type="password" placeholder="Confirm Password" name="confirmpassword" value="<?php echo $_POST['confirmpassword'] ?>" required>
@@ -170,10 +124,7 @@ if (isset($_POST['submit'])) {
 
 
 
-
-
     </div>
-   
 </body>
 
 </html>
