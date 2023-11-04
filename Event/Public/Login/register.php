@@ -11,6 +11,7 @@ if (isset($_POST['submit'])) {
     $email = trim($_POST['email']);
     $password = md5($_POST['password']);
     $confirmpassword = md5($_POST['confirmpassword']);
+    $gender = $_POST['gender'];
 
     if ($password == $confirmpassword) {
         $sql = "SELECT * FROM users WHERE email='" . $email . "'";
@@ -23,8 +24,8 @@ if (isset($_POST['submit'])) {
         } else if (mysqli_num_rows($result2) > 0) {
             echo "<script>alert('Username Already Exists.')</script>";
         } else {
-            $sql = "INSERT INTO users (username, email, password)
-                        VALUES ('$username', '$email', '$password')";
+            $sql = "INSERT INTO users (username, email, password, gender)
+                        VALUES ('$username', '$email', '$password','$gender')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 echo "<script>alert('Succesfully Registered'); window.location.href = 'login.php';</script>";
@@ -48,11 +49,21 @@ if (isset($_POST['submit'])) {
         fail += validateEmail(form.email.value)
         fail += validatePassword(form.password.value)
 
+        const gender = form.gender.value;
+        if (!gender) {
+            alert("Please select a gender.");
+            return false;
+        }
+
         if(fail=="") return true //if empty string, return true = pass validation
         else {alert(fail); return false}
 
        
     }
+
+
+
+   
 
 
     function validateUsername(field){
@@ -109,6 +120,25 @@ if (isset($_POST['submit'])) {
             <div class="input-group">
                 <input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
             </div>
+            <select
+ 
+                name="gender">
+
+                    
+                <option
+                
+                value="male">Male</option>
+
+                    
+                <option
+                
+                value="female">Female</option>
+
+                    
+                <option
+                
+                value="rather_not_to_say">Rather Not To Say</option>
+                </select>
             <div class="input-group">
                 <input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>
             </div>

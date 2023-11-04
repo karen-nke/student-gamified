@@ -12,6 +12,17 @@ if (!isset($_SESSION["username"])) {
 
 $username = $_SESSION["username"];
 
+// Fetch user data including gender and profile picture
+$userDataQuery = "SELECT gender FROM users WHERE username = ?";
+$userDataStmt = $conn->prepare($userDataQuery);
+$userDataStmt->bind_param("s", $username);
+$userDataStmt->execute();
+$userDataResult = $userDataStmt->get_result();
+$userData = $userDataResult->fetch_assoc();
+$gender = $userData['gender'];
+$userDataStmt->close();
+
+
 //$points = isset($_SESSION[$username]) ? $_SESSION[$username] : 0; 
 //This is used previously but cannot be used, because when user first logged in, the point doesnt showed unless user submit the form.
 
@@ -90,7 +101,15 @@ width: 50%;
 </style>
 
 <div class="container">
-    <img src="Image/Profile_Girl.png" style="width:200px;height:200px;" class="logo-centered"></a>
+    <?php
+    if ($gender === 'female') {
+        echo '<img src="Image/Profile_Female.png" style="width:200px;height:200px;" class="logo-centered"></a>';
+    } elseif ($gender === 'male') {
+        echo '<img src="Image/Profile_Male.png" style="width:200px;height:200px;" class="logo-centered"></a>';
+    } else {
+        echo '<img src="Image/Profile.png" style="width:200px;height:200px;" class="logo-centered"></a>';
+    }
+    ?>
     
     <h2 class="title"><br>Welcome, <?php echo $username; ?>!</h2>
 </div>
@@ -186,4 +205,3 @@ $eventsStmt->close();
 
 </body>
 </html>
-
