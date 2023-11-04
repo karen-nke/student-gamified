@@ -15,59 +15,40 @@
 
         <?php require_once 'Part/header.php' ?>
 
-        <div class="page-container">
-                <div>
-                        <h2 class="title"><br>Home</h2>
-                </div>
+       
+                <section class="hero">
+                        <div class ="container">
+                                <div class="mid">
+                                <div class="desc">
+                                        <h2>Unlock Your Potential: <br>Soft Skills Mastery Journey </h2>
+                                        <p> Embark on a transformative journey of self-discovery and skill enhancement with our innovative soft skills development platform. Dive into interactive modules, engage in practical tasks, and earn badges as you level up your expertise. Join a community of learners, track your progress, and discover the power of combining professionalism with the fun of gamified learning. Your journey to unlocking a new realm of possibilities starts here. </p>
+                                        
+                                        <div class="cta">
+                                                <a href="Login/login.php">Login</a>
+                                                <a href="Login/logout.php">Logout</a>
 
-                <div class="container">
-
-                        <?php
-                        // Check if the user is logged in
-                        if (isset($_SESSION["username"])) {
-                                // User is logged in, show the form
-                        ?>
-                                <form action="process_form_b.php" method="post" class="login-email">
-                                        <p class="login-text" style='font-size:2rem; font-weight:800;'>Input Event</p>
-
-                                        <div class="input-group">
-                                                <?php
-                                                // Assuming you have a login system and the username is stored in the session
-                                                if (isset($_SESSION["username"])) {
-                                                        $username = $_SESSION["username"];
-                                                        echo "<input type='text' id='username' placeholder='Username' name='username' value='$username' readonly>";
-                                                } else {
-                                                        echo "<input type='text' id='username' placeholder='Username' name='username' required>";
-                                                }
-                                                ?>
                                         </div>
+                                </div>  
 
-                                        <div class="input-group">
-                                                <input type="text" id="event" placeholder="Event Name" name="event" required>
-                                        </div>
+                                
 
-                                        <div class="input-group">
-                                                <input type="text" id="club" placeholder="Club" name="club" required>
-                                        </div>
+                                <img src="Image/Home_Banner.png" />
+                                
+                                </div>
 
-                                        <div class="input-group">
-                                                <input type="datetime-local" id="datetime" placeholder="Date & Time of the Event" name="datetime" required>
-                                        </div>
 
-                                        <button class="btn" type="submit">Submit</button>
-                                </form>
+                        </div>
 
-                        <?php
-                        } else {
-                                // User is not logged in, show a message or redirect to the login page
-                                echo "<p>Please <a href='Login/login.php'>login</a> first.</p>";
-                        }
-                        ?>
+                </section>
 
-                </div>
 
-                <?php require_once 'Part/_footer.php' ?>
+                
+                        
 
+     
+
+                        
 </body>
 
 </html>
+
