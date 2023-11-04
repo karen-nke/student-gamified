@@ -163,7 +163,6 @@ $eventsStmt->close();
         ?>
     </div>
 
-
     <button class="btn"><a href="point_history.php">Point History</a></button>
 
    

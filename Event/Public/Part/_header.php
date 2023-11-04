@@ -38,7 +38,7 @@
 
 
 <div class="container">
-        <a href="index.php"><img src="Image/PopHolic_Logo.png" style="width:200px;height:200px;" class="logo-centered"></a>
+        <a href="index.php"><img src="Image/Big_Logo.png" style="width:200px;height:200px;" class="logo-centered"></a>
 
 
 
@@ -47,29 +47,18 @@
         <div class="navbar">
                 <a href="index.php">Home</a>
                 <div class="dropdown">
-                        <button class="dropbtn">Product
+                        <button class="dropbtn">Module
                                 <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
-                                <a href="funko_page.php?type=all">Funko Pop</a>
-                                <a href="banpresto_page.php?type=all">Banpresto</a>
+                                <a href="funko_page.php">Leadership</a>
+                                <a href="banpresto_page.php">Communication</a>
+                                <a href="banpresto_page.php">Teamwork</a>
                         </div>
                 </div>
-                <a href="about_us.php">About Us</a>
-                <a href="contact_us.php">Contact Us</a>
-                <a href="faq.php">FAQs</a>
-
-                <div class="dropdown">
-                        <button class="dropbtn">Other
-                                <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                                <a href="Q&A.php">Q&A</a>
-                                <a href="testimonial.php">Review</a>
-                                
-                        </div>
-                </div>
-        
+                <a href="about_us.php">Events</a>
+                <a href="contact_us.php">Leaderboard</a>
+                
 
         </div>
 

@@ -51,7 +51,7 @@
       float: left;
       display:block;
       font-size: 16px;
-      color: #376189;
+      color: #045174;
       text-align: center;
       width:150px;
       padding: 14px 16px;
@@ -59,7 +59,7 @@
     }
   
     .navbar a:hover, .dropdown:hover .dropbtn {
-      color: #1CBDB9;
+      color: #E87A00;
           
    }
   
@@ -77,7 +77,7 @@
       font-size: 16px; 
       border: none;
       outline: none;
-      color: #376189;
+      color: #045174;
       padding: 14px 16px;
       background-color: inherit;
       font-family: inherit; /* Important for vertical align on mobile phones */
@@ -99,7 +99,7 @@
     /* Links inside the dropdown */
     .dropdown-content a {
       float: none;
-      color: #376189;
+      color: #045174;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
@@ -615,7 +615,7 @@
   .topnav {
     position: relative;
     overflow: hidden;
-    background-color: #376189;
+    background-color: #045174;
   }
   
   .topnav a {
