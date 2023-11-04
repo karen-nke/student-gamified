@@ -17,7 +17,7 @@
 
         <div class="page-container">
                 <div>
-                        <h2 class="title"><br>Home</h2>
+                        <h2 class="title"><br>Events Points Tracker</h2>
                 </div>
 
                 <div class="container">

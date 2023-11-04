@@ -56,7 +56,7 @@
                                 <a href="banpresto_page.php">Teamwork</a>
                         </div>
                 </div>
-                <a href="about_us.php">Events</a>
+                <a href="event.php">Events</a>
                 <a href="contact_us.php">Leaderboard</a>
                 
 

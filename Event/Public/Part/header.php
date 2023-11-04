@@ -3,7 +3,7 @@
     <div class="menu-item">
         <div class ="menu">
             <a href="index.php">Home</a>
-            <a href="index.php">Events</a>
+            <a href="event.php">Events</a>
             <div class="dropdown">
                         <button class="dropbtn">Module
                                 <i class="fa fa-caret-down"></i>
@@ -25,9 +25,10 @@
                 session_start();
 
                 if (isset($_SESSION['username'])) {
+                    
                         echo "
-                        <button class=\"login-button\"><a href=\"index.php\">Account</a></button>
-                        <button class=\"register-button\"><a href=\"index.php\">Logout</a></button>
+                        <button class=\"login-button\"><a href=\"account.php\">Account</a></button>
+                        <button class=\"register-button\"><a href=\"Login/logout.php\">Logout</a></button>
                 
 
                      
@@ -37,8 +38,8 @@
                 } else {
 
                         echo "
-                        <button class=\"login-button\"><a href=\"index.php\">Login</a></button>
-                        <button class=\"register-button\"><a href=\"index.php\">Register</a></button>
+                        <button class=\"login-button\"><a href=\"Login/login.php\">Login</a></button>
+                        <button class=\"register-button\"><a href=\"Login/register.php\">Register</a></button>
                     
                 ";
                 }
@@ -47,13 +48,15 @@
                 ?>
       
     </div>
-    <img src="../Image/Logo.png" />
+    <img src="Image/Logo.png" />
 </div>
 
     
 
 
 <style>
+
+    /* Navigation Bar */
 
     .navbar{
         width: 100%; 
@@ -63,7 +66,7 @@
     }
 
     .menu-item {
-        width: 651px;
+
         align-items: center;
         gap: 24px;
         display: inline-flex;
