@@ -77,9 +77,21 @@ $progress = $levelData['progress'];
     border-radius: 5px;
 }
 
+.logo-centered {
+
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%;
+
+
+}  
+
 </style>
 
 <div class="container">
+    <img src="Image/Profile_Girl.png" style="width:200px;height:200px;" class="logo-centered"></a>
+    
     <h2 class="title"><br>Welcome, <?php echo $username; ?>!</h2>
 </div>
 

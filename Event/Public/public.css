@@ -16,15 +16,30 @@
     color: #555;
   }
   
+  title{
+    color: #E87A00;
+    font-size: 54px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-align: center;
+  }
   
   .container{
     max-width: 1300px;
     margin: auto;
-    padding-left: 25px;
-    padding-right: 25px;
+   padding: 25px;
+
     
   
   }
+
+  .logo-centered {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    }  
 
   /* Hero Banner */
 
@@ -153,24 +168,7 @@
     display: table;
   }
   
-  .title{
-    text-align: center;
-    margin: 0px auto 80px;
-    position: relative;
-    line-height: 60px;
-    color: #555;
-  }
-  .title::after{
-    content: '';
-    background: #a3a3a3;
-    width: 80px;
-    height: 5px;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+
   
   .product-container .btn{
     display: block;
@@ -760,11 +758,11 @@
   }
   
   .title{
+    color: #E87A00;
+    font-size: 54px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
     text-align: center;
-    margin: 0px auto 80px;
-    position: relative;
-    line-height: 60px;
-    color: #555;
   }
   .title::after{
     content: '';
