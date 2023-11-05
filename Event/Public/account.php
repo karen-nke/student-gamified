@@ -60,6 +60,22 @@ function getLevel($points) {
     return array('level' => "Unknown", 'progress' => 0);
 }
 
+// Function to get user's leaderboard position
+function getUserPosition($conn, $username) {
+    $positionQuery = "SELECT COUNT(DISTINCT username) AS position FROM users WHERE points >= (SELECT points FROM users WHERE username = ?)";
+    $positionStmt = $conn->prepare($positionQuery);
+    $positionStmt->bind_param("s", $username);
+    $positionStmt->execute();
+    $positionResult = $positionStmt->get_result();
+    $positionRow = $positionResult->fetch_assoc();
+    $userPosition = $positionRow['position'];
+    $positionStmt->close();
+    return $userPosition;
+}
+
+// Get user's leaderboard position
+$userPosition = getUserPosition($conn, $username);
+
 $levelData = getLevel($points); 
 $userLevel = $levelData['level'];
 $progress = $levelData['progress'];
@@ -174,8 +190,16 @@ width: 50%;
         </div>
 
         <div class="container">
-            <p class="Ranking">Current Ranking: <span><?php echo $userLevel; ?></span></p>
+            <p class="Ranking">Current Ranking: <span><?php echo $userPosition; ?></span></p>
         </div>
+
+        <?php
+
+            if ($userPosition == 1) {
+            echo '<img src="Image/One_Badge.png" alt="No. 1 Badge">';
+            }
+         ?>
+
   
         
         
