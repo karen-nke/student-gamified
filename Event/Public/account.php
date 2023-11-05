@@ -39,16 +39,16 @@ $pointsStmt->close();
 
 function getLevel($points) {
     $levels = array(
-        1 => array('min' => 0, 'max' => 100),
-        2 => array('min' => 101, 'max' => 200),
-        3 => array('min' => 201, 'max' => 300),
-        4 => array('min' => 301, 'max' => 400),
-        5 => array('min' => 401, 'max' => 500),
-        6 => array('min' => 501, 'max' => 600),
-        7 => array('min' => 601, 'max' => 700),
-        8 => array('min' => 701, 'max' => 800),
-        9 => array('min' => 801, 'max' => 900),
-        10 => array('min' => 901, 'max' => PHP_INT_MAX) 
+        0 => array('min' => 0, 'max' => 100),
+        1 => array('min' => 101, 'max' => 200),
+        2 => array('min' => 201, 'max' => 300),
+        3 => array('min' => 301, 'max' => 400),
+        4 => array('min' => 401, 'max' => 500),
+        5 => array('min' => 501, 'max' => 600),
+        6 => array('min' => 601, 'max' => 700),
+        7 => array('min' => 701, 'max' => 800),
+        8 => array('min' => 801, 'max' => 900),
+        9 => array('min' => 901, 'max' => PHP_INT_MAX) 
     );
 
     foreach ($levels as $level => $range) {
@@ -224,35 +224,63 @@ width: 50%;
         <div class="badge-container">
             <p>Badges to be Earned</p>
 
-            <img src="Image/One_Badge.png" alt="No. 1 Badge">
-            <img src="Image/One_Badge.png" alt="No. 1 Badge">
-            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+            <img src="Image/Leadership_Locked.png" alt="No. 1 Badge">
+            <img src="Image/Communication_Locked.png" alt="No. 1 Badge">
+            <img src="Image/Teamwork_Locked.png" alt="No. 1 Badge">
           
             
             
         </div>
 
         <div class="badge-container">
-            <p>Achievmenet to be Unlocked</p>
+            <p>Acheivement to be Unlocked</p>
 
-            <img src="Image/One_Badge.png" alt="No. 1 Badge">
-            <img src="Image/One_Badge.png" alt="No. 1 Badge">
-            <img src="Image/One_Badge.png" alt="No. 1 Badge">
-            <img src="Image/One_Badge.png" alt="No. 1 Badge">
-            <img src="Image/One_Badge.png" alt="No. 1 Badge">
-            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+            <?php 
+            if ($points >= 1) {
+                echo ' <img src="Image/Points_Unlocked.png" alt="Points Badge">';
+                }else{
+                    echo ' <img src="Image/Points_Locked.png" alt="Points Badge">';
+                }
+            ?>
+
+           
+            <img src="Image/Module_Locked.png" alt="Module Badge">
+            <img src="Image/Complete_Locked.png" alt="Complete Badge">
+            <?php
+
+                if ($userRank == 1) {
+                echo '<img src="Image/Rank_Unlocked.png" alt="Rank Badge">';
+                }else{
+                    echo ' <img src="Image/Rank_Locked.png" alt="Rank Badge">';
+                }
+
+                if ($userLevel >= 1) {
+                    echo '<img src="Image/Lvl1_Unlocked.png" alt="Rank Badge">';
+                }else{
+                    echo '<img src="Image/Lvl1_Locked.png" alt="Rank Badge">';
+
+                }
+
+                if ($userLevel >= 5) {
+                    echo '<img src="Image/Lvl5_Unlocked.png" alt="Rank Badge">';
+                }else{
+                    echo '<img src="Image/Lvl5_Locked.png" alt="Rank Badge">';
+
+                }
+              
+              
+                   
+
+
+            ?>
+
             
             
         </div>
        
        
 
-        <?php
-
-            if ($userRank == 1) {
-            echo '<img src="Image/One_Badge.png" alt="No. 1 Badge">';
-            }
-         ?>
+      
 
   
         
