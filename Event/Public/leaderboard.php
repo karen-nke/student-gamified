@@ -25,6 +25,14 @@ require_once('db_connect.php');
         <h2>Leaderboard</h2>
 
         <div class="container">
+
+
+             <?php
+                        // Check if the user is logged in
+                        if (isset($_SESSION["username"])) {
+                                // User is logged in, show the form
+            ?>
+
             <table>
                 <tr>
                     <th>Rank</th>
@@ -60,6 +68,13 @@ require_once('db_connect.php');
                 ?>
 
             </table>
+
+            <?php
+                        } else {
+                                // User is not logged in, show a message or redirect to the login page
+                                echo "<p>Please <a href='Login/login.php'>login</a> first.</p>";
+                        }
+                        ?>
         </div>
     </section>
 
