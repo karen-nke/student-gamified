@@ -95,8 +95,39 @@ margin-left: auto;
 margin-right: auto;
 width: 50%;
 
-
 }  
+
+.profile-info{
+    padding: 20px;
+}
+
+.profile-info .container{
+    width: 100%;
+    height: 100px; 
+    background: white; 
+    border: 2px #E87A00 solid;
+    padding:50px;
+    position: relative;
+    margin: 25px;
+    display:flex;
+    justify-content: space-between;
+}
+
+.points, .level, .ranking{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+  
+    color: #E87A00;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 500;
+}
+
+
 
 </style>
 
@@ -116,44 +147,66 @@ width: 50%;
 
 <div class ="container">
 
-<div class="profile-info">
-    <p class="points">Points: <?php echo $points; ?></p>
-    <p class="level">Level: <?php echo $userLevel; ?></p>
+    <div class="profile-info">
+        <!-- Progress bar -->
+        <div class= "p-container">
 
-    <!-- Progress bar -->
-    <p class="progress">Level Progress: <?php echo round($progress, 2); ?>%</p>
-    <div class="progress-container">
-        <div class="progress-bar"></div>
+            <p class="progress">Level Progress: <?php echo round($progress, 2); ?>%</p>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+
+            <!-- Level label -->
+            <div class="level-label">
+                <span>Level <?php echo $userLevel; ?></span>
+                <span>Level <?php echo $userLevel + 1; ?></span>
+            </div>
+
+        </div>
+       
+
+        <div class="container">
+            <p class="points">Points Earned: <?php echo $points; ?></p>
+        </div>
+
+        <div class="container">
+            <p class="level">Level: <span><?php echo $userLevel; ?></span></p>
+        </div>
+
+        <div class="container">
+            <p class="Ranking">Current Ranking: <span><?php echo $userLevel; ?></span></p>
+        </div>
+  
+        
+        
+
+    
     </div>
+    
+    
 
-    <!-- Level label -->
-    <div class="level-label">
-        <span>Level <?php echo $userLevel; ?></span>
-        <span>Level <?php echo $userLevel + 1; ?></span>
-    </div>
+        <!-- Display events history -->
+    
+        <h2>Events History</h2>
+        <?php
+        // Fetch and display events history
+        $eventsQuery = "SELECT * FROM events WHERE username = ?";
+        $eventsStmt = $conn->prepare($eventsQuery);
+        $eventsStmt->bind_param("s", $username);
+        $eventsStmt->execute();
+        $eventsResult = $eventsStmt->get_result();
 
-    <!-- Display events history -->
-   
-    <h2>Events History</h2>
-    <?php
-    // Fetch and display events history
-    $eventsQuery = "SELECT * FROM events WHERE username = ?";
-    $eventsStmt = $conn->prepare($eventsQuery);
-    $eventsStmt->bind_param("s", $username);
-    $eventsStmt->execute();
-    $eventsResult = $eventsStmt->get_result();
+        // Count total joined events
+        $totalEvents = $eventsResult->num_rows;
 
-    // Count total joined events
-    $totalEvents = $eventsResult->num_rows;
+        echo "<p>Total Joined Events: {$totalEvents}</p>";
 
-    echo "<p>Total Joined Events: {$totalEvents}</p>";
+        while ($row = $eventsResult->fetch_assoc()) {
+            echo "<p>{$row['event']} at {$row['club']} on {$row['datetime']}</p>";
+        }
 
-    while ($row = $eventsResult->fetch_assoc()) {
-        echo "<p>{$row['event']} at {$row['club']} on {$row['datetime']}</p>";
-    }
-
-$eventsStmt->close();
-?>
+        $eventsStmt->close();
+        ?>
 
     <!-- Display challenges -->
     <div class="challenge-dropdown">
@@ -200,7 +253,7 @@ $eventsStmt->close();
    
 
     
-</div>
+    </div>
 </div>    
 
 </body>

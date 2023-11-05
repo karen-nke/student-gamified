@@ -849,16 +849,16 @@
   }
  /*-------Account progress--------------*/
 
-.profile-info {
-    margin-top: 20px;
-}
-
-.points, .level, .progress {
+.progress {
+    color: #E87A00;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 500;
     margin-bottom: 20px;
-    margin-left:150px;
+    margin-left:120px;
 }
 
-.progress-container {
+.progress-bar-container {
     border: 1px solid #ccc;
     width: 80%; 
     height: 20px;
@@ -870,6 +870,10 @@
 
 
 .level-label {
+    color: #E87A00;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 500;
     display: flex;
     justify-content: space-between;
     margin: 0 auto; /* Center the level labels within the container */
