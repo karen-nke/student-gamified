@@ -48,7 +48,7 @@
         ?>
       
     </div>
-    <img src="Image/Logo.png" />
+    <a href="index.php"><img src="Image/Logo.png" /></a>
 </div>
 
     

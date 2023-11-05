@@ -23,10 +23,35 @@
                                         <h2>Unlock Your Potential: <br>Soft Skills Mastery Journey </h2>
                                         <p> Embark on a transformative journey of self-discovery and skill enhancement with our innovative soft skills development platform. Dive into interactive modules, engage in practical tasks, and earn badges as you level up your expertise. Join a community of learners, track your progress, and discover the power of combining professionalism with the fun of gamified learning. Your journey to unlocking a new realm of possibilities starts here. </p>
                                         
-                                        <div class="cta">
-                                                <a href="Login/login.php">Login</a>
-                                                <a href="Login/register.php">Register</a>
 
+                                        <div class="cta">
+                                                <?php
+
+                                                        session_start();
+
+                                                        if (isset($_SESSION['username'])) {
+
+                                                                echo "
+                                                                <a href=\"account.php\">Account</a>
+                                                                <a href=\"Login/logout.php\">Logout</a>
+
+
+
+
+
+                                                        ";
+                                                        } else {
+
+                                                                echo "
+                                                                <a href=\"Login/login.php\">Login</a>
+                                                                <a href=\"Login/register.php\">Register</a>
+
+                                                        ";
+                                                        }
+
+
+                                                ?>
+                                                   
                                         </div>
                                 </div>  
 
