@@ -2,7 +2,7 @@
 session_start();
 
 require_once('db_connect.php');
-require_once('Part/_header.php');
+require_once('Part/header.php');
 
 // Assuming you have a login system and the username is stored in the session
 if (!isset($_SESSION["username"])) {
