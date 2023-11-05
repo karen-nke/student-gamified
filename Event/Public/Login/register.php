@@ -140,8 +140,11 @@ if (isset($_POST['submit'])) {
                 value="rather_not_to_say">Rather Not To Say</option>
                 </select>
             <div class="input-group">
-                <input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>
+                <input type="password" placeholder="Password" name="password" id="password" value="<?php echo $_POST['password']; ?>" required>
             </div>
+            <div class="input-group-cb">
+                 <input type="checkbox" onclick="togglePassword()"> Show Password   
+             </div>
             <div class="input-group">
                 <input type="password" placeholder="Confirm Password" name="confirmpassword" value="<?php echo $_POST['confirmpassword'] ?>" required>
             </div>
@@ -150,6 +153,20 @@ if (isset($_POST['submit'])) {
             </div>
             <p class="login-register-text">Already have account? <a href="login.php"><br>Login Here.</a></p>
         </form>
+
+        <script>
+             function togglePassword() {
+                 var passwordField = document.getElementById("password");
+                 if (passwordField.type === "password") {
+                     passwordField.type = "text";
+                 } else {
+                     passwordField.type = "password";
+                 }
+             }
+         </script>
+
+
+
 
 
 
