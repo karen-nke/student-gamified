@@ -123,7 +123,40 @@ width: 50%;
     justify-content: space-between;
 }
 
-.points, .level, .ranking{
+.profile-info .badge-container {
+  width: 100%; 
+  height: auto;
+  padding:50px;
+  position: relative;
+  margin: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: white; 
+  border: 2px #E87A00 solid;
+}
+
+.profile-info .badge-container img {
+  width: 30%;
+  height: auto;
+  margin: 10px;
+}
+
+.profile-info .badge-container p {
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #E87A00;
+  font-size: 24px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+
+
+.profile-info .container p{
   margin: 0;
   position: absolute;
   top: 50%;
@@ -136,6 +169,7 @@ width: 50%;
     font-family: 'Poppins', sans-serif; 
     font-weight: 500;
 }
+
 
 
 
@@ -176,16 +210,42 @@ width: 50%;
        
 
         <div class="container">
-            <p class="points">Points Earned: <?php echo $points; ?></p>
+            <p>Points Earned: <?php echo $points; ?></p>
         </div>
 
         <div class="container">
-            <p class="level">Level: <span><?php echo $userLevel; ?></span></p>
+            <p>Level: <span><?php echo $userLevel; ?></span></p>
         </div>
 
         <div class="container">
-            <p class="Ranking">Current Ranking: <span><?php echo $userRank; ?></span></p>
+            <p>Current Ranking: <span><?php echo $userRank; ?></span></p>
         </div>
+
+        <div class="badge-container">
+            <p>Badges to be Earned</p>
+
+            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+          
+            
+            
+        </div>
+
+        <div class="badge-container">
+            <p>Achievmenet to be Unlocked</p>
+
+            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+            <img src="Image/One_Badge.png" alt="No. 1 Badge">
+            
+            
+        </div>
+       
+       
 
         <?php
 
