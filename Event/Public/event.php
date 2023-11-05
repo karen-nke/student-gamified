@@ -27,7 +27,7 @@
                         if (isset($_SESSION["username"])) {
                                 // User is logged in, show the form
                         ?>
-                                <form action="process_form_b.php" method="post" class="login-email">
+                                <form action="process_form.php" method="post" class="login-email">
                                         <p class="login-text" style='font-size:2rem; font-weight:800;'>Input Event</p>
 
                                         <div class="input-group">

@@ -63,47 +63,6 @@ require_once('db_connect.php');
         </div>
     </section>
 
-    <style>
-        .logo-centered {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
-        }
-
-        .leaderboard .container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            max-width: 2000px;
-            margin: 0;
-        }
-
-        .leaderboard h2 {
-            color: #E87A00;
-            font-size: 54px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .leaderboard table {
-            width: 50%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .leaderboard th,
-        td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #E87A00;
-        }
-
-        .leaderboard th {
-            background-color: #f2f2f2;
-        }
-    </style>
 
 </body>
 

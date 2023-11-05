@@ -24,8 +24,8 @@
   }
   
   .container{
-    max-width: 1300px;
-    margin: auto;
+   max-width: 1300px;
+   margin: auto;
    padding: 25px;
 
     
@@ -130,304 +130,6 @@
 
   /* End Hero Banner */
 
-
-
-  
-  /*-------featured product--------------*/
-  .product-container{
-    max-width: 1500px;
-    margin: auto;
-    padding-left: 5px;
-    padding-right: 5px;
-  
-  }  
-  
-  .product-container .column {
-    float: left;
-    width: 25%;
-    padding: 10px;
-    min-width: 200px;
-    margin-bottom: 50px;
-    transition: transform 0.5s;
-  }
-  
-  /* Clearfix (clear floats) */
-  .product-container .row::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-  
-
-  
-  .product-container .btn{
-    display: block;
-    width: 100%;
-    padding: 15px 20px;
-    text-align: center;
-    border: none;
-    background: #E87A00;
-    outline: none;
-    border-radius: 30px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: .3s;
-  }
-  
-  .product-container .btn a{
-    color:white;
-  }
-  
-  
-  h4{
-    color: #555;
-    font-weight: normal;
-  }
-  .column p{
-    font-size: 14px;
-  }
-  .rating .fa{
-    color: #ffe606;
-  }
-  
-  .column:hover{
-    transform: translateY(-5px);
-  }
-  
-  /*-----------------------------*/
-  .header .row{
-    margin-top: 70px;
-  }
-  .row{
-    margin-top: 70px;
-  }
-  
-  .col-2{
-    flex-basis: 50%;
-    min-width: 300px;
-  }
-  
-  .col-2 img{
-    max-width: 100%;
-    padding: 50px 0;
-  }
-  .col-2 h1{
-    font-size: 50px;
-    line-height: 60px;
-    margin: 25px 0;
-  }
-  
-
-  /*-----------------------------*/
-  .categories{
-    margin: 70px 0;
-  }
-  
-  .small-container{
-    max-width: 1500px;
-    margin: auto;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  .col-3{
-    flex-basis: 30%;
-    min-width: 250px;
-    margin-bottom: 30px;
-  }
-  .col-3 img{
-    width: 100%;
-  }
-  
-  
-  
-  /*---------footer-------*/
-  
-  .footer{
-    background: #376189;
-    color: #fff;
-    font-size: 14px;
-    padding: 10px 0 20px;
-    width: 100%;
-  }
-  
-  .footer .p-column{
-    width: 25%;
-    padding: 0 15px;
-    text-align: center;
-  }
-  
-  .footer .container{
-    max-width: 1170px;
-      margin:auto;
-  }
-  
-  .footer .row{
-    display: flex;
-      flex-wrap: wrap;
-  }
-  
-  
-  .footer a{
-    color:#fff
-  }
-  .footer p{
-    color: #fff;
-  }
-  .footer h3{
-    color: #fff;
-    margin-bottom: 10px;
-  }
-  
-  
-  .app-logo{
-    margin-top: 20px;
-  }
-  
-  .app-logo img{
-    width: 140px;
-  }
-  
-  .footer li{
-    display: block;
-    
-  }
-  
-  .footer a:hover{
-    color:#1CBDB9
-  }
-  .footer hr{
-    border: none;
-    background: #fff;
-    height: 1px;
-    margin:  20px 0;
-  }
-  .copyright{
-    text-align: center;
-    
-  }
-  
-  /*-------media-query-for-max-width-800---------*/
-  
-  
-  @media only screen and (max-width: 800px) {
-  
-    
-  nav ul{
-    position: absolute;
-    top: 70px;
-    left: 0;
-    background: #333;
-    width: 100%;
-    overflow: hidden;
-    transition: 1s;
-    max-height: 0;
-    transition:max-height 0.5s;
-    }
-    
-  nav ul li{
-    display: block;
-    margin-right: 50px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    }
-  nav ul li a{
-        color: #fff;
-    }
-    
-  .menu-icon{
-        display: block;
-        cursor: pointer;
-    }
-    
-  
-  }
-  /*---------- 600 media query -------*/
-  @media only screen and (max-width: 600px){
-    
-    .row{
-      text-align: center;
-    }
-    
-    .col-1, .col-2, .col-3, .col-4{
-        
-        flex-basis: 100%;
-    }
-  }
-  
-  
-  
-  /*---------product details-----------*/
-  .single-product{
-    margin-top: 80px;
-  }
-  .single-product .col-2 img{
-    padding: 0;
-  }
-  .single-product .col-2{
-    padding: 20px;
-  }
-  
-  .single-product h4{
-    margin: 20px 0;
-    font-size: 22px;
-    font-weight: bold;
-  }
-  
-  .single-product select{
-    display: block;
-    padding: 10px;
-    margin-top: 20px;
-  }
-  
-  .single-product input{
-    width: 50px;
-    height: 40px;
-    padding-left: 10px;
-    font-size: 20px;
-    margin-right: 10px;
-    border: 1px solid #a3a3a3;
-  }
-  input:focus{
-    outline: none;
-  }
-  
-  .single-product .fa{
-    color: #a3a3a3;
-    margin-left: 10px;
-  }
-  .small-img-row{
-    display: flex;
-    justify-content: space-between;
-  }
-  .small-img-col{
-    flex-basis: 24%;
-    cursor: pointer;
-  }
-  
-  
-  /*-------600 media query---------*/
-  
-  
-  
-  @media only screen and (max-width: 600px){
-    .single-product .row{
-        text-align: left;
-    }
-    .single-product .col-2{
-        padding: 20px 0;
-    }
-  
-    .single-product h1{
-        font-size: 26px;
-        line-height: 22px;
-    }
-  }
-  
-  
-  
-  
-  
   /*---------------------Page-----------------------*/
   
   .page-container{
@@ -437,57 +139,7 @@
     padding-right: 25px;
     text-align: center;
   }
-  
-  .page-container .row{
-    margin-top: 35px;
-    margin-bottom: 35px;
-  }
-  
-  
-  
-  .page-container .row-2{
-    text-align: left;
-  }
-  
-
-  p.line{
-    line-height: 3;
-  }
-  
-  .row p{
-    line-height: 3;
-  }
-  
-  .row-2 p,li{
-    line-height:3;
-    color:#333
-  
-  }
-  
-  .row-2 li{
-    padding-left: 30px;
-  }
-  
-  .row-2 h3{
-    padding-top: 30px;
-  }
-  .row-2 a{
-    color: #1CBDB9;
-  }
-  
-  .row-2 a:hover{
-    color:#75c4c2
-  }
-  
-  
-  .row a{
-    color: #1CBDB9;
-  }
-  
-  .row a:hover{
-    color:#75c4c2
-  }
-  
+ 
   .btn {
     display: block;
     width: 100%;
@@ -511,15 +163,6 @@
     transform: translateY(-5px);
     background: #E87A00
   }
-  
-  .row .p-column a{
-    color:white
-  }
-  
-  .row .p-column a:hover{
-    color:#1CBDB9
-  }
-  
   
   
   
@@ -632,31 +275,6 @@
   
   
   
-  /*-------Testimonial--------------*/
-  .testimonial-container{
-    max-width: 1500px;
-    margin: auto;
-    padding-left: 5px;
-    padding-right: 5px;
-  
-  }  
-  
-  .testimonial-container .column {
-    float: left;
-    width: 25%;
-    padding: 10px;
-    min-width: 200px;
-    margin-bottom: 50px;
-    transition: transform 0.5s;
-    border: 5px black;
-  }
-  
-  /* Clearfix (clear floats) */
-  .testimonial-container .row::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
   
   .title{
     color: #E87A00;
@@ -665,89 +283,7 @@
     font-weight: 700;
     text-align: center;
   }
-  .title::after{
-    content: '';
-    background: #a3a3a3;
-    width: 80px;
-    height: 5px;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  
-  h4{
-    color: #555;
-    font-weight: normal;
-  }
-  .column p{
-    font-size: 14px;
-  }
-  
-  .column:hover{
-    transform: translateY(-5px);
-  }
-  
-  .testimonial-container .img{
-  border-radius: 50%;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  }
-  
-  /*-------QnA--------------*/
-  
-  .question-container{
-    width: 100%;
-    height:fit-content;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 30px;
-    padding-top: 5px;
-    border: 3px solid #376189;
-    margin: auto;
-    margin-bottom: 10px;
-  }
-  
-  .question-container h3{
-    padding-top: 5px;
-    text-align: left;
-    font-weight: bold;
-  }
-  
-  .question-container p{
-    padding-top: 5px;
-    text-align: left;
-    font-size: medium;
-    padding-bottom: 10px;
-    
-    
-  }
-  
-  .question-container .btn a{
-    color:white;
-  }
-  
-  .page-container .btn a{
-    color:white;
-  }
-  
-  /*-------account--------------*/
-  
-  .acc-tbl table,tr,td{
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #376189;
-    border-collapse: collapse;
-    text-align: center;
-    table-layout: fixed;
-    border-spacing: 0px;
-  }
-  
-  .acc-tbl td{
-    width: 25%;
-  }
+
  /*-------Account progress--------------*/
 
 .progress {
@@ -825,6 +361,47 @@ th {
 
 .date-column {
 width: 100px;
+}
+
+/* Leaderboard */
+.logo-centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.leaderboard .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 2000px;
+  margin: 0;
+}
+
+.leaderboard h2 {
+  color: #E87A00;
+  font-size: 54px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+.leaderboard table {
+  width: 50%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.leaderboard th,
+td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #E87A00;
+}
+
+.leaderboard th {
+  background-color: #f2f2f2;
 }
 
   
