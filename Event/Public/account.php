@@ -279,6 +279,8 @@ width: 50%;
             ?> 
             
         </div>
+
+    <button class="btn"><a href="badge_detail.php">Learn how to earn badges</a></button>   
   
     <button class="btn"><a href="point_history.php">Point History</a></button>
 

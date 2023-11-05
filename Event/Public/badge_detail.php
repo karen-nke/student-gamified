@@ -57,7 +57,7 @@
                 color: #E87A00;
                 font-size: 32px;
                 font-weight: 700;
-                line-height: 18px;
+                line-height: 42px;
 ;
                 
             }
@@ -107,8 +107,8 @@
                     </div>
 
                     <div class ="text-container">
-                        <p class ="badge-title">Leadership Completion Badge</p> <br>
-                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Leadership Completion Badge.</p>
+                        <p class ="badge-title">Communication Completion Badge</p> <br>
+                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Communication Completion Badge.</p>
                     
                     </div>
 
@@ -120,8 +120,54 @@
                     </div>
 
                     <div class ="text-container">
+                        <p class ="badge-title">Teamwork Completion Badge</p> <br>
+                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Teamwork Completion Badge.</p>
+                    
+                    </div>
+
+                </div>
+                
+
+
+
+            </div>
+
+            <div class="box-container">
+                <p class="title">Acheivement to be Earned</p>
+                <div class ="badge-container">
+                    <div class ="image-container">
+                        <img src="Image/Leadership_Locked.png" class ="image" alt="No. 1 Badge">
+                    </div>
+
+                    <div class ="text-container">
                         <p class ="badge-title">Leadership Completion Badge</p> <br>
                         <p class ="badge-desc">Complete Leadership Module to Receive <br> Leadership Completion Badge.</p>
+                    
+                    </div>
+
+                </div>
+
+                <div class ="badge-container">
+                    <div class ="image-container">
+                        <img src="Image/Communication_Locked.png" class ="image" alt="No. 1 Badge">
+                    </div>
+
+                    <div class ="text-container">
+                        <p class ="badge-title">Communication Completion Badge</p> <br>
+                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Communication Completion Badge.</p>
+                    
+                    </div>
+
+                </div>
+
+                <div class ="badge-container">
+                    <div class ="image-container">
+                        <img src="Image/Teamwork_Locked.png" class ="image" alt="No. 1 Badge">
+                    </div>
+
+                    <div class ="text-container">
+                        <p class ="badge-title">Teamwork Completion Badge</p> <br>
+                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Teamwork Completion Badge.</p>
                     
                     </div>
 

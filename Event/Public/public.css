@@ -153,6 +153,7 @@
     color: #FFF;
     cursor: pointer;
     transition: 0.3s;
+    margin-bottom: 25px;
 }
 
 .btn a{
