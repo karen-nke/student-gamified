@@ -4,7 +4,6 @@ session_start();
 require_once('db_connect.php');
 require_once('Part/header.php');
 
-// Assuming you have a login system and the username is stored in the session
 if (!isset($_SESSION["username"])) {
     header("Location: login.php"); // Redirect to login page
     exit();
@@ -53,11 +52,15 @@ function getLevel($points) {
 
     foreach ($levels as $level => $range) {
         if ($points >= $range['min'] && $points <= $range['max']) {
+            $nextLevelPoints = $range['max'];
+            $remainingPoints = $nextLevelPoints - $points;
             $progress = ($points - $range['min']) / ($range['max'] - $range['min']) * 100;
-            return array('level' => $level, 'progress' => $progress);
+            return array('level' => $level, 'progress' => $progress, 'remainingPoints' => $remainingPoints + 1);
         }
     }
-    return array('level' => "Unknown", 'progress' => 0);
+
+
+
 }
 
 
@@ -73,6 +76,7 @@ $rankStmt->close();
 $levelData = getLevel($points); 
 $userLevel = $levelData['level'];
 $progress = $levelData['progress'];
+$remainingPoints = $levelData['remainingPoints'];
 
 ?>
 
@@ -194,8 +198,9 @@ width: 50%;
     <div class="profile-info">
         <!-- Progress bar -->
         <div class= "p-container">
-
+        
             <p class="progress">Level Progress: <?php echo round($progress, 2); ?>%</p>
+            <p class="progress">Remaining Points to Next Level: <?php echo $remainingPoints; ?></p>
             <div class="progress-bar-container">
                 <div class="progress-bar"></div>
             </div>
@@ -205,6 +210,8 @@ width: 50%;
                 <span>Level <?php echo $userLevel; ?></span>
                 <span>Level <?php echo $userLevel + 1; ?></span>
             </div>
+         
+           
 
         </div>
        
@@ -212,6 +219,7 @@ width: 50%;
         <div class="container">
             <p>Points Earned: <?php echo $points; ?></p>
         </div>
+        
 
         <div class="container">
             <p>Level: <span><?php echo $userLevel; ?></span></p>
@@ -267,99 +275,13 @@ width: 50%;
                     echo '<img src="Image/Lvl5_Locked.png" alt="Rank Badge">';
 
                 }
-              
-              
-                   
 
-
-            ?>
-
-            
+            ?> 
             
         </div>
-       
-       
-
-      
-
   
-        
-        
-
-    
-    </div>
-    
-    
-
-        <!-- Display events history -->
-    
-        <h2>Events History</h2>
-        <?php
-        // Fetch and display events history
-        $eventsQuery = "SELECT * FROM events WHERE username = ?";
-        $eventsStmt = $conn->prepare($eventsQuery);
-        $eventsStmt->bind_param("s", $username);
-        $eventsStmt->execute();
-        $eventsResult = $eventsStmt->get_result();
-
-        // Count total joined events
-        $totalEvents = $eventsResult->num_rows;
-
-        echo "<p>Total Joined Events: {$totalEvents}</p>";
-
-        while ($row = $eventsResult->fetch_assoc()) {
-            echo "<p>{$row['event']} at {$row['club']} on {$row['datetime']}</p>";
-        }
-
-        $eventsStmt->close();
-        ?>
-
-    <!-- Display challenges -->
-    <div class="challenge-dropdown">
-        <h2>Challenges</h2>
-        <?php
-        // Fetch and display challenges
-        $challengesQuery = "SELECT * FROM challenges";
-        $challengesStmt = $conn->prepare($challengesQuery);
-        $challengesStmt->execute();
-        $challengesResult = $challengesStmt->get_result();
-
-        while ($challenge = $challengesResult->fetch_assoc()) {
-            // Check if user has completed the challenge based on event history
-            $completedQuery = "SELECT COUNT(*) FROM events WHERE username = ?";
-            $completedStmt = $conn->prepare($completedQuery);
-            $completedStmt->bind_param("s", $username);
-            $completedStmt->execute();
-            $completedStmt->bind_result($eventsCount);
-            $completedStmt->fetch();
-            $completedStmt->close();
-
-            if ($eventsCount >= $challenge['challenge_condition']) {
-                // Challenge completed
-                $statusClass = "complete";
-            } else {
-                // Challenge not completed
-                $statusClass = "incomplete";
-            }
-
-            echo "<div class='challenge-card {$statusClass}'>";
-            echo "<p>{$challenge['name']}</p>";
-            echo "<p>{$challenge['description']}</p>";
-            echo "<p>Points Reward: {$challenge['points_reward']}</p>";
-            echo "<p>Status: {$statusClass}</p>"; // This line for debugging
-            echo "</div>";
-        }
-        $challengesStmt->close();
-        ?>
-    </div>
-
-
     <button class="btn"><a href="point_history.php">Point History</a></button>
 
-   
-
-    
-    </div>
 </div>    
 
 </body>
