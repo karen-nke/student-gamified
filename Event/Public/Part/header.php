@@ -9,9 +9,9 @@
                                 <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
-                                <a href="funko_page.php">Leadership</a>
-                                <a href="banpresto_page.php">Communication</a>
-                                <a href="banpresto_page.php">Teamwork</a>
+                                <a href="leadership.php">Leadership</a>
+                                <a href="communication.php">Communication</a>
+                                <a href="teamwork.php">Teamwork</a>
                         </div>
                 </div>
 
