@@ -63,7 +63,7 @@ function getLevel($points) {
 
 }
 
-
+//Fetch User Rank
 $rankQuery = "SELECT COUNT(*) + 1 AS rank FROM users WHERE points > ?";
 $rankStmt = $conn->prepare($rankQuery);
 $rankStmt->bind_param("i", $points);
