@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
     <div class="container">
 
         <div class="logo">
-            <a href="index.php"><img src="../Image/logo.png" width="200px"></a>
+            <a href="index.php"><img src="../Image/Login_Logo.png.png" width="200px"></a>
         </div>
 
         <form class="login-email" action="login.php" method="post">

@@ -25,7 +25,6 @@
                 padding:50px;
                 position: relative;
                 margin: 50px;
-
                 justify-content: space-between;
 
             }
@@ -83,7 +82,7 @@
         </style>
 
         <div class ="container">
-            <img src="Image/Leaderboard_Icon.png" style="width:200px;height:250px;" class="logo-centered"></a>
+            <img src="Image/Rewards_Icon.png" style="width:200px;height:250px;" class="logo-centered"></a>
             <h2 class="title">Awards</h2>
 
             <div class="box-container">
@@ -172,23 +171,9 @@
                     </div>
 
                 </div>
-                
-
-
-
+            
             </div>
         </div>
-
-
-
-
-
-
-                
-                        
-
-     
-
                         
 </body>
 
