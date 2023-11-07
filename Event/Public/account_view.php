@@ -1,27 +1,38 @@
 <?php
-session_start();
-require_once('db_connect.php');
-require_once('Part/header.php');
-require_once('account_controller.php'); 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php");
+session_start();
+
+require_once('db_connect.php');
+// Remove session_start() from header.php
+require_once('Part/header.php');
+require_once('logic_controller.php');
+
+try {
+    if (!isset($_SESSION["username"])) {
+        throw new Exception("User not authenticated");
+    }
+
+    $username = $_SESSION["username"];
+
+    $userData = getUserData($conn, $username);
+    $gender = $userData['gender'];
+
+    $points = getUserPoints($conn, $username);
+
+    $levelData = getLevelData($points);
+    $userLevel = $levelData['level'];
+    $progress = $levelData['progress'];
+    $remainingPoints = $levelData['remainingPoints'];
+
+    $userRank = getRank($conn, $points);
+} catch (Exception $e) {
+    echo 'Caught exception: ', $e->getMessage(), "\n";
     exit();
 }
 
-$userController = new UserController($conn);
-$userData = $userController->getAccountData($username);
-
-// Fetch user data
-$gender = $userData['gender'];
-$points = $userData['points'];
-$level = $userData['level'];
-$rank = $userData['rank'];
-$progress = $userData['progress'];
-$remainingPoints = $remainingPoints['progress'];
-
 ?>
-
 <style>
 
     .progress-bar {
@@ -146,8 +157,8 @@ $remainingPoints = $remainingPoints['progress'];
 
             <!-- Level label -->
             <div class="level-label">
-                <span>Level <?php echo $level; ?></span>
-                <span>Level <?php echo $level + 1; ?></span>
+                <span>Level <?php echo $userLevel; ?></span>
+                <span>Level <?php echo $userLevel + 1; ?></span>
             </div>
          
            
@@ -161,11 +172,11 @@ $remainingPoints = $remainingPoints['progress'];
         
 
         <div class="container">
-            <p>Level: <span><?php echo $level; ?></span></p>
+            <p>Level: <span><?php echo $userLevel; ?></span></p>
         </div>
 
         <div class="container">
-            <p>Current Ranking: <span><?php echo $rank; ?></span></p>
+            <p>Current Ranking: <span><?php echo $userRank; ?></span></p>
         </div>
 
         <div class="badge-container">
@@ -195,20 +206,20 @@ $remainingPoints = $remainingPoints['progress'];
             <img src="Image/Complete_Locked.png" alt="Complete Badge">
             <?php
 
-                if ($rank == 1) {
+                if ($userRank == 1) {
                 echo '<img src="Image/Rank_Unlocked.png" alt="Rank Badge">';
                 }else{
                     echo ' <img src="Image/Rank_Locked.png" alt="Rank Badge">';
                 }
 
-                if ($level >= 1) {
+                if ($userRank >= 1) {
                     echo '<img src="Image/Lvl1_Unlocked.png" alt="Rank Badge">';
                 }else{
                     echo '<img src="Image/Lvl1_Locked.png" alt="Rank Badge">';
 
                 }
 
-                if ($level >= 5) {
+                if ($userRank >= 5) {
                     echo '<img src="Image/Lvl5_Unlocked.png" alt="Rank Badge">';
                 }else{
                     echo '<img src="Image/Lvl5_Locked.png" alt="Rank Badge">';
