@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once('db_connect.php');
+require_once('Part/header.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,9 +17,6 @@
 </head>
 
 <body>
-        <?php session_start(); ?>
-
-        <?php require_once 'Part/header.php' ?>
 
         <style>
 

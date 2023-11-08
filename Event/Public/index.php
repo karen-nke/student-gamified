@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once('db_connect.php');
+require_once('Part/header.php');
+require_once('logic_controller.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,10 +18,6 @@
 </head>
 
 <body>
-        <?php session_start(); ?>
-
-        <?php require_once 'Part/header.php' ?>
-
        
                 <section class="hero">
                         <div class ="container">
