@@ -1,6 +1,8 @@
 <?php
-// Include your database connection code here
+session_start();
 require_once('db_connect.php');
+require_once('Part/header.php');
+require_once('logic_controller.php');
 ?>
 
 <!DOCTYPE html>
@@ -16,68 +18,38 @@ require_once('db_connect.php');
 </head>
 
 <body>
-    <?php session_start(); ?>
-
-    <?php require_once 'Part/header.php' ?>
 
     <section class="leaderboard">
         <img src="Image/Leaderboard_Icon.png" style="width:200px;height:250px;" class="logo-centered"></a>
         <h2>Leaderboard</h2>
 
         <div class="container">
+            <?php
+            if (isset($_SESSION["username"])) {
+                $leaderboardData = getLeaderboardData($conn);
 
+                if (!empty($leaderboardData)) {
+                    echo "<table>";
+                    echo "<tr><th>Rank</th><th>Username</th><th>Points</th></tr>";
 
-             <?php
-                        // Check if the user is logged in
-                        if (isset($_SESSION["username"])) {
-                                // User is logged in, show the form
-            ?>
-
-            <table>
-                <tr>
-                    <th>Rank</th>
-                    <th>Username</th>
-                    <th>Points</th>
-                </tr>
-
-                <?php
-                // Fetch leaderboard data from the database
-                $leaderboardQuery = "SELECT username, points FROM users ORDER BY points DESC";
-                $leaderboardResult = $conn->query($leaderboardQuery);
-
-                $rank = 0; // Initialize rank
-                $prevPoints = null;
-
-                while ($row = $leaderboardResult->fetch_assoc()) {
-                    echo "<tr>";
-
-                    if ($row['points'] !== $prevPoints) {
-                        $rank++;
+                    foreach ($leaderboardData as $entry) {
+                        echo "<tr>";
+                        echo "<td>{$entry['rank']}</td>";
+                        echo "<td>{$entry['username']}</td>";
+                        echo "<td>{$entry['points']}</td>";
+                        echo "</tr>";
                     }
 
-                    echo "<td>{$rank}</td>";
-                    echo "<td>{$row['username']}</td>";
-                    echo "<td>{$row['points']}</td>";
-                    echo "</tr>";
-
-                    $prevPoints = $row['points'];
+                    echo "</table>";
+                } else {
+                    echo "<p>No data available.</p>";
                 }
-
-                // Close the database connection
-                $conn->close();
-                ?>
-
-            </table>
-
-            <?php
-                        } else {
-                                // User is not logged in, show a message or redirect to the login page
-                                echo "<p>Please <a href='Login/login.php'>login</a> first.</p>";
-                        }
-                        ?>
+            } else {
+                echo "<p>Please <a href='Login/login.php'>login</a> first.</p>";
+            }
+            ?>
         </div>
     </section>
-
 
 </body>
 

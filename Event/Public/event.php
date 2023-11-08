@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once('db_connect.php');
+require_once('Part/header.php');
+require_once('logic_controller.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,9 +18,6 @@
 </head>
 
 <body>
-        <?php session_start(); ?>
-
-        <?php require_once 'Part/header.php' ?>
 
         <div class="page-container">
                 <div>
@@ -26,8 +30,9 @@
                         // Check if the user is logged in
                         if (isset($_SESSION["username"])) {
                                 // User is logged in, show the form
+                                processEventForm($conn, 'processEventForm');
                         ?>
-                                <form action="process_form.php" method="post" class="login-email">
+                                <form action="" method="post" class="login-email">
                                         <p class="login-text" style='font-size:2rem; font-weight:800;'>Input Event</p>
 
                                         <div class="input-group">
