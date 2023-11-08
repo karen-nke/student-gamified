@@ -2,7 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    
 require_once('db_connect.php');
 require_once('Part/header.php');
 require_once('logic_controller.php');
@@ -33,7 +36,7 @@ require_once('logic_controller.php');
                                         <div class="cta">
                                                 <?php
 
-                                                        session_start();
+                                                      
 
                                                         if (isset($_SESSION['username'])) {
 
