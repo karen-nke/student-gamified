@@ -1,84 +1,121 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 
 require_once('db_connect.php');
+// Remove session_start() from header.php
 require_once('Part/header.php');
+require_once('logic_controller.php');
 
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php"); // Redirect to login page
+try {
+    if (!isset($_SESSION["username"])) {
+        throw new Exception("User not authenticated");
+    }
+
+    $username = $_SESSION["username"];
+
+    $userData = getUserData($conn, $username);
+    $gender = $userData['gender'];
+
+    $points = getUserPoints($conn, $username);
+
+    $levelData = getLevelData($points);
+    $userLevel = $levelData['level'];
+    $progress = $levelData['progress'];
+    $remainingPoints = $levelData['remainingPoints'];
+
+    $userRank = getRank($conn, $points);
+} catch (Exception $e) {
+    echo 'Caught exception: ', $e->getMessage(), "\n";
     exit();
 }
 
-$username = $_SESSION["username"];
+?>
+<style>
 
-// Fetch user data including gender and profile picture
-$userDataQuery = "SELECT gender FROM users WHERE username = ?";
-$userDataStmt = $conn->prepare($userDataQuery);
-$userDataStmt->bind_param("s", $username);
-$userDataStmt->execute();
-$userDataResult = $userDataStmt->get_result();
-$userData = $userDataResult->fetch_assoc();
-$gender = $userData['gender'];
-$userDataStmt->close();
+    .progress-bar {
+        background-color: #4CAF50;
+        height: 100%;
+        width: <?php echo $progress; ?>%;
+        transition: width 0.5s ease-in-out;
+        border-radius: 5px;
+    }
 
+    .logo-centered {
 
-//$points = isset($_SESSION[$username]) ? $_SESSION[$username] : 0; 
-//This is used previously but cannot be used, because when user first logged in, the point doesnt showed unless user submit the form.
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 
-// Fetch and display user's points
-$pointsQuery = "SELECT points FROM users WHERE username = ?";
-$pointsStmt = $conn->prepare($pointsQuery);
-$pointsStmt->bind_param("s", $username);
-$pointsStmt->execute();
-$pointsResult = $pointsStmt->get_result();
-$pointsRow = $pointsResult->fetch_assoc();
-$points = $pointsRow['points'];
-$pointsStmt->close();
+    }  
 
+    .profile-info{
+        padding: 20px;
+    }
 
-function getLevel($points) {
-    $levels = array(
-        0 => array('min' => 0, 'max' => 100),
-        1 => array('min' => 101, 'max' => 200),
-        2 => array('min' => 201, 'max' => 300),
-        3 => array('min' => 301, 'max' => 400),
-        4 => array('min' => 401, 'max' => 500),
-        5 => array('min' => 501, 'max' => 600),
-        6 => array('min' => 601, 'max' => 700),
-        7 => array('min' => 701, 'max' => 800),
-        8 => array('min' => 801, 'max' => 900),
-        9 => array('min' => 901, 'max' => PHP_INT_MAX) 
-    );
+    .profile-info .container{
+        width: 100%;
+        height: 100px; 
+        background: white; 
+        border: 2px #E87A00 solid;
+        padding:50px;
+        position: relative;
+        margin: 25px;
+        display:flex;
+        justify-content: space-between;
+    }
 
-    foreach ($levels as $level => $range) {
-        if ($points >= $range['min'] && $points <= $range['max']) {
-            $nextLevelPoints = $range['max'];
-            $remainingPoints = $nextLevelPoints - $points;
-            $progress = ($points - $range['min']) / ($range['max'] - $range['min']) * 100;
-            return array('level' => $level, 'progress' => $progress, 'remainingPoints' => $remainingPoints + 1);
-        }
+    .profile-info .badge-container {
+    width: 100%; 
+    height: auto;
+    padding:50px;
+    position: relative;
+    margin: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: white; 
+    border: 2px #E87A00 solid;
+    }
+
+    .profile-info .badge-container img {
+    width: 30%;
+    height: auto;
+    margin: 10px;
+    }
+
+    .profile-info .badge-container p {
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #E87A00;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
     }
 
 
 
-}
+    .profile-info .container p{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 
-//Fetch User Rank
-$rankQuery = "SELECT COUNT(*) + 1 AS rank FROM users WHERE points > ?";
-$rankStmt = $conn->prepare($rankQuery);
-$rankStmt->bind_param("i", $points);
-$rankStmt->execute();
-$rankResult = $rankStmt->get_result();
-$rankRow = $rankResult->fetch_assoc();
-$userRank = $rankRow['rank'];
-$rankStmt->close();
+    
+        color: #E87A00;
+        font-size: 24px;
+        font-family: 'Poppins', sans-serif; 
+        font-weight: 500;
+    }
 
-$levelData = getLevel($points); 
-$userLevel = $levelData['level'];
-$progress = $levelData['progress'];
-$remainingPoints = $levelData['remainingPoints'];
-
-?>
+</style>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -91,93 +128,6 @@ $remainingPoints = $levelData['remainingPoints'];
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-
-<style>
-
-.progress-bar {
-    background-color: #4CAF50;
-    height: 100%;
-    width: <?php echo $progress; ?>%;
-    transition: width 0.5s ease-in-out;
-    border-radius: 5px;
-}
-
-.logo-centered {
-
-display: block;
-margin-left: auto;
-margin-right: auto;
-width: 50%;
-
-}  
-
-.profile-info{
-    padding: 20px;
-}
-
-.profile-info .container{
-    width: 100%;
-    height: 100px; 
-    background: white; 
-    border: 2px #E87A00 solid;
-    padding:50px;
-    position: relative;
-    margin: 25px;
-    display:flex;
-    justify-content: space-between;
-}
-
-.profile-info .badge-container {
-  width: 100%; 
-  height: auto;
-  padding:50px;
-  position: relative;
-  margin: 25px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background: white; 
-  border: 2px #E87A00 solid;
-}
-
-.profile-info .badge-container img {
-  width: 30%;
-  height: auto;
-  margin: 10px;
-}
-
-.profile-info .badge-container p {
-  margin: 0;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  color: #E87A00;
-  font-size: 24px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-}
-
-
-
-.profile-info .container p{
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-
-  
-    color: #E87A00;
-    font-size: 24px;
-    font-family: 'Poppins', sans-serif; 
-    font-weight: 500;
-}
-
-
-
-
-</style>
 
 <div class="container">
     <?php
@@ -262,14 +212,14 @@ width: 50%;
                     echo ' <img src="Image/Rank_Locked.png" alt="Rank Badge">';
                 }
 
-                if ($userLevel >= 1) {
+                if ($userRank >= 1) {
                     echo '<img src="Image/Lvl1_Unlocked.png" alt="Rank Badge">';
                 }else{
                     echo '<img src="Image/Lvl1_Locked.png" alt="Rank Badge">';
 
                 }
 
-                if ($userLevel >= 5) {
+                if ($userRank >= 5) {
                     echo '<img src="Image/Lvl5_Unlocked.png" alt="Rank Badge">';
                 }else{
                     echo '<img src="Image/Lvl5_Locked.png" alt="Rank Badge">';
