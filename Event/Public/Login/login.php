@@ -24,6 +24,8 @@ if (isset($_POST['submit'])) {
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
         unset($row['password']);
+
+        $_SESSION['user_id'] = $row['id'];
         
         $_SESSION['username'] = $row['username'];
 

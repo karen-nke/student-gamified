@@ -1,56 +1,47 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 
 <div class="navbar">
     <div class="menu-item">
-        <div class ="menu">
+        <div class="menu">
             <a href="index.php">Home</a>
             <a href="event.php">Events</a>
             <div class="dropdown">
-                        <button class="dropbtn">Module
-                                <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                                <a href="leadership.php">Leadership</a>
-                                <a href="communication.php">Communication</a>
-                                <a href="teamwork.php">Teamwork</a>
-                        </div>
+                <button class="dropbtn">Module
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="leadership.php">Leadership</a>
+                    <a href="communication.php">Communication</a>
+                    <a href="teamwork.php">Teamwork</a>
                 </div>
-
+            </div>
             <a href="leaderboard.php">Leaderboard</a>
-          
-        
         </div>
 
-        <?php
-
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();}
-
-                if (isset($_SESSION['username'])) {
-                    
-                        echo "
-                        <button class=\"login-button\"><a href=\"account.php\">Account</a></button>
-                        <button class=\"register-button\"><a href=\"Login/logout.php\">Logout</a></button>
-                
-
-                     
-
-                
-                ";
-                } else {
-
-                        echo "
-                        <button class=\"login-button\"><a href=\"Login/login.php\">Login</a></button>
-                        <button class=\"register-button\"><a href=\"Login/register.php\">Register</a></button>
-                    
-                ";
-                }
-
-
-        ?>
-      
+<?php
+        if (isset($_SESSION['username'])) {
+            echo "
+                <button class=\"login-button\"><a href=\"account.php\">Account</a></button>
+                <button class=\"register-button\"><a href=\"Login/logout.php\">Logout</a></button>
+            ";
+        } else {
+            echo "
+                <button class=\"login-button\"><a href=\"Login/login.php\">Login</a></button>
+                <button class=\"register-button\"><a href=\"Login/register.php\">Register</a></button>
+            ";
+        }
+?>
     </div>
     <a href="index.php"><img src="Image/Logo.png" /></a>
 </div>
+
+<style>
+    /* Add your existing styles here */
+</style>
 
     
 
