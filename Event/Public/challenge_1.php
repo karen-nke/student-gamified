@@ -2,18 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Start or resume the session
-session_start();
-
-echo '<pre>';
-print_r($_SESSION);
-echo '</pre>';
-
-
-// Check if the user is logged in
-if (!isset($_SESSION["username"])) {
-    header("Location: Login/login.php"); // Redirect to login page if not logged in
-    exit();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
 
 require_once('db_connect.php');
@@ -21,6 +11,11 @@ require_once('Part/header.php');
 require_once('logic_controller.php');
 
 // Assuming you have the user ID in the session
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php"); // Redirect to login page
+    exit();
+}
+
 $user_id = $_SESSION["user_id"];
 
 $soft_skill_name = 'Leadership'; // Update with the current soft skill module
@@ -35,21 +30,41 @@ $soft_skill_row = $soft_skill_result->fetch_assoc();
 $soft_skill_id = $soft_skill_row['id'];
 $soft_skill_stmt->close();
 
+$disable_button = false; // Initialize to false by default
+
 // Challenge 1 completion handling
 if (isset($_POST['done'])) {
     $challenge_number = 1; // Challenge 1
-    $completion_query = "INSERT INTO user_soft_skill_progress (user_id, soft_skill_id, challenge_number, completed) VALUES (?, ?, ?, 1)";
-    $completion_stmt = $conn->prepare($completion_query);
-    $completion_stmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
 
-    $completion_stmt->execute();
-    $completion_stmt->close();
+    // Check if the challenge is already completed
+    $check_completion_query = "SELECT completed FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number = ?";
+    $check_completion_stmt = $conn->prepare($check_completion_query);
+    $check_completion_stmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
+    $check_completion_stmt->execute();
+    $check_completion_result = $check_completion_stmt->get_result();
+    $challenge_completed = $check_completion_result->fetch_assoc()['completed'];
 
-    // Redirect to the main soft skill module page
-    header("Location: leadership.php");
-    exit();
+    if ($challenge_completed) {
+        $disable_button = true;
+        
+    } else {
+        // Challenge 1 completion query
+        $completion_query = "INSERT INTO user_soft_skill_progress (user_id, soft_skill_id, challenge_number, completed) VALUES (?, ?, ?, 1)";
+        $completion_stmt = $conn->prepare($completion_query);
+        $completion_stmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
+        $completion_stmt->execute();
+        $completion_stmt->close();
+
+        echo "<script>alert('Challenge completed!');</script>";
+        header("Location: leadership.php");
+        exit();
+    }
+
+    $check_completion_stmt->close();
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,9 +117,11 @@ if (isset($_POST['done'])) {
 
             Quisque ac urna lectus. Nunc ex nisi, egestas id hendrerit eget, tristique ac risus. Maecenas orci nisl, mattis in turpis nec, sagittis blandit elit. Cras laoreet arcu ex, at sagittis ligula posuere a. Quisque id dui et urna aliquet porttitor aliquet eu ex. Donec eget massa erat. Donec accumsan massa sapien, nec tincidunt enim interdum in. Quisque ut vulputate nisl. Vestibulum luctus, sem id feugiat sollicitudin, dui diam interdum neque, vel interdum tortor neque eget ante. Aliquam non augue lacus. In viverra venenatis augue, eu suscipit tellus posuere vel. Maecenas convallis mauris quis turpis pellentesque, blandit rhoncus dolor congue. Suspendisse ut tempus justo, nec sodales massa. In at massa pretium, tincidunt magna et, molestie massa.</p>
         
-        <form method="post">
-            <button type="submit" name="done">Done</button>
-        </form>
+            <form method="post">
+                
+                <button type="submit" name="done" <?php if ($disable_button) echo "disabled"; ?>>Done</button>
+            </form>
+
     
     </div>
 

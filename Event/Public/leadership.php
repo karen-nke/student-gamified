@@ -6,6 +6,22 @@ session_start();
 require_once('db_connect.php');
 require_once('Part/header.php');
 require_once('logic_controller.php');
+
+// Assuming you have the user ID and soft skill ID
+$user_id = $_SESSION["user_id"];
+$soft_skill_id = 1; // You need to implement a function like getSoftSkillId
+
+// Check if the challenge is already completed
+$completion_query = "SELECT * FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number = ?";
+$completion_stmt = $conn->prepare($completion_query);
+$completion_stmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
+$completion_stmt->execute();
+$completion_result = $completion_stmt->get_result();
+$challenge_completed = $completion_result->num_rows > 0;
+
+$completion_stmt->close();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -81,10 +97,20 @@ require_once('logic_controller.php');
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Theory</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <a href="challenge_1.php">
-                                                                <button>Start Challenge</button>
-                                                        </a>
+                                                                <?php
+                                                        // Display the "Start Challenge" button only if the challenge is not completed
+                                                                if (!$challenge_completed) {
+                                                                echo '<button onclick="startChallenge()">Start Challenge</button>';
+                                                                }
+                                                                ?>
                                                 </div>
+
+                                                <script>
+                                                function startChallenge() {
+                                                // Add logic to navigate to the challenge page (e.g., leadership_challenge.php)
+                                                window.location.href = 'challenge_1.php';
+                                                }
+                                                </script>
 
                                         </div>
 
