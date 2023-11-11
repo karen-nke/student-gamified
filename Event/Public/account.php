@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 session_start();
+$user_id = $_SESSION["user_id"];
 
 require_once('db_connect.php');
 // Remove session_start() from header.php
@@ -31,6 +32,21 @@ try {
     echo 'Caught exception: ', $e->getMessage(), "\n";
     exit();
 }
+
+function hasJoinedModule($conn, $user_id) {
+    $check_module_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ?";
+    $check_module_stmt = $conn->prepare($check_module_query);
+    $check_module_stmt->bind_param("i", $user_id);
+    $check_module_stmt->execute();
+    $result = $check_module_stmt->get_result();
+    $count = $result->fetch_assoc()['count'];
+    $check_module_stmt->close();
+
+    return $count > 0;
+}
+$joined_module = hasJoinedModule($conn, $user_id);
+
+
 
 ?>
 <style>
@@ -200,9 +216,16 @@ try {
                     echo ' <img src="Image/Points_Locked.png" alt="Points Badge">';
                 }
             ?>
+            <?php
 
-           
-            <img src="Image/Module_Locked.png" alt="Module Badge">
+            if ($joined_module) {
+                echo '<img src="Image/Module_Unlocked.png" alt="Rank Badge">';
+
+            }else{
+                echo '<img src="Image/Module_Locked.png" alt="Rank Badge">';
+            }
+            ?>
+
             <img src="Image/Complete_Locked.png" alt="Complete Badge">
             <?php
 
