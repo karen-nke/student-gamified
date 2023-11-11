@@ -212,14 +212,14 @@ try {
                     echo ' <img src="Image/Rank_Locked.png" alt="Rank Badge">';
                 }
 
-                if ($userRank >= 1) {
+                if ($userLevel >= 1) {
                     echo '<img src="Image/Lvl1_Unlocked.png" alt="Rank Badge">';
                 }else{
                     echo '<img src="Image/Lvl1_Locked.png" alt="Rank Badge">';
 
                 }
 
-                if ($userRank >= 5) {
+                if ($userLevel >= 5) {
                     echo '<img src="Image/Lvl5_Unlocked.png" alt="Rank Badge">';
                 }else{
                     echo '<img src="Image/Lvl5_Locked.png" alt="Rank Badge">';

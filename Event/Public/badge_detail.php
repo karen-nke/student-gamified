@@ -95,7 +95,7 @@ require_once('Part/header.php');
                 <p class="title">Badges to be Earned</p>
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Leadership_Locked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Leadership_Unlocked.png" class ="image" alt="No. 1 Badge">
                     </div>
 
                     <div class ="text-container">
@@ -108,12 +108,12 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Communication_Locked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Communication_Unlocked.png" class ="image" alt="No. 1 Badge">
                     </div>
 
                     <div class ="text-container">
                         <p class ="badge-title">Communication Completion Badge</p> <br>
-                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Communication Completion Badge.</p>
+                        <p class ="badge-desc">Complete Communication Module to Receive <br> Communication Completion Badge.</p>
                     
                     </div>
 
@@ -121,12 +121,12 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Teamwork_Locked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Teamwork_Unlocked.png" class ="image" alt="No. 1 Badge">
                     </div>
 
                     <div class ="text-container">
                         <p class ="badge-title">Teamwork Completion Badge</p> <br>
-                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Teamwork Completion Badge.</p>
+                        <p class ="badge-desc">Complete Teamwork Module to Receive <br> Teamwork Completion Badge.</p>
                     
                     </div>
 
@@ -141,7 +141,7 @@ require_once('Part/header.php');
                 <p class="title">Acheivement to be Earned</p>
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Leadership_Locked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Points_Unlocked.png" class ="image" alt="No. 1 Badge">
                     </div>
 
                     <div class ="text-container">
@@ -154,7 +154,7 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Communication_Locked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Module_Unlocked.png" class ="image" alt="No. 1 Badge">
                     </div>
 
                     <div class ="text-container">
@@ -167,7 +167,46 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Teamwork_Locked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Complete_Unlocked.png" class ="image" alt="No. 1 Badge">
+                    </div>
+
+                    <div class ="text-container">
+                        <p class ="badge-title">Teamwork Completion Badge</p> <br>
+                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Teamwork Completion Badge.</p>
+                    
+                    </div>
+
+                </div>
+
+                <div class ="badge-container">
+                    <div class ="image-container">
+                        <img src="Image/Rank_Unlocked.png" class ="image" alt="No. 1 Badge">
+                    </div>
+
+                    <div class ="text-container">
+                        <p class ="badge-title">Teamwork Completion Badge</p> <br>
+                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Teamwork Completion Badge.</p>
+                    
+                    </div>
+
+                </div>
+
+                <div class ="badge-container">
+                    <div class ="image-container">
+                        <img src="Image/Lvl1_Unlocked.png" class ="image" alt="No. 1 Badge">
+                    </div>
+
+                    <div class ="text-container">
+                        <p class ="badge-title">Teamwork Completion Badge</p> <br>
+                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Teamwork Completion Badge.</p>
+                    
+                    </div>
+
+                </div>
+
+                <div class ="badge-container">
+                    <div class ="image-container">
+                        <img src="Image/Lvl5_Unlocked.png" class ="image" alt="No. 1 Badge">
                     </div>
 
                     <div class ="text-container">
