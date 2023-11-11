@@ -45,17 +45,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insertEventStmt->execute();
         $insertEventStmt->close();
 
-        // Record point history with added_at timestamp
-        $pointsReward = 10;
-        $eventDescription = "Event participation";
-        
-        $recordHistoryQuery = "INSERT INTO point_history (username, points_added, event_description, added_at) VALUES (?, ?, ?, NOW())";
-        $recordHistoryStmt = $conn->prepare($recordHistoryQuery);
-        $pointsReward = 10; // Hard-coded points
-        $eventDescription = "Event participation"; // Hard-coded event description
-        $recordHistoryStmt->bind_param("sis", $username, $pointsReward, $eventDescription);
-        $recordHistoryStmt->execute();
-        $recordHistoryStmt->close();
+        // Record point history
+            $point_history_query = "INSERT INTO point_history (username, points_added, event_description, added_at) VALUES (?, ?, ?, NOW())";
+            $point_history_stmt = $conn->prepare($point_history_query);
+
+            if (!$point_history_stmt) {
+                echo "Error: " . $conn->error;
+            } else {
+                $event_description = "Challenge 1 Point";
+                $points_added = 10;
+                $point_history_stmt->bind_param("sis", $_SESSION['username'], $points_added, $event_description);
+                
+                if (!$point_history_stmt->execute()) {
+                    echo "Error: " . $point_history_stmt->error;
+                } else {
+                    echo "<script>alert('Challenge completed! You earned 10 points.');</script>";
+                }
+
+                $point_history_stmt->close();
+}
 
         // Close the database connection
         $conn->close();
