@@ -41,6 +41,7 @@ if (isset($_POST['done'])) {
 
     if ($challenge_completed) {
         $disable_button = true;
+        
     } else {
         // Challenge 1 completion query
         $completion_query = "INSERT INTO user_soft_skill_progress (user_id, soft_skill_id, challenge_number, completed) VALUES (?, ?, ?, 1)";
