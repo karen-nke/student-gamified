@@ -51,7 +51,7 @@ if (isset($_POST['done'])) {
         $completion_stmt->close();
 
         // Add 10 points to user's points and record in point_history
-        $points_to_add = 10;
+        $points_to_add = 20;
         $event_description = "Challenge Point";
 
         // Update user's points
