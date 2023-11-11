@@ -145,8 +145,8 @@ require_once('Part/header.php');
                     </div>
 
                     <div class ="text-container">
-                        <p class ="badge-title">Leadership Completion Badge</p> <br>
-                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Leadership Completion Badge.</p>
+                        <p class ="badge-title">Point Pioneer</p> <br>
+                        <p class ="badge-desc">Forge your path to success! To become a "Point Pioneer," earn your first point. Engage with tasks, quizzes, and events to accumulate points and showcase your commitment to growth.</p>
                     
                     </div>
 
@@ -158,8 +158,8 @@ require_once('Part/header.php');
                     </div>
 
                     <div class ="text-container">
-                        <p class ="badge-title">Communication Completion Badge</p> <br>
-                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Communication Completion Badge.</p>
+                        <p class ="badge-title">Module Explorer</p> <br>
+                        <p class ="badge-desc">Begin your soft skills adventure! To earn the "Module Explorer" achievement, start your first module. Navigate through the tasks and unlock the secrets of effective soft skills development.</p>
                     
                     </div>
 
@@ -171,8 +171,8 @@ require_once('Part/header.php');
                     </div>
 
                     <div class ="text-container">
-                        <p class ="badge-title">Teamwork Completion Badge</p> <br>
-                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Teamwork Completion Badge.</p>
+                        <p class ="badge-title">Module Master</p> <br>
+                        <p class ="badge-desc">Master the modules! To achieve "Module Master" status, complete your first module. Conquer the tasks, absorb the knowledge, and emerge as a well-rounded soft skills enthusiast.</p>
                     
                     </div>
 
@@ -184,8 +184,8 @@ require_once('Part/header.php');
                     </div>
 
                     <div class ="text-container">
-                        <p class ="badge-title">Teamwork Completion Badge</p> <br>
-                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Teamwork Completion Badge.</p>
+                        <p class ="badge-title">Lead Voyager</p> <br>
+                        <p class ="badge-desc">Set sail to leadership excellence! To become a "Leadership Voyager," reach the top spot on the Leadership Board. Showcase your outstanding leadership skills and inspire others on your journey.</p>
                     
                     </div>
 
@@ -197,8 +197,8 @@ require_once('Part/header.php');
                     </div>
 
                     <div class ="text-container">
-                        <p class ="badge-title">Teamwork Completion Badge</p> <br>
-                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Teamwork Completion Badge.</p>
+                        <p class ="badge-title">Skill Apprentice (Level 1)</p> <br>
+                        <p class ="badge-desc">To earn the "Skill Apprentice" achievement, reach Level 1. Embrace the learning process, accumulate points, and steadily progress on your way to mastery.</p>
                     
                     </div>
 
@@ -210,8 +210,8 @@ require_once('Part/header.php');
                     </div>
 
                     <div class ="text-container">
-                        <p class ="badge-title">Teamwork Completion Badge</p> <br>
-                        <p class ="badge-desc">Complete Leadership Module to Receive <br> Teamwork Completion Badge.</p>
+                        <p class ="badge-title">Skill Sage (Level 5)</p> <br>
+                        <p class ="badge-desc">To become a "Skill Sage," reach Level 5. Your dedication and continuous improvement have elevated you to the highest echelons of soft skills expertise.</p>
                     
                     </div>
 
