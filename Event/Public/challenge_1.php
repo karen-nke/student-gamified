@@ -139,14 +139,13 @@ if (isset($_POST['done'])) {
                 pellentesque, blandit rhoncus dolor congue. Suspendisse ut tempus justo, nec sodales massa. In at massa
                 pretium, tincidunt magna et, molestie massa.</p>
 
-            <form method="post">
-
-                <button type="submit" name="done" <?php if ($disable_button) echo "disabled"; ?>>Done</button>
-
-                <?php if ($disable_button): ?>
-                <a href="challenge_2.php"><button type="button">Next Challenge</button></a>
-                <?php endif; ?>
-            </form>
+                <form method="post">
+                    <?php if ($disable_button): ?>
+                        <a href="challenge_2.php"><button type="button">Next Challenge</button></a>
+                    <?php else: ?>
+                        <button type="submit" name="done">Done</button>
+                    <?php endif; ?>
+                </form>
 
 
         </div>

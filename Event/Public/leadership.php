@@ -7,8 +7,9 @@ require_once('db_connect.php');
 require_once('Part/header.php');
 require_once('logic_controller.php');
 
-// Assuming you have the user ID and soft skill ID
 $user_id = $_SESSION["user_id"];
+$username = $_SESSION["username"];
+
 $soft_skill_id = 1; // You need to implement a function like getSoftSkillId
 
 // Check if the challenge is already completed
