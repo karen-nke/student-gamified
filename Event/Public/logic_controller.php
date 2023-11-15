@@ -114,22 +114,10 @@ function getPointHistoryData($conn, $username) {
     return $pointHistoryData;
 }
 
-function getTotalEventHistoryRows($conn, $username) {
-    $totalRowsQuery = "SELECT COUNT(*) as count FROM events WHERE username = ?";
-    $totalRowsStmt = $conn->prepare($totalRowsQuery);
-    $totalRowsStmt->bind_param("s", $username);
-    $totalRowsStmt->execute();
-    $result = $totalRowsStmt->get_result();
-    $totalRows = $result->fetch_assoc()['count'];
-    $totalRowsStmt->close();
-
-    return $totalRows;
-}
-
-function getEventHistoryDataPaginated($conn, $username, $offset, $perPage) {
+function getEventHistoryDataPaginated($conn, $username, $start_index, $items_per_page) {
     $eventHistoryQuery = "SELECT * FROM events WHERE username = ? ORDER BY datetime DESC LIMIT ?, ?";
     $eventHistoryStmt = $conn->prepare($eventHistoryQuery);
-    $eventHistoryStmt->bind_param("sii", $username, $offset, $perPage);
+    $eventHistoryStmt->bind_param("sii", $username, $start_index, $items_per_page);
     $eventHistoryStmt->execute();
     $eventHistoryResult = $eventHistoryStmt->get_result();
     $eventHistoryData = array();
@@ -146,6 +134,23 @@ function getEventHistoryDataPaginated($conn, $username, $offset, $perPage) {
 
     return $eventHistoryData;
 }
+
+
+function getTotalPages($conn, $username, $items_per_page = 10) {
+    $totalEventsQuery = "SELECT COUNT(*) as total FROM events WHERE username = ?";
+    $totalEventsStmt = $conn->prepare($totalEventsQuery);
+    $totalEventsStmt->bind_param("s", $username);
+    $totalEventsStmt->execute();
+    $totalEventsResult = $totalEventsStmt->get_result();
+    $totalEvents = $totalEventsResult->fetch_assoc()['total'];
+    $totalEventsStmt->close();
+
+    // Calculate the total pages
+    $totalPages = ceil($totalEvents / $items_per_page);
+
+    return $totalPages;
+}
+
 
 
 
