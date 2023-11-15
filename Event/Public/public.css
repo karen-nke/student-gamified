@@ -160,9 +160,35 @@
   color:#fff;
 }
   
-  .btn:hover {
+.btn:hover {
     transform: translateY(-5px);
     background: #E87A00
+  }
+
+  /*Account Deletion Button */
+  .btn-delete {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    text-align: center;
+    border: none;
+    background: #E87A00;
+    outline: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    color: #FFF;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 25px;
+}
+
+.btn-delete a{
+  color:#fff;
+}
+  
+.btn-delete:hover {
+    transform: translateY(-5px);
+    background: #e82e00
   }
   
   

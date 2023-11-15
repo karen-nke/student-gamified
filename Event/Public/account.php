@@ -331,7 +331,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
     <button class="btn"><a href="point_history.php">Point History</a></button>
 
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    <button class="btn" type="submit" name="delete_account_confirm">Delete Account</button>
+    <button class="btn-delete" type="submit" name="delete_account_confirm">Delete Account</button>
     </form>
 
 </div>    
