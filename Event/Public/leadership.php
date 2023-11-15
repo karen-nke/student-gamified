@@ -123,7 +123,7 @@ $username = $_SESSION["username"];
 
                                         <div class ="badge-container">
                                                 <div class ="image-container">
-                                                        <img src="Image/Challenge Box 1.png" class ="image" alt="No. 1 Badge">
+                                                        <img src="Image/Challenge Box 3.png" class ="image" alt="No. 1 Badge">
                                                 </div>
 
                                                 <div class ="text-container">
