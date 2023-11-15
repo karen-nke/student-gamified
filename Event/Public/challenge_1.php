@@ -116,6 +116,18 @@ if (isset($_POST['done'])) {
         line-height: 30px;
 
     }
+
+    .box-container .button {
+        font-family: 'Poppins', sans-serif; 
+        font-size: 18px;
+        font-weight:300;
+        background-color: #E87A00;
+        color: #fff;
+        padding: 10px 25px 10px 25px;
+        margin-top: 25px;
+        border-radius: 10px;
+
+    }
 </style>
 
 <body>
@@ -141,9 +153,9 @@ if (isset($_POST['done'])) {
 
                 <form method="post">
                     <?php if ($disable_button): ?>
-                        <a href="challenge_2.php"><button type="button">Next Challenge</button></a>
+                        <a href="challenge_2.php"><button class ="button" type="button">Next Challenge</button></a>
                     <?php else: ?>
-                        <button type="submit" name="done">Done</button>
+                        <button class ="button" type="submit" name="done">Done</button>
                     <?php endif; ?>
                 </form>
 
