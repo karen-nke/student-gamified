@@ -98,20 +98,11 @@ $completion_stmt->close();
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Theory</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                                <?php
-                                                        // Display the "Start Challenge" button only if the challenge is not completed
-                                                                if (!$challenge_completed) {
-                                                                echo '<button onclick="startChallenge()">Start Challenge</button>';
-                                                                }
-                                                                ?>
+                                                        <a href = "challenge_1.php"><button>Start Challenge</button></a>
+                                                               
                                                 </div>
 
-                                                <script>
-                                                function startChallenge() {
-                                                // Add logic to navigate to the challenge page (e.g., leadership_challenge.php)
-                                                window.location.href = 'challenge_1.php';
-                                                }
-                                                </script>
+                                              
 
                                         </div>
 
@@ -123,7 +114,7 @@ $completion_stmt->close();
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Test</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <button>Start Challenge</button>
+                                                        <a href = "challenge_2.php"><button>Start Challenge</button></a>
                                                 </div>
 
                                         </div>
@@ -136,7 +127,7 @@ $completion_stmt->close();
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Pratical</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <button>Start Challenge</button>
+                                                        <a href = "challenge_3.php"><button>Start Challenge</button></a>
                                                 </div>
 
                                         </div>
