@@ -53,7 +53,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isset($_POST[$answer_key])) {
             $answers[$i] = $_POST[$answer_key];
         } else {
-            echo "Please answer all questions.";
+            echo "<script>
+                    alert('Please answer all questions');
+                    window.location.href = 'challenge_2.php';
+                 </script>";
+                    
             exit();
         }
     }
@@ -110,16 +114,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $record_history_stmt->execute();
                 $record_history_stmt->close();
     
-                echo "<script>alert('Challenge 2 completed!');</script>";
+                echo
+                "<script>
+                    alert('Challenge 2 completed!');
+                    window.location.href = 'leadership.php';
+                 </script>";
+
             } else {
                 // Challenge already completed
-                echo "<script>alert('Challenge 2 already completed!');</script>";
+                echo "<script>
+                        alert('Challenge 2 already completed!');
+                        window.location.href = 'leadership.php';
+                    </script>";
             }
         }
-        
 
-
-       
 
         $check_completion_stmt->close();
     } else {
@@ -130,13 +139,60 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
+<style>
+    .box-container {
+        width: 100%;
+        height: auto;
+        background: white;
+        border: 2px #E87A00 solid;
+        padding: 50px;
+        position: relative;
+        margin: 25px;
+
+    }
+
+    .box-container h3 {
+        margin-bottom: 50px;
+
+        color: #E87A00;
+        font-size: 24px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+    }
+
+    .box-container .question {
+        color: #045174;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 30px;
+        margin-top:50px;
+
+    }
+
+    .box-container .button {
+        font-family: 'Poppins', sans-serif; 
+        font-size: 18px;
+        font-weight:300;
+        background-color: #E87A00;
+        color: #fff;
+        padding: 10px 25px 10px 25px;
+        margin-top: 25px;
+        border-radius: 10px;
+
+    }
+
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Challenge 2</title>
-  
+    <title>Events Point Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -147,14 +203,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <?php if ($challenge_completed): ?>
                 <p>Congratulations! You completed Challenge 2.</p>
-                <a href="challenge_3.php"><button type="button">Next Challenge</button></a>
+                <a href="challenge_3.php"><button class ="button" type="button">Next Challenge</button></a>
                 
             <?php else: ?>
                 <form method="post">
                   
                     <?php foreach ($questions as $index => $question): ?>
                         <div class="question-container">
-                            <p><?php echo $question['question']; ?></p>
+                            <p class ="question"><?php echo $question['question']; ?></p>
                             
                             <?php foreach ($question['choices'] as $choice): ?>
                                 <label>
@@ -165,7 +221,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                     <?php endforeach; ?>
 
-                    <button type="submit" name="submit">Submit Answers</button>
+                    <button class ="button" type="submit" name="submit">Submit Answers</button>
                 </form>
             <?php endif; ?>
         </div>
