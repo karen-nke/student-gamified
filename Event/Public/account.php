@@ -58,6 +58,21 @@ function hasJoinedModule($conn, $user_id) {
 }
 $joined_module = hasJoinedModule($conn, $user_id);
 
+function hasCompletedAllChallenges($conn, $user_id) {
+    $check_completion_query = "SELECT COUNT(DISTINCT soft_skill_id) as count FROM user_soft_skill_progress WHERE user_id = ? AND completed = 1";
+    $check_completion_stmt = $conn->prepare($check_completion_query);
+    $check_completion_stmt->bind_param("i", $user_id);
+    $check_completion_stmt->execute();
+    $result = $check_completion_stmt->get_result();
+    $count = $result->fetch_assoc()['count'];
+    $check_completion_stmt->close();
+
+    return $count > 0;
+}
+
+
+$completed_all_challenges = hasCompletedAllChallenges($conn, $user_id);
+
 function hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers) {
     $check_completion_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number IN (?, ?, ?)";
     $check_completion_stmt = $conn->prepare($check_completion_query);
@@ -249,7 +264,7 @@ $completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_
                 echo '<img src="Image/Leadership_Locked.png" alt="No. 1 Badge">';
             }
             ?>
-            
+
             <img src="Image/Communication_Locked.png" alt="No. 1 Badge">
             <img src="Image/Teamwork_Locked.png" alt="No. 1 Badge">
           
@@ -258,50 +273,45 @@ $completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_
         </div>
 
         <div class="badge-container">
-            <p>Acheivement to be Unlocked</p>
+            <p>Achievement to be Unlocked</p>
 
             <?php 
             if ($points >= 1) {
-                echo ' <img src="Image/Points_Unlocked.png" alt="Points Badge">';
-                }else{
-                    echo ' <img src="Image/Points_Locked.png" alt="Points Badge">';
-                }
-            ?>
-            <?php
+                echo '<img src="Image/Points_Unlocked.png" alt="Points Badge">';
+            } else {
+                echo '<img src="Image/Points_Locked.png" alt="Points Badge">';
+            }
 
             if ($joined_module) {
                 echo '<img src="Image/Module_Unlocked.png" alt="Rank Badge">';
-
-            }else{
+            } else {
                 echo '<img src="Image/Module_Locked.png" alt="Rank Badge">';
             }
-            ?>
 
-            <img src="Image/Complete_Locked.png" alt="Complete Badge">
-            <?php
+            if ($completed_all_challenges) {
+                echo '<img src="Image/Complete_Unlocked.png" alt="Complete Badge">';
+            } else {
+                echo '<img src="Image/Complete_Locked.png" alt="Complete Badge">';
+            }
 
-                if ($userRank == 1) {
+            if ($userRank == 1) {
                 echo '<img src="Image/Rank_Unlocked.png" alt="Rank Badge">';
-                }else{
-                    echo ' <img src="Image/Rank_Locked.png" alt="Rank Badge">';
-                }
+            } else {
+                echo '<img src="Image/Rank_Locked.png" alt="Rank Badge">';
+            }
 
-                if ($userLevel >= 1) {
-                    echo '<img src="Image/Lvl1_Unlocked.png" alt="Rank Badge">';
-                }else{
-                    echo '<img src="Image/Lvl1_Locked.png" alt="Rank Badge">';
+            if ($userLevel >= 1) {
+                echo '<img src="Image/Lvl1_Unlocked.png" alt="Rank Badge">';
+            } else {
+                echo '<img src="Image/Lvl1_Locked.png" alt="Rank Badge">';
+            }
 
-                }
-
-                if ($userLevel >= 5) {
-                    echo '<img src="Image/Lvl5_Unlocked.png" alt="Rank Badge">';
-                }else{
-                    echo '<img src="Image/Lvl5_Locked.png" alt="Rank Badge">';
-
-                }
-
+            if ($userLevel >= 5) {
+                echo '<img src="Image/Lvl5_Unlocked.png" alt="Rank Badge">';
+            } else {
+                echo '<img src="Image/Lvl5_Locked.png" alt="Rank Badge">';
+            }
             ?> 
-            
         </div>
 
     <button class="btn"><a href="badge_detail.php">Learn how to earn badges</a></button>   
