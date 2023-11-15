@@ -114,6 +114,29 @@ function getPointHistoryData($conn, $username) {
     return $pointHistoryData;
 }
 
+function getEventHistoryData($conn, $username) {
+
+    $eventHistoryQuery = "SELECT * FROM events WHERE username = ? ORDER BY datetime DESC";
+    $eventHistoryStmt = $conn->prepare($eventHistoryQuery);
+    $eventHistoryStmt->bind_param("s", $username);
+    $eventHistoryStmt->execute();
+    $eventHistoryResult = $eventHistoryStmt->get_result();
+    $eventHistoryData = array();
+
+
+    while ($row = $eventHistoryResult->fetch_assoc()) {
+        $eventHistoryData[] = array(
+            'date' => $row['datetime'],
+            'event_description' => $row['event'],
+            'club' => $row['club']
+        );
+    }
+
+    $eventHistoryStmt->close();
+
+    return $eventHistoryData;
+}
+
 function processEventForm($conn)
 {
    

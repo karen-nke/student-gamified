@@ -1,19 +1,64 @@
-<!-- event_history.php -->
+
 <?php
-// Include necessary files (e.g., db_connect.php, header, etc.)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Fetch and display all events history
-$eventsQuery = "SELECT * FROM events WHERE username = ? ORDER BY datetime DESC";
-$eventsStmt = $conn->prepare($eventsQuery);
-$eventsStmt->bind_param("s", $username);
-$eventsStmt->execute();
-$eventsResult = $eventsStmt->get_result();
+session_start();
 
-echo "<h2>All Events History</h2>";
+require_once('db_connect.php');
+require_once('Part/header.php');
+require_once('logic_controller.php');
 
-while ($row = $eventsResult->fetch_assoc()) {
-    echo "<p>{$row['event']} at {$row['club']} on {$row['datetime']}</p>";
+// Assuming you have a login system and the username is stored in the session
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php"); // Redirect to login page
+    exit();
 }
 
-$eventsStmt->close();
+$username = $_SESSION["username"];
+
+$eventHistoryData = getEventHistoryData($conn, $username);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Point History</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <h2 class="title"><br>Welcome, <?php echo $username; ?>!</h2>
+    </div>
+   
+    <div class="page-container">
+        <h3>Point History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th class="date-column">Date</th>
+                    <th>Event Description</th>
+                    <th>Points Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($eventHistoryData as $row) {
+                    echo "<tr>";
+                    echo "<td>{$row['date']}</td>";
+                    echo "<td>{$row['event_description']}</td>";
+                    echo "<td>{$row['club']}</td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

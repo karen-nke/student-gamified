@@ -39,6 +39,7 @@ $username = $_SESSION["username"];
 </style>
 
 <body>
+<div class ="container">
 
 
        
@@ -141,7 +142,7 @@ $username = $_SESSION["username"];
                         </div>
 
                 </section>
-
+</div>
 
         
                         

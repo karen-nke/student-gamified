@@ -65,12 +65,15 @@ require_once('logic_controller.php');
                                         <button class="btn" type="submit">Submit</button>
                                 </form>
 
+                                <button class="btn"><a href="event_history.php">Event History</a></button>  
+
                         <?php
                         } else {
                                 // User is not logged in, show a message or redirect to the login page
                                 echo "<p>Please <a href='Login/login.php'>login</a> first.</p>";
                         }
                         ?>
+                       
 
                 </div>
 
