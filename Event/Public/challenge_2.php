@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 echo
                 "<script>
                     alert('Challenge 2 completed!');
-                    window.location.href = 'leadership.php';
+                    window.location.href = 'challenge_3.php';
                  </script>";
 
             } else {
