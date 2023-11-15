@@ -114,6 +114,41 @@ function getPointHistoryData($conn, $username) {
     return $pointHistoryData;
 }
 
+function getPointHistoryDataPaginated($conn, $username, $start_index, $items_per_page) {
+    $pointHistoryQuery = "SELECT * FROM point_history WHERE username = ? ORDER BY added_at DESC LIMIT ?, ?";
+    $pointHistoryStmt = $conn->prepare($pointHistoryQuery);
+    $pointHistoryStmt->bind_param("sii", $username, $start_index, $items_per_page);
+    $pointHistoryStmt->execute();
+    $pointHistoryResult = $pointHistoryStmt->get_result();
+    $pointHistoryData = array();
+
+    while ($row = $pointHistoryResult->fetch_assoc()) {
+        $pointHistoryData[] = array(
+            'date' => $row['added_at'],
+            'event_description' => $row['event_description'],
+            'points_added' => $row['points_added']
+        );
+    }
+
+    $pointHistoryStmt->close();
+
+    return $pointHistoryData;
+}
+
+function getTotalRows($conn, $username) {
+    $totalRowsQuery = "SELECT COUNT(*) as count FROM point_history WHERE username = ?";
+    $totalRowsStmt = $conn->prepare($totalRowsQuery);
+    $totalRowsStmt->bind_param("s", $username);
+    $totalRowsStmt->execute();
+    $result = $totalRowsStmt->get_result();
+    $count = $result->fetch_assoc()['count'];
+    $totalRowsStmt->close();
+
+    return $count;
+}
+
+
+
 function getEventHistoryDataPaginated($conn, $username, $start_index, $items_per_page) {
     $eventHistoryQuery = "SELECT * FROM events WHERE username = ? ORDER BY datetime DESC LIMIT ?, ?";
     $eventHistoryStmt = $conn->prepare($eventHistoryQuery);

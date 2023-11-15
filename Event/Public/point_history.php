@@ -16,7 +16,17 @@ if (!isset($_SESSION["username"])) {
 
 $username = $_SESSION["username"];
 
-$pointHistoryData = getPointHistoryData($conn, $username);
+// Fetch total number of rows
+$totalRows = getTotalRows($conn, $username);
+
+// Calculate total number of pages
+$items_per_page = 10;
+$totalPages = ceil($totalRows / $items_per_page);
+
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$start_index = ($page - 1) * $items_per_page;
+
+$pointHistoryData = getPointHistoryDataPaginated($conn, $username, $start_index, $items_per_page);
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +40,36 @@ $pointHistoryData = getPointHistoryData($conn, $username);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
+
+<style>
+        .current-page {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            padding: 8px 16px;
+            margin: 0 5px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .pagination a.current-page {
+            background-color: #E87A00;
+            color: #fff;
+            border: 1px solid #E87A00;
+}
+
+    </style>
+
 <body>
     <div class="container">
         <h2 class="title"><br>Welcome, <?php echo $username; ?>!</h2>
@@ -57,6 +97,12 @@ $pointHistoryData = getPointHistoryData($conn, $username);
                 ?>
             </tbody>
         </table>
+
+        <div class="pagination">
+            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                <a href="?page=<?php echo $i; ?>" class="<?php echo $i == $page ? 'current-page' : ''; ?>"><?php echo $i; ?></a>
+            <?php endfor; ?>
+        </div>
     </div>
 </body>
 </html>
