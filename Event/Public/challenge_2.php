@@ -200,12 +200,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="container">
         <div class="box-container">
             <h3>Challenge 2</h3>
+           
 
             <?php if ($challenge_completed): ?>
                 <p>Congratulations! You completed Challenge 2.</p>
                 <a href="challenge_3.php"><button class ="button" type="button">Next Challenge</button></a>
                 
             <?php else: ?>
+                <p> For testing purpose, the answer is all a" </p>
                 <form method="post">
                   
                     <?php foreach ($questions as $index => $question): ?>
