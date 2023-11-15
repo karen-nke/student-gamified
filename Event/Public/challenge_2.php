@@ -26,19 +26,19 @@ $username = $_SESSION["username"];
 
 $questions = array(
     array(
-        'question' => 'What is the capital of France?',
-        'choices' => array('Paris', 'Berlin', 'Rome', 'Madrid'),
-        'correct_answer' => 'Paris',
+        'question' => 'Question 1?',
+        'choices' => array('A', 'B', 'C', 'D'),
+        'correct_answer' => 'A',
     ),
     array(
-        'question' => 'Which river is the longest in the world?',
-        'choices' => array('Nile', 'Amazon', 'Yangtze', 'Mississippi'),
-        'correct_answer' => 'Amazon',
+        'question' => 'Question 2?',
+        'choices' => array('A', 'B', 'C', 'D'),
+        'correct_answer' => 'A',
     ),
     array(
-        'question' => 'Who wrote "Romeo and Juliet"?',
-        'choices' => array('Charles Dickens', 'Jane Austen', 'William Shakespeare', 'Mark Twain'),
-        'correct_answer' => 'William Shakespeare',
+        'question' => 'Question 3?',
+        'choices' => array('A', 'B', 'C', 'D'),
+        'correct_answer' => 'A',
     ),
 );
 
