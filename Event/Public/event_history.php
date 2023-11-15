@@ -43,7 +43,7 @@ $eventHistoryData = getEventHistoryData($conn, $username);
                 <tr>
                     <th class="date-column">Date</th>
                     <th>Event Description</th>
-                    <th>Points Added</th>
+                    <th>Club</th>
                 </tr>
             </thead>
             <tbody>

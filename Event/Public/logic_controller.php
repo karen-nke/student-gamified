@@ -50,7 +50,7 @@ function getLevelData($points) {
         7 => array('min' => 701, 'max' => 800),
         8 => array('min' => 801, 'max' => 900),
         9 => array('min' => 901, 'max' => 1000),
-        10 => array('min' => 1001, 'max' => PHP_INT_MAX) 
+        10 => array('min' => 1001, 'max' => 2000) 
     );
 
     foreach ($levels as $level => $range) {
@@ -203,6 +203,55 @@ function processEventForm($conn)
         // Close the database connection
         $conn->close();
     }
+}
+
+function hasCheckedInToday($conn, $user_id) {
+    $checkin_date_query = "SELECT checkin_date FROM checkin_history WHERE user_id = ? AND checkin_date = CURDATE()";
+    $checkin_date_stmt = $conn->prepare($checkin_date_query);
+    $checkin_date_stmt->bind_param("i", $user_id);
+    $checkin_date_stmt->execute();
+    $result = $checkin_date_stmt->get_result();
+    $checkin_date_stmt->close();
+
+    return $result->num_rows > 0;
+}
+
+function checkin($conn, $user_id) {
+    // Check if the user already checked in today
+    if (hasCheckedInToday($conn, $user_id)) {
+        return "You have already checked in today.";
+    }
+
+    // Get the username from the session
+  
+    $username = $_SESSION["username"];
+
+    // Reward points for check-in
+    $points_to_add = 5;
+    
+    // Update user's points
+    $update_points_query = "UPDATE users SET points = points + ? WHERE id = ?";
+    $update_points_stmt = $conn->prepare($update_points_query);
+    $update_points_stmt->bind_param("ii", $points_to_add, $user_id);
+    $update_points_stmt->execute();
+    $update_points_stmt->close();
+
+    // Record point history with added_at timestamp
+    $event_description = "Check-in Points";
+    $record_history_query = "INSERT INTO point_history (username, points_added, event_description, added_at) VALUES (?, ?, ?, NOW())";
+    $record_history_stmt = $conn->prepare($record_history_query);
+    $record_history_stmt->bind_param("sis", $username, $points_to_add, $event_description);
+    $record_history_stmt->execute();
+    $record_history_stmt->close();
+
+    // Record check-in in checkin_history table
+    $record_checkin_query = "INSERT INTO checkin_history (user_id, checkin_date) VALUES (?, CURDATE())";
+    $record_checkin_stmt = $conn->prepare($record_checkin_query);
+    $record_checkin_stmt->bind_param("i", $user_id);
+    $record_checkin_stmt->execute();
+    $record_checkin_stmt->close();
+
+    return "Check-in successful! You earned 5 points.";
 }
 
 

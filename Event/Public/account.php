@@ -10,6 +10,18 @@ require_once('db_connect.php');
 require_once('Part/header.php');
 require_once('logic_controller.php');
 
+$user_id = $_SESSION["user_id"];
+$username = $_SESSION["username"];
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // Perform the check-in logic
+    $checkinResult = checkin($conn, $user_id);
+
+    // Display the check-in result
+    echo "<script>alert('$checkinResult');</script>";
+}
+
 try {
     if (!isset($_SESSION["username"])) {
         throw new Exception("User not authenticated");
@@ -131,6 +143,10 @@ $joined_module = hasJoinedModule($conn, $user_id);
         font-weight: 500;
     }
 
+    .checkin-container{
+        margin: 25px;
+    }
+
 </style>
 
 <!DOCTYPE html>
@@ -161,6 +177,7 @@ $joined_module = hasJoinedModule($conn, $user_id);
 
 <div class ="container">
 
+
     <div class="profile-info">
         <!-- Progress bar -->
         <div class= "p-container">
@@ -180,6 +197,17 @@ $joined_module = hasJoinedModule($conn, $user_id);
            
 
         </div>
+
+
+
+      <div class="checkin-container">
+        <form method="post" action="account.php">
+            <button class ="btn" type="submit">Check-in to earn 5 points</button>
+        </form>  
+
+      </div>
+
+       
        
 
         <div class="container">
