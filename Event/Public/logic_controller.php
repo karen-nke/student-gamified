@@ -114,15 +114,25 @@ function getPointHistoryData($conn, $username) {
     return $pointHistoryData;
 }
 
-function getEventHistoryData($conn, $username) {
+function getTotalEventHistoryRows($conn, $username) {
+    $totalRowsQuery = "SELECT COUNT(*) as count FROM events WHERE username = ?";
+    $totalRowsStmt = $conn->prepare($totalRowsQuery);
+    $totalRowsStmt->bind_param("s", $username);
+    $totalRowsStmt->execute();
+    $result = $totalRowsStmt->get_result();
+    $totalRows = $result->fetch_assoc()['count'];
+    $totalRowsStmt->close();
 
-    $eventHistoryQuery = "SELECT * FROM events WHERE username = ? ORDER BY datetime DESC";
+    return $totalRows;
+}
+
+function getEventHistoryDataPaginated($conn, $username, $offset, $perPage) {
+    $eventHistoryQuery = "SELECT * FROM events WHERE username = ? ORDER BY datetime DESC LIMIT ?, ?";
     $eventHistoryStmt = $conn->prepare($eventHistoryQuery);
-    $eventHistoryStmt->bind_param("s", $username);
+    $eventHistoryStmt->bind_param("sii", $username, $offset, $perPage);
     $eventHistoryStmt->execute();
     $eventHistoryResult = $eventHistoryStmt->get_result();
     $eventHistoryData = array();
-
 
     while ($row = $eventHistoryResult->fetch_assoc()) {
         $eventHistoryData[] = array(
@@ -136,6 +146,9 @@ function getEventHistoryData($conn, $username) {
 
     return $eventHistoryData;
 }
+
+
+
 
 function processEventForm($conn)
 {
