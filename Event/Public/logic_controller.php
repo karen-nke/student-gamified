@@ -49,7 +49,8 @@ function getLevelData($points) {
         6 => array('min' => 601, 'max' => 700),
         7 => array('min' => 701, 'max' => 800),
         8 => array('min' => 801, 'max' => 900),
-        9 => array('min' => 901, 'max' => PHP_INT_MAX) 
+        9 => array('min' => 901, 'max' => 1000),
+        10 => array('min' => 1001, 'max' => PHP_INT_MAX) 
     );
 
     foreach ($levels as $level => $range) {

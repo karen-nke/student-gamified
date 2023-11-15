@@ -21,36 +21,100 @@ $username = $_SESSION["username"];
 
 
 
+$questions = array(
+    array(
+        'question' => 'What is the capital of France?',
+        'choices' => array('Paris', 'Berlin', 'Rome', 'Madrid'),
+        'correct_answer' => 'Paris',
+    ),
+    array(
+        'question' => 'Which river is the longest in the world?',
+        'choices' => array('Nile', 'Amazon', 'Yangtze', 'Mississippi'),
+        'correct_answer' => 'Amazon',
+    ),
+    array(
+        'question' => 'Who wrote "Romeo and Juliet"?',
+        'choices' => array('Charles Dickens', 'Jane Austen', 'William Shakespeare', 'Mark Twain'),
+        'correct_answer' => 'William Shakespeare',
+    ),
+);
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  
+    // Retrieve the submitted answers
+    $answers = array();
 
+    foreach ($questions as $i => $question) {
+        $answer_key = 'answer_' . $i;
+        if (isset($_POST[$answer_key])) {
+            $answers[$i] = $_POST[$answer_key];
+        } else {
+            echo "Please answer all questions.";
+            exit();
+        }
+    }
 
-    $challenge_completed = true;
-} else {
-    // Display the quiz questions
-  
-    $questions = array(
-        array(
-            'question' => 'Questions',
-            'choices' => array('A', 'B', 'C', 'D'),
-            'correct_answer' => 'A',
-        ),
-        array(
-            'question' => 'Questions',
-            'choices' => array('A', 'B', 'C', 'D'),
-            'correct_answer' => 'B',
-        ),
-        array(
-            'question' => 'Questions',
-            'choices' => array('A', 'B', 'C', 'D'),
-            'correct_answer' => 'C',
-        ),
+    $all_correct = true;
+
+    foreach ($questions as $i => $question) {
+        if ($answers[$i] !== $question['correct_answer']) {
+            $all_correct = false;
+            break;
+        }
+    }
+
+    if ($all_correct) {
+        // Update user progress and points
+        $soft_skill_id = 1; // Update with the correct soft skill ID
+        $challenge_number = 2;
         
-    );
+       // Check if the challenge is already completed
+    $check_completion_query = "SELECT completed FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number = ?";
+    $check_completion_stmt = $conn->prepare($check_completion_query);
+    $check_completion_stmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
+    $check_completion_stmt->execute();
+    $check_completion_result = $check_completion_stmt->get_result();
+    $challenge_completed = $check_completion_result->fetch_assoc()['completed'];
 
+    if (!$challenge_completed) {
+        // Challenge 2 completion query
+        $completion_query = "INSERT INTO user_soft_skill_progress (user_id, soft_skill_id, challenge_number, completed) VALUES (?, ?, ?, 1)";
+        $completion_stmt = $conn->prepare($completion_query);
+        $completion_stmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
+        $completion_stmt->execute();
+        $completion_stmt->close();
 
-    $challenge_completed = false;
+        // Add points to user's points and record in point_history
+        $points_to_add = 20; // Update with the correct points
+        $event_description = "Challenge 2 Point";
+
+        // Update user's points
+        $update_points_query = "UPDATE users SET points = points + ? WHERE id = ?";
+        $update_points_stmt = $conn->prepare($update_points_query);
+        $update_points_stmt->bind_param("ii", $points_to_add, $user_id);
+        $update_points_stmt->execute();
+        $update_points_stmt->close();
+
+        // Record point history with added_at timestamp
+        $record_history_query = "INSERT INTO point_history (username, points_added, event_description, added_at) VALUES (?, ?, ?, NOW())";
+        $record_history_stmt = $conn->prepare($record_history_query);
+        $record_history_stmt->bind_param("sis", $username, $points_to_add, $event_description);
+        $record_history_stmt->execute();
+        $record_history_stmt->close();
+
+        echo "<script>alert('Challenge 2 completed!');</script>";
+    } else {
+        // Challenge already completed
+        echo "<script>alert('Challenge 2 already completed!');</script>";
+    }
+
+    $check_completion_stmt->close();  // Close the statement here
+
+    } else {
+        // Display a message indicating that not all answers are correct
+        echo "<script>alert('Not all answers are correct. Please try again.');</script>";
+    }
+
 }
 ?>
 
@@ -71,6 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <?php if ($challenge_completed): ?>
                 <p>Congratulations! You completed Challenge 2.</p>
+                <a href="challenge_3.php"><button type="button">Next Challenge</button></a>
                 
             <?php else: ?>
                 <form method="post">
