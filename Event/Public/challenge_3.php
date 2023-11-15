@@ -1,81 +1,74 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 session_start();
-
 require_once('db_connect.php');
 require_once('Part/header.php');
-
 
 // Check if the user is authenticated
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit();
 }
-
-$user_id = $_SESSION["user_id"];
 $username = $_SESSION["username"];
+$user_id = $_SESSION["user_id"];
 $soft_skill_id = 1;
 $challenge_number = 3;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if the form data is reaching the server
-    var_dump($_POST);
+// Check if the user has completed the challenge previously
+$check_completion_query = "SELECT completed FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number = ?";
+$check_completion_stmt = $conn->prepare($check_completion_query);
+$check_completion_stmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
+$check_completion_stmt->execute();
+$check_completion_result = $check_completion_stmt->get_result();
+$challenge_completed_row = $check_completion_result->fetch_assoc();
 
+if ($challenge_completed_row !== null && $challenge_completed_row['completed']) {
+    // User has already completed the challenge
+    echo "<script>
+            alert('You have already completed Challenge 3!');
+            window.location.href = 'leadership.php';
+        </script>";
+    exit();
+}
+
+$check_completion_stmt->close();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST["description"];
 
     // Update practical_form
     $insertEventQuery = "INSERT INTO practical_form (user_id, soft_skill_id, date_stamp, description) VALUES (?, ?, NOW(), ?)";
     $insertEventStmt = $conn->prepare($insertEventQuery);
     $insertEventStmt->bind_param("iis", $user_id, $soft_skill_id, $description);
-
-    if ($insertEventStmt->execute()) {
-        // Challenge 3 completion query
-        $completion_query = "INSERT INTO user_soft_skill_progress (user_id, soft_skill_id, challenge_number, completed) VALUES (?, ?, ?, 1)";
-        $completion_stmt = $conn->prepare($completion_query);
-        $completion_stmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
-
-        if ($completion_stmt->execute()) {
-            // Add points to user's points and record in point_history
-            $points_to_add = 20;
-            $event_description = "Challenge 3 Point";
-
-            $update_points_query = "UPDATE users SET points = points + ? WHERE id = ?";
-            $update_points_stmt = $conn->prepare($update_points_query);
-            $update_points_stmt->bind_param("ii", $points_to_add, $user_id);
-
-            if ($update_points_stmt->execute()) {
-                $record_history_query = "INSERT INTO point_history (username, points_added, event_description, added_at) VALUES (?, ?, ?, NOW())";
-                $record_history_stmt = $conn->prepare($record_history_query);
-                $record_history_stmt->bind_param("sis", $username, $points_to_add, $event_description);
-
-                if ($record_history_stmt->execute()) {
-                    echo "<script>
-                            alert('Challenge 3 completed!');
-                            window.location.href = 'leadership.php';
-                        </script>";
-                } else {
-                    echo "Error: " . $record_history_stmt->error;
-                }
-
-                $record_history_stmt->close();
-            } else {
-                echo "Error: " . $update_points_stmt->error;
-            }
-
-            $update_points_stmt->close();
-        } else {
-            echo "Error: " . $completion_stmt->error;
-        }
-
-        $completion_stmt->close();
-    } else {
-        echo "Error: " . $insertEventStmt->error;
-    }
-
+    $insertEventStmt->execute();
     $insertEventStmt->close();
+
+    // Challenge 3 completion query
+    $completion_query = "INSERT INTO user_soft_skill_progress (user_id, soft_skill_id, challenge_number, completed) VALUES (?, ?, ?, 1)";
+    $completion_stmt = $conn->prepare($completion_query);
+    $completion_stmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
+    $completion_stmt->execute();
+    $completion_stmt->close();
+
+    // Add points to user's points and record in point_history
+    $points_to_add = 20;
+    $event_description = "Challenge 3 Point";
+
+    $update_points_query = "UPDATE users SET points = points + ? WHERE id = ?";
+    $update_points_stmt = $conn->prepare($update_points_query);
+    $update_points_stmt->bind_param("ii", $points_to_add, $user_id);
+    $update_points_stmt->execute();
+    $update_points_stmt->close();
+
+    $record_history_query = "INSERT INTO point_history (username, points_added, event_description, added_at) VALUES (?, ?, ?, NOW())";
+    $record_history_stmt = $conn->prepare($record_history_query);
+    $record_history_stmt->bind_param("sis", $username, $points_to_add, $event_description);
+    $record_history_stmt->execute();
+    $record_history_stmt->close();
+
+    echo "<script>
+            alert('Challenge 3 completed!');
+            window.location.href = 'leadership.php';
+         </script>";
 }
 ?>
 
