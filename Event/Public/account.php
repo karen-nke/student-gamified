@@ -58,6 +58,22 @@ function hasJoinedModule($conn, $user_id) {
 }
 $joined_module = hasJoinedModule($conn, $user_id);
 
+function hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers) {
+    $check_completion_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number IN (?, ?, ?)";
+    $check_completion_stmt = $conn->prepare($check_completion_query);
+    $check_completion_stmt->bind_param("iiiii", $user_id, $soft_skill_id, $challenge_numbers[0], $challenge_numbers[1], $challenge_numbers[2]);
+    $check_completion_stmt->execute();
+    $result = $check_completion_stmt->get_result();
+    $count = $result->fetch_assoc()['count'];
+    $check_completion_stmt->close();
+
+    return $count == count($challenge_numbers);
+}
+
+$soft_skill_id = 1;
+$challenge_numbers = [1, 2, 3];
+$completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers);
+
 
 
 ?>
@@ -226,7 +242,14 @@ $joined_module = hasJoinedModule($conn, $user_id);
         <div class="badge-container">
             <p>Badges to be Earned</p>
 
-            <img src="Image/Leadership_Locked.png" alt="No. 1 Badge">
+            <?php
+            if ($completed_soft_skill_challenges) {
+                echo '<img src="Image/Leadership_Unlocked.png" alt="No. 1 Badge">';
+            } else {
+                echo '<img src="Image/Leadership_Locked.png" alt="No. 1 Badge">';
+            }
+            ?>
+            
             <img src="Image/Communication_Locked.png" alt="No. 1 Badge">
             <img src="Image/Teamwork_Locked.png" alt="No. 1 Badge">
           
