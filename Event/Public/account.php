@@ -13,7 +13,9 @@ require_once('logic_controller.php');
 $user_id = $_SESSION["user_id"];
 $username = $_SESSION["username"];
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["checkin"])) {
 
     // Perform the check-in logic
     $checkinResult = checkin($conn, $user_id);
@@ -88,6 +90,16 @@ function hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $chall
 $soft_skill_id = 1;
 $challenge_numbers = [1, 2, 3];
 $completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm"])) {
+    // User clicked the "Delete Account" button, show confirmation message
+    echo "<script>
+            var confirmed = confirm('Are you sure you want to delete your account? This action cannot be undone.');
+            if (confirmed) {
+                window.location.href = 'delete_account.php'; // Redirect to delete_account.php for actual deletion
+            }
+         </script>";
+}
 
 
 
@@ -233,7 +245,7 @@ $completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_
 
       <div class="checkin-container">
         <form method="post" action="account.php">
-            <button class ="btn" type="submit">Check-in to earn 5 points</button>
+            <button class ="btn" type="submit" name="checkin">Check-in to earn 5 points</button>
         </form>  
 
       </div>
@@ -317,6 +329,10 @@ $completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_
     <button class="btn"><a href="badge_detail.php">Learn how to earn badges</a></button>   
   
     <button class="btn"><a href="point_history.php">Point History</a></button>
+
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <button class="btn" type="submit" name="delete_account_confirm">Delete Account</button>
+    </form>
 
 </div>    
 

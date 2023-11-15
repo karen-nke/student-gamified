@@ -7,8 +7,7 @@ require_once('db_connect.php');
 require_once('Part/header.php');
 require_once('logic_controller.php');
 
-$user_id = $_SESSION["user_id"];
-$username = $_SESSION["username"];
+
 
 ?>
 
