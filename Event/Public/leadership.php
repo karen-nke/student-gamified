@@ -10,19 +10,6 @@ require_once('logic_controller.php');
 $user_id = $_SESSION["user_id"];
 $username = $_SESSION["username"];
 
-$soft_skill_id = 1; // You need to implement a function like getSoftSkillId
-
-// Check if the challenge is already completed
-$completion_query = "SELECT * FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number = ?";
-$completion_stmt = $conn->prepare($completion_query);
-$completion_stmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
-$completion_stmt->execute();
-$completion_result = $completion_stmt->get_result();
-$challenge_completed = $completion_result->num_rows > 0;
-
-$completion_stmt->close();
-
-
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +23,20 @@ $completion_stmt->close();
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
+<style>
+.button {
+        font-family: 'Poppins', sans-serif; 
+        font-size: 18px;
+        font-weight:300;
+        background-color: #E87A00;
+        color: #fff;
+        padding: 10px 25px 10px 25px;
+        margin-top: 25px;
+        border-radius: 10px;
+
+    }
+</style>
 
 <body>
 
@@ -98,7 +99,7 @@ $completion_stmt->close();
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Theory</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <a href = "challenge_1.php"><button>Start Challenge</button></a>
+                                                        <a href = "challenge_1.php"><button class ="button">Start Challenge</button></a>
                                                                
                                                 </div>
 
@@ -114,7 +115,7 @@ $completion_stmt->close();
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Test</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <a href = "challenge_2.php"><button>Start Challenge</button></a>
+                                                        <a href = "challenge_2.php"><button class ="button">Start Challenge</button></a>
                                                 </div>
 
                                         </div>
@@ -127,7 +128,7 @@ $completion_stmt->close();
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Pratical</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <a href = "challenge_3.php"><button>Start Challenge</button></a>
+                                                        <a href = "challenge_3.php"><button class ="button">Start Challenge</button></a>
                                                 </div>
 
                                         </div>
