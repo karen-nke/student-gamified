@@ -26,7 +26,7 @@ function getUserPoints($conn, $username) {
 }
 
 function getRank($conn, $points) {
-    $rankQuery = "SELECT COUNT(*) + 1 AS rank FROM users WHERE points > ?";
+    $rankQuery = "SELECT rank FROM (SELECT username, points, DENSE_RANK() OVER (ORDER BY points DESC) AS rank FROM users) AS ranked_users WHERE username IN (SELECT username FROM users WHERE points = ?)";
     $rankStmt = $conn->prepare($rankQuery);
     $rankStmt->bind_param("i", $points);
     $rankStmt->execute();
