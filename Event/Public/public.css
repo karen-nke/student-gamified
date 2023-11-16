@@ -506,10 +506,17 @@ td {
   width: 50%;
   text-align: center;
 }
-.image {
+.image-container .image {
   max-width: 100%;
   height: auto;
 }
+
+.image-container .challenge-image {
+  max-width: 100%;
+  height: auto;
+  padding-top: 120px;
+}
+
 
 .box-container .text-container {
   width: 50%;
