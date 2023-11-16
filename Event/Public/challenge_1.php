@@ -88,48 +88,6 @@ if (isset($_POST['done'])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<style>
-    .box-container {
-        width: 100%;
-        height: auto;
-        background: white;
-        border: 2px #E87A00 solid;
-        padding: 50px;
-        position: relative;
-        margin: 25px;
-
-    }
-
-    .box-container h3 {
-        margin-bottom: 50px;
-
-        color: #E87A00;
-        font-size: 24px;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 500;
-    }
-
-    .box-container p {
-        color: #045174;
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 30px;
-
-    }
-
-    .box-container .button {
-        font-family: 'Poppins', sans-serif; 
-        font-size: 18px;
-        font-weight:300;
-        background-color: #E87A00;
-        color: #fff;
-        padding: 10px 25px 10px 25px;
-        margin-top: 25px;
-        border-radius: 10px;
-
-    }
-</style>
-
 <body>
 
     <div class="container">
