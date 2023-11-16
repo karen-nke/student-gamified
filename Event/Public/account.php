@@ -168,12 +168,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
             <?php
             if ($completed_soft_skill_challenges) {
                 echo '<img src="Image/Leadership_Unlocked.png" alt="Leadership Unlocked Badge">';
-
                 if (!$leadershipAlertShown) {
-                    echo "<script>alert('Congratulations! You've earned a Leadership Badge!');</script>";
+                    echo "<script>alert('Congratulations! You\'ve earned a Leadership Badge!');</script>";
                     markBadgeAlertAsShown($conn, $user_id, 'leadership');
                 }
-                
+
             } else {
                 echo '<img src="Image/Leadership_Locked.png" alt="Leadership Locked Badge">';
             }
@@ -185,54 +184,79 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
             
             
         </div>
-        <?php
-            if (!$pointsAlertShown && $points >= 1) {
-                echo "<script>alert('Congratulations! You\'ve earned a Points Badge!');</script>";
-                markBadgeAlertAsShown($conn, $user_id, 'points');
-            }
-        ?>
+
 
         <div class="badge-container">
             <p>Achievement to be Unlocked</p>
 
             <?php 
             if ($points >= 1) {
-                echo '<img src="Image/Points_Unlocked.png" alt="Points Unlocked Badge">';                
+                echo '<img src="Image/Points_Unlocked.png" alt="Points Unlocked Badge">';  
+                if (!$pointsAlertShown) {
+                    echo "<script>alert('Congratulations! You\'ve earned a Points Pioneer Badge!');</script>";
+                    markBadgeAlertAsShown($conn, $user_id, 'points');
+                }
+                  
             } else {
                 echo '<img src="Image/Points_Locked.png" alt="Points Locked Badge">';
             }
 
             if ($joined_module) {
                 echo '<img src="Image/Module_Unlocked.png" alt="Challenge Unlocked Badge">';
+                if (!$challengeAlertShown) {
+                    echo "<script>alert('Congratulations! You\'ve earned a Module Explorer Badge!');</script>";
+                    markBadgeAlertAsShown($conn, $user_id, 'challenge');
+                }
+                  
             } else {
                 echo '<img src="Image/Module_Locked.png" alt="Challenge Locked Badge">';
             }
 
             if ($completed_module_challenges) {
                 echo '<img src="Image/Complete_Unlocked.png" alt="Module Unlocked Badge">';
+                if (!$moduleAlertShown) {
+                    echo "<script>alert('Congratulations! You\'ve earned a Module Master Badge!');</script>";
+                    markBadgeAlertAsShown($conn, $user_id, 'module');
+                }
             } else {
                 echo '<img src="Image/Complete_Locked.png" alt="Module Locked Badge">';
             }
 
             if ($userRank == 1) {
                 echo '<img src="Image/Rank_Unlocked.png" alt="Rank Unlocked Badge">';
+                if (!$rankAlertShown) {
+                    echo "<script>alert('Congratulations! You\'ve earned a Lead VoyagerBadge!');</script>";
+                    markBadgeAlertAsShown($conn, $user_id, 'rank');
+                }
             } else {
                 echo '<img src="Image/Rank_Locked.png" alt="Rank Locked Badge">';
             }
 
             if ($userLevel >= 1) {
                 echo '<img src="Image/Lvl1_Unlocked.png" alt="Level 1 Unlocked Badge">';
+                if (!$lvl1AlertShown) {
+                    echo "<script>alert('Congratulations! You\'ve earned a Skill Apprentice Level 1 Badge!');</script>";
+                    markBadgeAlertAsShown($conn, $user_id, 'lvl1');
+                }
             } else {
                 echo '<img src="Image/Lvl1_Locked.png" alt="Level 1 Locked Badge">';
             }
 
             if ($userLevel >= 5) {
                 echo '<img src="Image/Lvl5_Unlocked.png" alt="Level 5 Unlocked Badge">';
+                if (!$lvl5AlertShown) {
+                    echo "<script>alert('Congratulations! You\'ve earned a Skill Sage Level 5 Badge!');</script>";
+                    markBadgeAlertAsShown($conn, $user_id, 'lvl5');
+                }
             } else {
                 echo '<img src="Image/Lvl5_Locked.png" alt="Level 5 Locked Badge">';
             }
             if ($hasSubmittedThreeEvents){
                 echo '<img src ="Image/Event_Unlocked.png" alt ="Event Locked Bagde">';
+                if (!$eventAlertShown) {
+                    echo "<script>alert('Congratulations! You\'ve earned a Socialite Elite Badge!');</script>";
+                    markBadgeAlertAsShown($conn, $user_id, 'event');
+                }
 
             } else{
                 echo '<img src ="Image/Event_Locked.png" alt ="Event Locked Bagde">';
