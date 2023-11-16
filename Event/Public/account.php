@@ -324,6 +324,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
                 echo '<img src="Image/Lvl5_Locked.png" alt="Rank Badge">';
             }
             ?> 
+            <img src ="Image/Event_Locked.png" alt ="Event Bagde">
         </div>
 
     <button class="btn"><a href="badge_detail.php">Learn how to earn badges</a></button>   

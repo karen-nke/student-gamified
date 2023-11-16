@@ -193,6 +193,19 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
+                        <img src="Image/Event_Unlocked.png" class ="image" alt="No. 1 Badge">
+                    </div>
+
+                    <div class ="text-container">
+                        <p class ="badge-title">Socialite Elite</p> <br>
+                        <p class ="badge-desc">Step into the spotlight of social engagement with the "Socialite Elite" badge. This achievement awaits users who submit their very first event participation.</p>
+                    
+                    </div>
+
+                </div>
+
+                <div class ="badge-container">
+                    <div class ="image-container">
                         <img src="Image/Lvl1_Unlocked.png" class ="image" alt="No. 1 Badge">
                     </div>
 
