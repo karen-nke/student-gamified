@@ -1,5 +1,8 @@
 <?php
 
+/* Account Function */
+
+//To get user gender - Customise Profile Picture 
 function getUserData($conn, $username) {
     $userDataQuery = "SELECT gender FROM users WHERE username = ?";
     $userDataStmt = $conn->prepare($userDataQuery);
@@ -12,6 +15,7 @@ function getUserData($conn, $username) {
     return $userData;
 }
 
+//To get user points 
 function getUserPoints($conn, $username) {
     $pointsQuery = "SELECT points FROM users WHERE username = ?";
     $pointsStmt = $conn->prepare($pointsQuery);
@@ -25,8 +29,9 @@ function getUserPoints($conn, $username) {
     return $points;
 }
 
+//To get user current rank
 function getRank($conn, $points) {
-    $rankQuery = "SELECT rank FROM (SELECT username, points, DENSE_RANK() OVER (ORDER BY points DESC) AS rank FROM users) AS ranked_users WHERE username IN (SELECT username FROM users WHERE points = ?)";
+    $rankQuery = "SELECT rank FROM (SELECT username, points, DENSE_RANK() OVER (ORDER BY points DESC) AS rank FROM users) AS ranked_users WHERE username IN (SELECT username FROM users WHERE points = ?)"; //Fixed same marks but different level using Dense_Rank()
     $rankStmt = $conn->prepare($rankQuery);
     $rankStmt->bind_param("i", $points);
     $rankStmt->execute();
@@ -38,6 +43,7 @@ function getRank($conn, $points) {
     return $userRank;
 }
 
+//To get user current level according to total points earned
 function getLevelData($points) {
     $levels = array(
         0 => array('min' => 0, 'max' => 9),
@@ -53,6 +59,7 @@ function getLevelData($points) {
         10 => array('min' => 180, 'max' => 2000) 
     );
 
+    //Control the progress and levelling up
     foreach ($levels as $level => $range) {
         if ($points >= $range['min'] && $points <= $range['max']) {
             $nextLevelPoints = $range['max'];
@@ -66,6 +73,113 @@ function getLevelData($points) {
 
 }
 
+//For user checkin
+function hasCheckedInToday($conn, $user_id) {
+    $checkin_date_query = "SELECT checkin_date FROM checkin_history WHERE user_id = ? AND checkin_date = CURDATE()";
+    $checkin_date_stmt = $conn->prepare($checkin_date_query);
+    $checkin_date_stmt->bind_param("i", $user_id);
+    $checkin_date_stmt->execute();
+    $result = $checkin_date_stmt->get_result();
+    $checkin_date_stmt->close();
+
+    return $result->num_rows > 0;
+}
+
+function checkin($conn, $user_id) {
+    // Check if the user already checked in today
+    if (hasCheckedInToday($conn, $user_id)) {
+        return "You have already checked in today.";
+    }
+
+    // Get the username from the session
+  
+    $username = $_SESSION["username"];
+
+    // Reward points for check-in
+    $points_to_add = 5;
+    
+    // Update user's points
+    $update_points_query = "UPDATE users SET points = points + ? WHERE id = ?";
+    $update_points_stmt = $conn->prepare($update_points_query);
+    $update_points_stmt->bind_param("ii", $points_to_add, $user_id);
+    $update_points_stmt->execute();
+    $update_points_stmt->close();
+
+    // Record point history with added_at timestamp
+    $event_description = "Check-in Points";
+    $record_history_query = "INSERT INTO point_history (username, points_added, event_description, added_at) VALUES (?, ?, ?, NOW())";
+    $record_history_stmt = $conn->prepare($record_history_query);
+    $record_history_stmt->bind_param("sis", $username, $points_to_add, $event_description);
+    $record_history_stmt->execute();
+    $record_history_stmt->close();
+
+    // Record check-in in checkin_history table
+    $record_checkin_query = "INSERT INTO checkin_history (user_id, checkin_date) VALUES (?, CURDATE())";
+    $record_checkin_stmt = $conn->prepare($record_checkin_query);
+    $record_checkin_stmt->bind_param("i", $user_id);
+    $record_checkin_stmt->execute();
+    $record_checkin_stmt->close();
+
+    return "Check-in successful! You earned 5 points.";
+}
+
+// To check if a user has submitted at least 3 event participations
+function hasSubmittedThreeEvents($conn, $username) {
+    $eventSubmissionQuery = "SELECT COUNT(*) as count FROM events WHERE username = ?";
+    $eventSubmissionStmt = $conn->prepare($eventSubmissionQuery);
+    $eventSubmissionStmt->bind_param("s", $username);
+    $eventSubmissionStmt->execute();
+    $result = $eventSubmissionStmt->get_result();
+    $count = $result->fetch_assoc()['count'];
+    $eventSubmissionStmt->close();
+
+    return $count >= 3;
+}
+
+//To check if a user has join the module by starting the challenge 
+function hasJoinedModule($conn, $user_id) {
+    $check_module_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ?";
+    $check_module_stmt = $conn->prepare($check_module_query);
+    $check_module_stmt->bind_param("i", $user_id);
+    $check_module_stmt->execute();
+    $result = $check_module_stmt->get_result();
+    $count = $result->fetch_assoc()['count'];
+    $check_module_stmt->close();
+
+    return $count > 0;
+}
+
+//To check if user has completed all the challenge
+function hasCompletedAllChallenges($conn, $user_id) {
+    $check_completion_query = "SELECT COUNT(DISTINCT soft_skill_id) as count FROM user_soft_skill_progress WHERE user_id = ? AND completed = 1";
+    $check_completion_stmt = $conn->prepare($check_completion_query);
+    $check_completion_stmt->bind_param("i", $user_id);
+    $check_completion_stmt->execute();
+    $result = $check_completion_stmt->get_result();
+    $count = $result->fetch_assoc()['count'];
+    $check_completion_stmt->close();
+
+    return $count > 0;
+}
+
+//To check if user has completed Leadership Module 
+function hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers) {
+    $check_completion_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number IN (?, ?, ?)";
+    $check_completion_stmt = $conn->prepare($check_completion_query);
+    $check_completion_stmt->bind_param("iiiii", $user_id, $soft_skill_id, $challenge_numbers[0], $challenge_numbers[1], $challenge_numbers[2]);
+    $check_completion_stmt->execute();
+    $result = $check_completion_stmt->get_result();
+    $count = $result->fetch_assoc()['count'];
+    $check_completion_stmt->close();
+
+    return $count == count($challenge_numbers);
+}
+
+/* End of Account */
+
+/*Leaderboard*/
+
+//Get user points and rank for leaderboard
 function getLeaderboardData($conn) {
     $leaderboardQuery = "SELECT username, points FROM users ORDER BY points DESC";
     $leaderboardResult = $conn->query($leaderboardQuery);
@@ -91,6 +205,10 @@ function getLeaderboardData($conn) {
 
     return $leaderboardData;
 }
+
+/* End of Leaderboard */
+
+/*Point History*/
 
 function getPointHistoryData($conn, $username) {
     $pointHistoryQuery = "SELECT * FROM point_history WHERE username = ?";
@@ -147,8 +265,9 @@ function getTotalRows($conn, $username) {
     return $count;
 }
 
+/* End of Points History */
 
-
+/* Event History */
 function getEventHistoryDataPaginated($conn, $username, $start_index, $items_per_page) {
     $eventHistoryQuery = "SELECT * FROM events WHERE username = ? ORDER BY datetime DESC LIMIT ?, ?";
     $eventHistoryStmt = $conn->prepare($eventHistoryQuery);
@@ -185,11 +304,11 @@ function getTotalPages($conn, $username, $items_per_page = 10) {
 
     return $totalPages;
 }
+/* End of Event History */
 
 
 
-
-
+/* Event Form Process */
 function processEventForm($conn)
 {
    
@@ -258,104 +377,7 @@ function processEventForm($conn)
     }
 }
 
-function hasCheckedInToday($conn, $user_id) {
-    $checkin_date_query = "SELECT checkin_date FROM checkin_history WHERE user_id = ? AND checkin_date = CURDATE()";
-    $checkin_date_stmt = $conn->prepare($checkin_date_query);
-    $checkin_date_stmt->bind_param("i", $user_id);
-    $checkin_date_stmt->execute();
-    $result = $checkin_date_stmt->get_result();
-    $checkin_date_stmt->close();
-
-    return $result->num_rows > 0;
-}
-
-function checkin($conn, $user_id) {
-    // Check if the user already checked in today
-    if (hasCheckedInToday($conn, $user_id)) {
-        return "You have already checked in today.";
-    }
-
-    // Get the username from the session
-  
-    $username = $_SESSION["username"];
-
-    // Reward points for check-in
-    $points_to_add = 5;
-    
-    // Update user's points
-    $update_points_query = "UPDATE users SET points = points + ? WHERE id = ?";
-    $update_points_stmt = $conn->prepare($update_points_query);
-    $update_points_stmt->bind_param("ii", $points_to_add, $user_id);
-    $update_points_stmt->execute();
-    $update_points_stmt->close();
-
-    // Record point history with added_at timestamp
-    $event_description = "Check-in Points";
-    $record_history_query = "INSERT INTO point_history (username, points_added, event_description, added_at) VALUES (?, ?, ?, NOW())";
-    $record_history_stmt = $conn->prepare($record_history_query);
-    $record_history_stmt->bind_param("sis", $username, $points_to_add, $event_description);
-    $record_history_stmt->execute();
-    $record_history_stmt->close();
-
-    // Record check-in in checkin_history table
-    $record_checkin_query = "INSERT INTO checkin_history (user_id, checkin_date) VALUES (?, CURDATE())";
-    $record_checkin_stmt = $conn->prepare($record_checkin_query);
-    $record_checkin_stmt->bind_param("i", $user_id);
-    $record_checkin_stmt->execute();
-    $record_checkin_stmt->close();
-
-    return "Check-in successful! You earned 5 points.";
-}
-
-// Add this function to check if a user has submitted at least 3 event participations
-function hasSubmittedThreeEvents($conn, $username) {
-    $eventSubmissionQuery = "SELECT COUNT(*) as count FROM events WHERE username = ?";
-    $eventSubmissionStmt = $conn->prepare($eventSubmissionQuery);
-    $eventSubmissionStmt->bind_param("s", $username);
-    $eventSubmissionStmt->execute();
-    $result = $eventSubmissionStmt->get_result();
-    $count = $result->fetch_assoc()['count'];
-    $eventSubmissionStmt->close();
-
-    return $count >= 3;
-}
-
-function hasJoinedModule($conn, $user_id) {
-    $check_module_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ?";
-    $check_module_stmt = $conn->prepare($check_module_query);
-    $check_module_stmt->bind_param("i", $user_id);
-    $check_module_stmt->execute();
-    $result = $check_module_stmt->get_result();
-    $count = $result->fetch_assoc()['count'];
-    $check_module_stmt->close();
-
-    return $count > 0;
-}
-
-function hasCompletedAllChallenges($conn, $user_id) {
-    $check_completion_query = "SELECT COUNT(DISTINCT soft_skill_id) as count FROM user_soft_skill_progress WHERE user_id = ? AND completed = 1";
-    $check_completion_stmt = $conn->prepare($check_completion_query);
-    $check_completion_stmt->bind_param("i", $user_id);
-    $check_completion_stmt->execute();
-    $result = $check_completion_stmt->get_result();
-    $count = $result->fetch_assoc()['count'];
-    $check_completion_stmt->close();
-
-    return $count > 0;
-}
-
-function hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers) {
-    $check_completion_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number IN (?, ?, ?)";
-    $check_completion_stmt = $conn->prepare($check_completion_query);
-    $check_completion_stmt->bind_param("iiiii", $user_id, $soft_skill_id, $challenge_numbers[0], $challenge_numbers[1], $challenge_numbers[2]);
-    $check_completion_stmt->execute();
-    $result = $check_completion_stmt->get_result();
-    $count = $result->fetch_assoc()['count'];
-    $check_completion_stmt->close();
-
-    return $count == count($challenge_numbers);
-}
-
+/* End of Event Form Process */
 
 
 
