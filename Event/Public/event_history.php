@@ -44,6 +44,7 @@ $eventHistoryData = getEventHistoryDataPaginated($conn, $username, $start_index,
             display: flex;
             justify-content: center;
             margin-top: 20px;
+            margin-bottom: 50px;
         }
 
         .pagination a {
@@ -97,6 +98,8 @@ $eventHistoryData = getEventHistoryDataPaginated($conn, $username, $start_index,
                 <a href="?page=<?php echo $i; ?>" class="<?php echo $i == $page ? 'current-page' : ''; ?>"><?php echo $i; ?></a>
             <?php endfor; ?>
         </div>
+
+        <button class="btn"><a href="event.php">Back to Event</a></button>
 
     </div>
 </body>

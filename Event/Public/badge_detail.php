@@ -231,6 +231,8 @@ require_once('Part/header.php');
                 </div>
             
             </div>
+
+            <button class="btn"><a href="account.php">Back to Account</a></button>
         </div>
                         
 </body>
