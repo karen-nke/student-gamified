@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
 
     function validateUsername(field){
         if(field == "") return "No Username was entered.\n"
-        else if (field.length <5) return "Username must be at least 5 characters.\n"
+        else if (field.length <5 || field.length >10) return "Username must be at least 5 characters and maximum 10 character.\n"
         else if (/[^a-zA-Z0-9_-]/.test(field)) return "Only Alphabet & Numbers are allowed in the username.\n"
         return ""
 
