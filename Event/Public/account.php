@@ -3,16 +3,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 session_start();
-$user_id = $_SESSION["user_id"];
 
 require_once('db_connect.php');
-// Remove session_start() from header.php
 require_once('Part/header.php');
 require_once('logic_controller.php');
 
 $user_id = $_SESSION["user_id"];
 $username = $_SESSION["username"];
-
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["checkin"])) {
@@ -64,9 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
             }
          </script>";
 }
-
-
-
 ?>
 <style>
 
@@ -78,82 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
         border-radius: 5px;
     }
 
-    .logo-centered {
-
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-
-    }  
-
-    .profile-info{
-        padding: 20px;
-    }
-
-    .profile-info .container{
-        width: 100%;
-        height: 100px; 
-        background: white; 
-        border: 2px #E87A00 solid;
-        padding:50px;
-        position: relative;
-        margin: 25px;
-        display:flex;
-        justify-content: space-between;
-    }
-
-    .profile-info .badge-container {
-    width: 100%; 
-    height: auto;
-    padding:50px;
-    position: relative;
-    margin: 25px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    background: white; 
-    border: 2px #E87A00 solid;
-    }
-
-    .profile-info .badge-container img {
-    width: 30%;
-    height: auto;
-    margin: 10px;
-    }
-
-    .profile-info .badge-container p {
-    margin: 0;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    color: #E87A00;
-    font-size: 24px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    }
-
-
-
-    .profile-info .container p{
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-
-    
-        color: #E87A00;
-        font-size: 24px;
-        font-family: 'Poppins', sans-serif; 
-        font-weight: 500;
-    }
-
-    .checkin-container{
-        margin: 25px;
-    }
-
+  
 </style>
 
 <!DOCTYPE html>

@@ -311,7 +311,7 @@
     text-align: center;
   }
 
- /*-------Account progress--------------*/
+ /*--------------Account--------------*/
 
 .progress {
     color: #E87A00;
@@ -343,6 +343,83 @@
     margin: 0 auto; /* Center the level labels within the container */
     max-width: 80%; /* Match the width of the progress container */
 }
+
+.logo-centered {
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+
+  }  
+
+  .profile-info{
+      padding: 20px;
+  }
+
+  .profile-info .container{
+      width: 100%;
+      height: 100px; 
+      background: white; 
+      border: 2px #E87A00 solid;
+      padding:50px;
+      position: relative;
+      margin: 25px;
+      display:flex;
+      justify-content: space-between;
+  }
+
+  .profile-info .badge-container {
+  width: 100%; 
+  height: auto;
+  padding:50px;
+  position: relative;
+  margin: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: white; 
+  border: 2px #E87A00 solid;
+  }
+
+  .profile-info .badge-container img {
+  width: 30%;
+  height: auto;
+  margin: 10px;
+  }
+
+  .profile-info .badge-container p {
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #E87A00;
+  font-size: 24px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  }
+
+
+
+  .profile-info .container p{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+  
+  color: #E87A00;
+  font-size: 24px;
+  font-family: 'Poppins', sans-serif; 
+  font-weight: 500;
+  }
+
+  .checkin-container{
+      margin: 25px;
+  }
+
 
 
 /* Challenge Section */
