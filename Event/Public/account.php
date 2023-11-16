@@ -207,11 +207,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
 <div class="container">
     <?php
     if ($gender === 'female') {
-        echo '<img src="Image/Profile_Female.png" style="width:200px;height:200px;" class="logo-centered"></a>';
+        echo '<img src="Image/Profile_Female.png" style="width:200px;height:200px;" class="logo-centered" alt="Female Profile Picture"></a>';
     } elseif ($gender === 'male') {
-        echo '<img src="Image/Profile_Male.png" style="width:200px;height:200px;" class="logo-centered"></a>';
+        echo '<img src="Image/Profile_Male.png" style="width:200px;height:200px;" class="logo-centered" alt="Male Profile Picture"></a>';
     } else {
-        echo '<img src="Image/Profile.png" style="width:200px;height:200px;" class="logo-centered"></a>';
+        echo '<img src="Image/Profile.png" style="width:200px;height:200px;" class="logo-centered" alt="Profile Picture"></a>';
     }
     ?>
     
@@ -271,14 +271,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
 
             <?php
             if ($completed_soft_skill_challenges) {
-                echo '<img src="Image/Leadership_Unlocked.png" alt="No. 1 Badge">';
+                echo '<img src="Image/Leadership_Unlocked.png" alt="Leadership Unlocked Badge">';
             } else {
-                echo '<img src="Image/Leadership_Locked.png" alt="No. 1 Badge">';
+                echo '<img src="Image/Leadership_Locked.png" alt="Leadership Locked Badge">';
             }
             ?>
 
-            <img src="Image/Communication_Locked.png" alt="No. 1 Badge">
-            <img src="Image/Teamwork_Locked.png" alt="No. 1 Badge">
+            <img src="Image/Communication_Locked.png" alt="Communication Locked Badge">
+            <img src="Image/Teamwork_Locked.png" alt="Teamwork Locked Badge">
           
             
             
@@ -289,42 +289,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
 
             <?php 
             if ($points >= 1) {
-                echo '<img src="Image/Points_Unlocked.png" alt="Points Badge">';
+                echo '<img src="Image/Points_Unlocked.png" alt="Points Unlocked Badge">';
             } else {
-                echo '<img src="Image/Points_Locked.png" alt="Points Badge">';
+                echo '<img src="Image/Points_Locked.png" alt="Points Locked Badge">';
             }
 
             if ($joined_module) {
-                echo '<img src="Image/Module_Unlocked.png" alt="Rank Badge">';
+                echo '<img src="Image/Module_Unlocked.png" alt="Challenge Unlocked Badge">';
             } else {
-                echo '<img src="Image/Module_Locked.png" alt="Rank Badge">';
+                echo '<img src="Image/Module_Locked.png" alt="Challenge Locked Badge">';
             }
 
             if ($completed_all_challenges) {
-                echo '<img src="Image/Complete_Unlocked.png" alt="Complete Badge">';
+                echo '<img src="Image/Complete_Unlocked.png" alt="Module Unlocked Badge">';
             } else {
-                echo '<img src="Image/Complete_Locked.png" alt="Complete Badge">';
+                echo '<img src="Image/Complete_Locked.png" alt="Module Locked Badge">';
             }
 
             if ($userRank == 1) {
-                echo '<img src="Image/Rank_Unlocked.png" alt="Rank Badge">';
+                echo '<img src="Image/Rank_Unlocked.png" alt="Rank Unlocked Badge">';
             } else {
-                echo '<img src="Image/Rank_Locked.png" alt="Rank Badge">';
+                echo '<img src="Image/Rank_Locked.png" alt="Rank Locked Badge">';
             }
 
             if ($userLevel >= 1) {
-                echo '<img src="Image/Lvl1_Unlocked.png" alt="Rank Badge">';
+                echo '<img src="Image/Lvl1_Unlocked.png" alt="Level 1 Unlocked Badge">';
             } else {
-                echo '<img src="Image/Lvl1_Locked.png" alt="Rank Badge">';
+                echo '<img src="Image/Lvl1_Locked.png" alt="Level 1 Locked Badge">';
             }
 
             if ($userLevel >= 5) {
-                echo '<img src="Image/Lvl5_Unlocked.png" alt="Rank Badge">';
+                echo '<img src="Image/Lvl5_Unlocked.png" alt="Level 5 Unlocked Badge">';
             } else {
-                echo '<img src="Image/Lvl5_Locked.png" alt="Rank Badge">';
+                echo '<img src="Image/Lvl5_Locked.png" alt="Level 5 Locked Badge">';
             }
             ?> 
-            <img src ="Image/Event_Locked.png" alt ="Event Bagde">
+            <img src ="Image/Event_Locked.png" alt ="Event Locked Bagde">
         </div>
 
     <button class="btn"><a href="badge_detail.php">Learn how to earn badges</a></button>   

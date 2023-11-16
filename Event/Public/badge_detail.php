@@ -95,7 +95,7 @@ require_once('Part/header.php');
                 <p class="title">Badges to be Earned</p>
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Leadership_Unlocked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Leadership_Unlocked.png" class ="image" alt="Leadership Badge">
                     </div>
 
                     <div class ="text-container">
@@ -108,7 +108,7 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Communication_Unlocked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Communication_Unlocked.png" class ="image" alt="Communication Badge">
                     </div>
 
                     <div class ="text-container">
@@ -121,7 +121,7 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Teamwork_Unlocked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Teamwork_Unlocked.png" class ="image" alt="Teamwork Badge">
                     </div>
 
                     <div class ="text-container">
@@ -141,7 +141,7 @@ require_once('Part/header.php');
                 <p class="title">Acheivement to be Earned</p>
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Points_Unlocked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Points_Unlocked.png" class ="image" alt="Points Badge">
                     </div>
 
                     <div class ="text-container">
@@ -154,7 +154,7 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Module_Unlocked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Module_Unlocked.png" class ="image" alt="Module Badge">
                     </div>
 
                     <div class ="text-container">
@@ -167,7 +167,7 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Complete_Unlocked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Complete_Unlocked.png" class ="image" alt="Completion Badge">
                     </div>
 
                     <div class ="text-container">
@@ -180,7 +180,7 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Rank_Unlocked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Rank_Unlocked.png" class ="image" alt="Rank Badge">
                     </div>
 
                     <div class ="text-container">
@@ -193,7 +193,7 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Event_Unlocked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Event_Unlocked.png" class ="image" alt="Event Badge">
                     </div>
 
                     <div class ="text-container">
@@ -206,7 +206,7 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Lvl1_Unlocked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Lvl1_Unlocked.png" class ="image" alt="Level 1 Badge">
                     </div>
 
                     <div class ="text-container">
@@ -219,7 +219,7 @@ require_once('Part/header.php');
 
                 <div class ="badge-container">
                     <div class ="image-container">
-                        <img src="Image/Lvl5_Unlocked.png" class ="image" alt="No. 1 Badge">
+                        <img src="Image/Lvl5_Unlocked.png" class ="image" alt="Level 5 Badge">
                     </div>
 
                     <div class ="text-container">
