@@ -41,16 +41,16 @@ function getRank($conn, $points) {
 function getLevelData($points) {
     $levels = array(
         0 => array('min' => 0, 'max' => 9),
-        1 => array('min' => 10, 'max' => 19),
-        2 => array('min' => 20, 'max' => 29),
-        3 => array('min' => 30, 'max' => 39),
-        4 => array('min' => 40, 'max' => 49),
-        5 => array('min' => 50, 'max' => 59),
-        6 => array('min' => 60, 'max' => 69),
-        7 => array('min' => 70, 'max' => 79),
-        8 => array('min' => 80, 'max' => 89),
-        9 => array('min' => 90, 'max' => 99),
-        10 => array('min' => 100, 'max' => 2000) 
+        1 => array('min' => 10, 'max' => 29),
+        2 => array('min' => 30, 'max' => 49),
+        3 => array('min' => 50, 'max' => 69),
+        4 => array('min' => 70, 'max' => 89),
+        5 => array('min' => 90, 'max' => 109),
+        6 => array('min' => 110, 'max' => 129),
+        7 => array('min' => 130, 'max' => 149),
+        8 => array('min' => 150, 'max' => 169),
+        9 => array('min' => 170, 'max' => 179),
+        10 => array('min' => 180, 'max' => 2000) 
     );
 
     foreach ($levels as $level => $range) {
