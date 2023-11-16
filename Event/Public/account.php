@@ -47,10 +47,21 @@ try {
     $soft_skill_id = 1;
     $challenge_numbers = [1, 2, 3];
     $completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers);
+
+    $leadershipAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'leadership');
+    $pointsAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'points');
+    $challengeAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'challenge');
+    $moduleAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'module');
+    $eventAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'event');
+    $rankAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'rank');
+    $lvl1AlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'lvl1');
+    $lvl5AlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'lvl5');
 } catch (Exception $e) {
     echo 'Caught exception: ', $e->getMessage(), "\n";
     exit();
 }
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm"])) {
     // User clicked the "Delete Account" button, show confirmation message
@@ -155,6 +166,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
             <?php
             if ($completed_soft_skill_challenges) {
                 echo '<img src="Image/Leadership_Unlocked.png" alt="Leadership Unlocked Badge">';
+
+                if (!$leadershipAlertShown) {
+                    echo "<script>alert('Congratulations! You've earned a Leadership Badge!');</script>";
+                    markBadgeAlertAsShown($conn, $user_id, 'leadership');
+                }
+                
             } else {
                 echo '<img src="Image/Leadership_Locked.png" alt="Leadership Locked Badge">';
             }
@@ -166,13 +183,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
             
             
         </div>
+        <?php
+            if (!$pointsAlertShown && $points >= 1) {
+                echo "<script>alert('Congratulations! You\'ve earned a Points Badge!');</script>";
+                markBadgeAlertAsShown($conn, $user_id, 'points');
+            }
+        ?>
 
         <div class="badge-container">
             <p>Achievement to be Unlocked</p>
 
             <?php 
             if ($points >= 1) {
-                echo '<img src="Image/Points_Unlocked.png" alt="Points Unlocked Badge">';
+                echo '<img src="Image/Points_Unlocked.png" alt="Points Unlocked Badge">';                
             } else {
                 echo '<img src="Image/Points_Locked.png" alt="Points Locked Badge">';
             }
