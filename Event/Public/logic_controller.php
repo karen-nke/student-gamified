@@ -149,17 +149,20 @@ function hasJoinedModule($conn, $user_id) {
     return $count > 0;
 }
 
-//To check if user has completed all the challenge
-function hasCompletedAllChallenges($conn, $user_id) {
-    $check_completion_query = "SELECT COUNT(DISTINCT soft_skill_id) as count FROM user_soft_skill_progress WHERE user_id = ? AND completed = 1";
+function hasCompletedModuleChallenges($conn, $user_id, $soft_skill_id) {
+    $check_completion_query = "
+        SELECT COUNT(*) as count
+        FROM user_soft_skill_progress
+        WHERE user_id = ? AND soft_skill_id = ? AND completed = 1
+    ";
     $check_completion_stmt = $conn->prepare($check_completion_query);
-    $check_completion_stmt->bind_param("i", $user_id);
+    $check_completion_stmt->bind_param("ii", $user_id, $soft_skill_id);
     $check_completion_stmt->execute();
     $result = $check_completion_stmt->get_result();
     $count = $result->fetch_assoc()['count'];
     $check_completion_stmt->close();
 
-    return $count > 0;
+    return $count >= 3; // Check if the count is greater than or equal to 3
 }
 
 //To check if user has completed Leadership Module 

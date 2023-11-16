@@ -42,11 +42,13 @@ try {
 
     $hasSubmittedThreeEvents = hasSubmittedThreeEvents($conn, $username);
     $joined_module = hasJoinedModule($conn, $user_id);
-    $completed_all_challenges = hasCompletedAllChallenges($conn, $user_id);
+    
 
     $soft_skill_id = 1;
     $challenge_numbers = [1, 2, 3];
     $completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers);
+    $completed_module_challenges = hasCompletedModuleChallenges($conn, $user_id, $soft_skill_id);
+
 
     $leadershipAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'leadership');
     $pointsAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'points');
@@ -206,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
                 echo '<img src="Image/Module_Locked.png" alt="Challenge Locked Badge">';
             }
 
-            if ($completed_all_challenges) {
+            if ($completed_module_challenges) {
                 echo '<img src="Image/Complete_Unlocked.png" alt="Module Unlocked Badge">';
             } else {
                 echo '<img src="Image/Complete_Locked.png" alt="Module Locked Badge">';
