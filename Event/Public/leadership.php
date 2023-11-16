@@ -23,19 +23,6 @@ require_once('logic_controller.php');
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<style>
-.button {
-        font-family: 'Poppins', sans-serif; 
-        font-size: 18px;
-        font-weight:300;
-        background-color: #E87A00;
-        color: #fff;
-        padding: 10px 25px 10px 25px;
-        margin-top: 25px;
-        border-radius: 10px;
-
-    }
-</style>
 
 <body>
 <div class ="container">
@@ -99,7 +86,7 @@ require_once('logic_controller.php');
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Theory</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <a href = "challenge_1.php"><button class ="button">Start Challenge</button></a>
+                                                        <a href = "challenge_1.php"><button class ="challenge-button">Start Challenge</button></a>
                                                                
                                                 </div>
 
@@ -115,7 +102,7 @@ require_once('logic_controller.php');
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Test</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <a href = "challenge_2.php"><button class ="button">Start Challenge</button></a>
+                                                        <a href = "challenge_2.php"><button class ="challenge-button">Start Challenge</button></a>
                                                 </div>
 
                                         </div>
@@ -128,7 +115,7 @@ require_once('logic_controller.php');
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Pratical</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <a href = "challenge_3.php"><button class ="button">Start Challenge</button></a>
+                                                        <a href = "challenge_3.php"><button class ="challenge-button">Start Challenge</button></a>
                                                 </div>
 
                                         </div>

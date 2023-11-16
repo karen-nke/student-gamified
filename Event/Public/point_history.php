@@ -41,36 +41,6 @@ $pointHistoryData = getPointHistoryDataPaginated($conn, $username, $start_index,
 
 </head>
 
-<style>
-        .current-page {
-            color: orange;
-            font-weight: bold;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            margin-bottom:50px;
-        }
-
-        .pagination a {
-            padding: 8px 16px;
-            margin: 0 5px;
-            text-decoration: none;
-            color: #333;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .pagination a.current-page {
-            background-color: #E87A00;
-            color: #fff;
-            border: 1px solid #E87A00;
-}
-
-    </style>
-
 <body>
     <div class="container">
         <h2 class="title"><br>Welcome, <?php echo $username; ?>!</h2>

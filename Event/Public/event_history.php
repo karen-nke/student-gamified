@@ -34,35 +34,7 @@ $eventHistoryData = getEventHistoryDataPaginated($conn, $username, $start_index,
     <link rel="stylesheet" href="public.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .current-page {
-            color: orange;
-            font-weight: bold;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            margin-bottom: 50px;
-        }
-
-        .pagination a {
-            padding: 8px 16px;
-            margin: 0 5px;
-            text-decoration: none;
-            color: #333;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .pagination a.current-page {
-            background-color: #E87A00;
-            color: #fff;
-            border: 1px solid #E87A00;
-}
-
-    </style>
+   
 </head>
 
 <body>

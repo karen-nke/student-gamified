@@ -421,34 +421,7 @@
   }
 
 
-
-/* Challenge Section */
-.challenge-dropdown {
-    margin-top: 20px;
-}
-
-.challenge-card {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-}
-
-.challenge-card p {
-    margin: 0;
-}
-
-.challenge-card p.complete {
-    color: green;
-}
-
-.challenge-card p.incomplete {
-    color: red;
-}
-
-
-/*Point History Table*/
+ /*--------------Point History Table--------------*/
 table {
   border-collapse: collapse;
   width: 100%;
@@ -467,7 +440,7 @@ th {
 width: 100px;
 }
 
-/* Leaderboard */
+ /*--------------Leaderboard--------------*/
 .logo-centered {
   display: block;
   margin-left: auto;
@@ -509,8 +482,8 @@ td {
 }
 
 
-/** Badge Detail **/
-.box-container{
+ /*--------------Badge Details--------------*/
+ .box-container{
   width: 100%;
   height: auto; 
   background: white; 
@@ -532,7 +505,6 @@ td {
 .box-container .image-container{
   width: 50%;
   text-align: center;
-  display:flex;
 }
 .image {
   max-width: 100%;
@@ -551,8 +523,7 @@ td {
   font-size: 32px;
   font-weight: 700;
   line-height: 42px;
-;
-  
+
 }
 
 .box-container .badge-desc{
@@ -573,6 +544,49 @@ td {
   font-weight: 500;
 }
   
+
+ /*--------------History Pagination--------------*/
+
+.current-page {
+  color: orange;
+  font-weight: bold;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom:50px;
+}
+
+.pagination a {
+  padding: 8px 16px;
+  margin: 0 5px;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pagination a.current-page {
+  background-color: #E87A00;
+  color: #fff;
+  border: 1px solid #E87A00;
+}
+
+
+ /*--------------Module--------------*/
+.challenge-button {
+  font-family: 'Poppins', sans-serif; 
+  font-size: 18px;
+  font-weight:300;
+  background-color: #E87A00;
+  color: #fff;
+  padding: 10px 25px 10px 25px;
+  margin-top: 25px;
+  border-radius: 10px;
+
+}
   
   
   
