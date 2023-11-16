@@ -24,6 +24,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["checkin"])) {
     echo "<script>alert('$checkinResult');</script>";
 }
 
+// Inside the try-catch block in account.php
+try {
+  
+
+    $hasSubmittedThreeEvents = hasSubmittedThreeEvents($conn, $username);
+
+} catch (Exception $e) {
+    echo 'Caught exception: ', $e->getMessage(), "\n";
+    exit();
+}
+
+
 try {
     if (!isset($_SESSION["username"])) {
         throw new Exception("User not authenticated");
@@ -323,8 +335,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
             } else {
                 echo '<img src="Image/Lvl5_Locked.png" alt="Level 5 Locked Badge">';
             }
+            if ($hasSubmittedThreeEvents){
+                echo '<img src ="Image/Event_Unlocked.png" alt ="Event Locked Bagde">';
+
+            } else{
+                echo '<img src ="Image/Event_Locked.png" alt ="Event Locked Bagde">';
+            }
             ?> 
-            <img src ="Image/Event_Locked.png" alt ="Event Locked Bagde">
+          
+            
         </div>
 
     <button class="btn"><a href="badge_detail.php">Learn how to earn badges</a></button>   

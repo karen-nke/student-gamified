@@ -307,6 +307,20 @@ function checkin($conn, $user_id) {
     return "Check-in successful! You earned 5 points.";
 }
 
+// Add this function to check if a user has submitted at least 3 event participations
+function hasSubmittedThreeEvents($conn, $username) {
+    $eventSubmissionQuery = "SELECT COUNT(*) as count FROM events WHERE username = ?";
+    $eventSubmissionStmt = $conn->prepare($eventSubmissionQuery);
+    $eventSubmissionStmt->bind_param("s", $username);
+    $eventSubmissionStmt->execute();
+    $result = $eventSubmissionStmt->get_result();
+    $count = $result->fetch_assoc()['count'];
+    $eventSubmissionStmt->close();
+
+    return $count >= 3;
+}
+
+
 
 
 
