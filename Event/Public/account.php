@@ -24,18 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["checkin"])) {
     echo "<script>alert('$checkinResult');</script>";
 }
 
-// Inside the try-catch block in account.php
-try {
-  
-
-    $hasSubmittedThreeEvents = hasSubmittedThreeEvents($conn, $username);
-
-} catch (Exception $e) {
-    echo 'Caught exception: ', $e->getMessage(), "\n";
-    exit();
-}
-
-
 try {
     if (!isset($_SESSION["username"])) {
         throw new Exception("User not authenticated");
@@ -54,54 +42,18 @@ try {
     $remainingPoints = $levelData['remainingPoints'];
 
     $userRank = getRank($conn, $points);
+
+    $hasSubmittedThreeEvents = hasSubmittedThreeEvents($conn, $username);
+    $joined_module = hasJoinedModule($conn, $user_id);
+    $completed_all_challenges = hasCompletedAllChallenges($conn, $user_id);
+
+    $soft_skill_id = 1;
+    $challenge_numbers = [1, 2, 3];
+    $completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers);
 } catch (Exception $e) {
     echo 'Caught exception: ', $e->getMessage(), "\n";
     exit();
 }
-
-function hasJoinedModule($conn, $user_id) {
-    $check_module_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ?";
-    $check_module_stmt = $conn->prepare($check_module_query);
-    $check_module_stmt->bind_param("i", $user_id);
-    $check_module_stmt->execute();
-    $result = $check_module_stmt->get_result();
-    $count = $result->fetch_assoc()['count'];
-    $check_module_stmt->close();
-
-    return $count > 0;
-}
-$joined_module = hasJoinedModule($conn, $user_id);
-
-function hasCompletedAllChallenges($conn, $user_id) {
-    $check_completion_query = "SELECT COUNT(DISTINCT soft_skill_id) as count FROM user_soft_skill_progress WHERE user_id = ? AND completed = 1";
-    $check_completion_stmt = $conn->prepare($check_completion_query);
-    $check_completion_stmt->bind_param("i", $user_id);
-    $check_completion_stmt->execute();
-    $result = $check_completion_stmt->get_result();
-    $count = $result->fetch_assoc()['count'];
-    $check_completion_stmt->close();
-
-    return $count > 0;
-}
-
-
-$completed_all_challenges = hasCompletedAllChallenges($conn, $user_id);
-
-function hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers) {
-    $check_completion_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number IN (?, ?, ?)";
-    $check_completion_stmt = $conn->prepare($check_completion_query);
-    $check_completion_stmt->bind_param("iiiii", $user_id, $soft_skill_id, $challenge_numbers[0], $challenge_numbers[1], $challenge_numbers[2]);
-    $check_completion_stmt->execute();
-    $result = $check_completion_stmt->get_result();
-    $count = $result->fetch_assoc()['count'];
-    $check_completion_stmt->close();
-
-    return $count == count($challenge_numbers);
-}
-
-$soft_skill_id = 1;
-$challenge_numbers = [1, 2, 3];
-$completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm"])) {
     // User clicked the "Delete Account" button, show confirmation message
