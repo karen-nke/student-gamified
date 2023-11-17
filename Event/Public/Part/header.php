@@ -14,7 +14,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
-                    <a href="leadership.php">Leadership</a>
+                    <a href="soft_skills.php?skill=leadership">Leadership</a>
                     <a href="soft_skills.php?skill=communication">Communication</a>
                     <a href="soft_skills.php?skill=teamwork">Teamwork</a>
                 </div>
