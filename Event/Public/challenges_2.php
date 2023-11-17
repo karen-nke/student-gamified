@@ -31,23 +31,23 @@ if (!$data) {
 }
 
 
-
+$soft_skill_id= $data['id'];
 
 $questions = array(
     array(
-        'question' => 'Question 1?',
-        'choices' => array('A', 'B', 'C', 'D'),
-        'correct_answer' => 'A',
+        'question' => $data['question_1'],
+        'choices' => array($data['option_1_A'], $data['option_1_B'], $data['option_1_C'], $data['option_1_D']),
+        'correct_answer' => $data['correct_answer_1'],
     ),
     array(
-        'question' => 'Question 2?',
-        'choices' => array('A', 'B', 'C', 'D'),
-        'correct_answer' => 'A',
+        'question' => $data['question_2'],
+        'choices' => array($data['option_2_A'], $data['option_2_B'], $data['option_2_C'], $data['option_2_D']),
+        'correct_answer' => $data['correct_answer_2'],
     ),
     array(
-        'question' => 'Question 3?',
-        'choices' => array('A', 'B', 'C', 'D'),
-        'correct_answer' => 'A',
+        'question' => $data['question_3'],
+        'choices' => array($data['option_3_A'], $data['option_3_B'], $data['option_3_C'], $data['option_3_D']),
+        'correct_answer' => $data['correct_answer_3'],
     ),
 );
 
@@ -171,22 +171,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <p>Congratulations! You completed Challenge 2.</p>
                 <a href="challenge_3.php"><button class ="button" type="button">Next Challenge</button></a>
                 
-            <?php else: ?>
-                <p> For testing purpose, the answer is all a" </p>
+                <?php else: ?>
+                <p>For testing purposes, the answer is all 'A'</p>
                 <form method="post">
-                  
                     <?php foreach ($questions as $index => $question): ?>
-                        <div class="question-container">
-                            <p class ="question"><?php echo $question['question']; ?></p>
-                            
-                            <?php foreach ($question['choices'] as $choice): ?>
-                                <label>
-                                    <input type="radio" name="answer_<?php echo $index; ?>" value="<?php echo $choice; ?>">
-                                    <?php echo $choice; ?>
-                                </label>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endforeach; ?>
+                            <div class="question-container">
+                                <p class ="question"><?php echo $question['question']; ?></p>
+                                
+                                <?php foreach ($question['choices'] as $choice): ?>
+                                    <label>
+                                        <input type="radio" name="answer_<?php echo $index; ?>" value="<?php echo $choice; ?>">
+                                        <?php echo $choice; ?>
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endforeach; ?>
 
                     <button class ="button" type="submit" name="submit">Submit Answers</button>
                 </form>
