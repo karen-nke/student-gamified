@@ -92,7 +92,7 @@ if (!$data) {
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Theory</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <a href = "challenge_1.php"><button class ="challenge-button">Start Challenge</button></a>
+                                                        <a href = "challenges_1.php?skill=<?php echo $skill; ?>"><button class ="challenge-button">Start Challenge</button></a>
                                                                
                                                 </div>
 
