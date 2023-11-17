@@ -178,6 +178,33 @@ function hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $chall
     return $count == count($challenge_numbers);
 }
 
+// Check if the alert for a specific badge has been shown for the user
+function hasBadgeAlertBeenShown($conn, $user_id, $badgeName) {
+    $columnName = $badgeName . '_alert_shown';
+    $query = "SELECT $columnName FROM user_alerts WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $stmt->close();
+
+    return $row[$columnName] ?? false;
+}
+
+// Mark the alert for a specific badge as shown for the user
+function markBadgeAlertAsShown($conn, $user_id, $badgeName) {
+    $columnName = $badgeName . '_alert_shown';
+    $query = "INSERT INTO user_alerts (user_id, $columnName) VALUES (?, 1)
+              ON DUPLICATE KEY UPDATE $columnName = 1";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+
+
 /* End of Account */
 
 /*Leaderboard*/
@@ -382,30 +409,6 @@ function processEventForm($conn)
 
 /* End of Event Form Process */
 
-// Check if the alert for a specific badge has been shown for the user
-function hasBadgeAlertBeenShown($conn, $user_id, $badgeName) {
-    $columnName = $badgeName . '_alert_shown';
-    $query = "SELECT $columnName FROM user_alerts WHERE user_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $stmt->close();
-
-    return $row[$columnName] ?? false;
-}
-
-// Mark the alert for a specific badge as shown for the user
-function markBadgeAlertAsShown($conn, $user_id, $badgeName) {
-    $columnName = $badgeName . '_alert_shown';
-    $query = "INSERT INTO user_alerts (user_id, $columnName) VALUES (?, 1)
-              ON DUPLICATE KEY UPDATE $columnName = 1";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $stmt->close();
-}
 
 
 

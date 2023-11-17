@@ -27,6 +27,7 @@ try {
     }
 
     $username = $_SESSION["username"];
+    $user_id = $_SESSION["user_id"];
 
     $userData = getUserData($conn, $username);
     $gender = $userData['gender'];
@@ -37,7 +38,7 @@ try {
     $userLevel = $levelData['level'];
     $progress = $levelData['progress'];
     $remainingPoints = $levelData['remainingPoints'];
-
+       
     $userRank = getRank($conn, $points);
 
     $hasSubmittedThreeEvents = hasSubmittedThreeEvents($conn, $username);
