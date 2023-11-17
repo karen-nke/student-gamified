@@ -61,6 +61,8 @@ try {
 
 
     $leadershipAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'leadership');
+    $communicationAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'communication');
+    $teamworkAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'teamwork');
     $pointsAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'points');
     $challengeAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'challenge');
     $moduleAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'module');
@@ -68,6 +70,7 @@ try {
     $rankAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'rank');
     $lvl1AlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'lvl1');
     $lvl5AlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'lvl5');
+
 
     
 
@@ -193,6 +196,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
 
             if ( $completed_communcation_challenges) {
                 echo ' <img src="Image/Communication_Unlocked.png" alt="Communication Locked Badge">';
+                if (!$communicationAlertShown) {
+                    echo "<script>alert('Congratulations! You\'ve earned a Communication Badge!');</script>";
+                    markBadgeAlertAsShown($conn, $user_id, 'communication');
+                }
             
 
             } else {
@@ -201,6 +208,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
 
             if ($completed_teamwork_challenges) {
                 echo ' <img src="Image/Teamwork_Unlocked.png" alt="Communication Locked Badge">';
+                if (!$teamworkAlertShown) {
+                    echo "<script>alert('Congratulations! You\'ve earned a Teamwork Badge!');</script>";
+                    markBadgeAlertAsShown($conn, $user_id, 'teamwork');
+                }
             
 
             } else {
