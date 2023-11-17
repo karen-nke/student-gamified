@@ -28,7 +28,10 @@ if (isset($_POST['submit'])) {
                         VALUES ('$username', '$email', '$password','$gender')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                echo "<script>alert('Succesfully Registered'); window.location.href = 'login.php';</script>";
+                echo "<script>alert('Succesfully Registered'); window.location.href = 'login.php';</script>"; 
+                
+              
+
                 $username = "";
                 $email = "";
                 $_POST['password'] = "";

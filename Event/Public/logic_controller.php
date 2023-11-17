@@ -408,7 +408,65 @@ function processEventForm($conn)
 }
 
 /* End of Event Form Process */
+function getUserLevelAlertData($conn, $user_id) {
+    $query = "SELECT alert_level, level_up_alert_shown FROM user_levels WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    // Check if data exists
+    if ($result->num_rows > 0) {
+        $data = $result->fetch_assoc();
+    } else {
+        // Initialize with default values if data doesn't exist
+        $data = [
+            'alert_level' => 0,
+            'level_up_alert_shown' => 0,
+        ];
+    }
 
+    $stmt->close();
+
+    return $data;
+}
+function resetLevelUpAlert($conn, $user_id) {
+    $query = "UPDATE user_levels SET level_up_alert_shown = 0 WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+function markLevelUpAlertAsShown($conn, $user_id) {
+    $query = "UPDATE user_levels SET level_up_alert_shown = 1 WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+
+function initializeUserLevels($conn, $user_id) {
+    // Check if the user already has a record in user_levels
+    $checkUserLevelsQuery = "SELECT * FROM user_levels WHERE user_id = ?";
+    $checkUserLevelsStmt = $conn->prepare($checkUserLevelsQuery);
+    $checkUserLevelsStmt->bind_param("i", $user_id);
+    $checkUserLevelsStmt->execute();
+    $checkUserLevelsResult = $checkUserLevelsStmt->get_result();
+
+    if ($checkUserLevelsResult->num_rows == 0) {
+        // User does not have a record in user_levels, insert a new record
+        $initializeUserLevelsQuery = "INSERT INTO user_levels (user_id, alert_level, level_up_alert_shown)
+                                      VALUES (?, 0, 0)";
+        $initializeUserLevelsStmt = $conn->prepare($initializeUserLevelsQuery);
+        $initializeUserLevelsStmt->bind_param("i", $user_id);
+        $initializeUserLevelsStmt->execute();
+        $initializeUserLevelsStmt->close();
+    }
+
+    $checkUserLevelsStmt->close();
+}
 
 
 

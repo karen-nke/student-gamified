@@ -38,7 +38,7 @@ try {
     $userLevel = $levelData['level'];
     $progress = $levelData['progress'];
     $remainingPoints = $levelData['remainingPoints'];
-       
+
     $userRank = getRank($conn, $points);
 
     $hasSubmittedThreeEvents = hasSubmittedThreeEvents($conn, $username);
@@ -59,6 +59,8 @@ try {
     $rankAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'rank');
     $lvl1AlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'lvl1');
     $lvl5AlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'lvl5');
+
+
 } catch (Exception $e) {
     echo 'Caught exception: ', $e->getMessage(), "\n";
     exit();
