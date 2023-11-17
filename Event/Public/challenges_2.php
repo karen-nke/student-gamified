@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 echo
                 "<script>
                     alert('Challenge 2 completed!');
-                    window.location.href = 'challenge_3.php';
+                    window.location.href = 'challenge_3.php?skill=" . urlencode($skill) . "';
                  </script>";
 
             } else {
@@ -169,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <?php if ($challenge_completed): ?>
                 <p>Congratulations! You completed Challenge 2.</p>
-                <a href="challenge_3.php?skill=<?php echo $skill; ?>"><button class ="button" type="button">Next Challenge</button></a>
+                <a href="challenges_3.php?skill=<?php echo $skill; ?>"><button class ="button" type="button">Next Challenge</button></a>
                 
                 <?php else: ?>
                 <p>For testing purposes, the answer is all 'A'</p>

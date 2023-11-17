@@ -108,7 +108,7 @@ if (!$data) {
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Test</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <a href = "challenge_2.php"><button class ="challenge-button">Start Challenge</button></a>
+                                                        <a href = "challenges_2.php?skill=<?php echo $skill; ?>"><button class ="challenge-button">Start Challenge</button></a>
                                                 </div>
 
                                         </div>
@@ -121,7 +121,7 @@ if (!$data) {
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Pratical</p> <br>
                                                         <p class ="badge-desc">Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.</p>
-                                                        <a href = "challenge_3.php"><button class ="challenge-button">Start Challenge</button></a>
+                                                        <a href = "challenges_3.php?skill=<?php echo $skill; ?>"><button class ="challenge-button">Start Challenge</button></a>
                                                 </div>
 
                                         </div>
