@@ -50,7 +50,13 @@ try {
 
     $soft_skill_id = 1;
     $challenge_numbers = [1, 2, 3];
-    $completed_soft_skill_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers);
+    $completed_leadership_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers);
+    $communication_id = 2;
+    $teamwork_id = 3;
+
+    $completed_communcation_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $communication_id, $challenge_numbers);
+    $completed_teamwork_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $teamwork_id, $challenge_numbers);
+
     $completed_module_challenges = hasCompletedModuleChallenges($conn, $user_id, $soft_skill_id);
 
 
@@ -174,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
             <p>Badges to be Earned</p>
 
             <?php
-            if ($completed_soft_skill_challenges) {
+            if ($completed_leadership_challenges) {
                 echo '<img src="Image/Leadership_Unlocked.png" alt="Leadership Unlocked Badge">';
                 if (!$leadershipAlertShown) {
                     echo "<script>alert('Congratulations! You\'ve earned a Leadership Badge!');</script>";
@@ -184,11 +190,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
             } else {
                 echo '<img src="Image/Leadership_Locked.png" alt="Leadership Locked Badge">';
             }
+
+            if ( $completed_communcation_challenges) {
+                echo ' <img src="Image/Communication_Unlocked.png" alt="Communication Locked Badge">';
+            
+
+            } else {
+                echo ' <img src="Image/Communication_Locked.png" alt="Communication Locked Badge">';
+            }
+
+            if ($completed_teamwork_challenges) {
+                echo ' <img src="Image/Teamwork_Unlocked.png" alt="Communication Locked Badge">';
+            
+
+            } else {
+                echo ' <img src="Image/Teamwork_Locked.png" alt="Communication Locked Badge">';
+            }
             ?>
 
-            <img src="Image/Communication_Locked.png" alt="Communication Locked Badge">
-            <img src="Image/Teamwork_Locked.png" alt="Teamwork Locked Badge">
-          
             
             
         </div>
