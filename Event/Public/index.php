@@ -10,10 +10,8 @@ require_once('db_connect.php');
 require_once('Part/header.php');
 require_once('logic_controller.php');
 
-   // Initialize user_levels for the newly registered user
-   $user_id = $_SESSION["user_id"];
-   initializeUserLevels($conn, $user_id);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

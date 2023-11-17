@@ -12,6 +12,9 @@ $user_id = $_SESSION["user_id"];
 $username = $_SESSION["username"];
 
 
+initializeUserLevels($conn, $user_id);
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["checkin"])) {
 
     // Perform the check-in logic
@@ -59,6 +62,8 @@ try {
     $rankAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'rank');
     $lvl1AlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'lvl1');
     $lvl5AlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'lvl5');
+
+    
 
 
 } catch (Exception $e) {

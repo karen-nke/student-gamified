@@ -65,13 +65,15 @@ function getLevelData($points) {
             $nextLevelPoints = $range['max'];
             $remainingPoints = $nextLevelPoints - $points;
             $progress = ($points - $range['min']) / ($range['max'] - $range['min']) * 100;
-            return array('level' => $level, 'progress' => $progress, 'remainingPoints' => $remainingPoints + 1);
+
+            return array('level' => $level, 'progress' => $progress, 'remainingPoints' => $remainingPoints + 1, 'currentLevel' => $level);
         }
     }
 
 
 
 }
+
 
 //For user checkin
 function hasCheckedInToday($conn, $user_id) {
@@ -408,43 +410,6 @@ function processEventForm($conn)
 }
 
 /* End of Event Form Process */
-function getUserLevelAlertData($conn, $user_id) {
-    $query = "SELECT alert_level, level_up_alert_shown FROM user_levels WHERE user_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    // Check if data exists
-    if ($result->num_rows > 0) {
-        $data = $result->fetch_assoc();
-    } else {
-        // Initialize with default values if data doesn't exist
-        $data = [
-            'alert_level' => 0,
-            'level_up_alert_shown' => 0,
-        ];
-    }
-
-    $stmt->close();
-
-    return $data;
-}
-function resetLevelUpAlert($conn, $user_id) {
-    $query = "UPDATE user_levels SET level_up_alert_shown = 0 WHERE user_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $stmt->close();
-}
-
-function markLevelUpAlertAsShown($conn, $user_id) {
-    $query = "UPDATE user_levels SET level_up_alert_shown = 1 WHERE user_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $stmt->close();
-}
 
 
 function initializeUserLevels($conn, $user_id) {
@@ -457,8 +422,8 @@ function initializeUserLevels($conn, $user_id) {
 
     if ($checkUserLevelsResult->num_rows == 0) {
         // User does not have a record in user_levels, insert a new record
-        $initializeUserLevelsQuery = "INSERT INTO user_levels (user_id, alert_level, level_up_alert_shown)
-                                      VALUES (?, 0, 0)";
+        $initializeUserLevelsQuery = "INSERT INTO user_levels (user_id, current_level, alert_level, level_up_alert_shown)
+                                      VALUES (?, 0, 0, 0)";
         $initializeUserLevelsStmt = $conn->prepare($initializeUserLevelsQuery);
         $initializeUserLevelsStmt->bind_param("i", $user_id);
         $initializeUserLevelsStmt->execute();
@@ -467,7 +432,6 @@ function initializeUserLevels($conn, $user_id) {
 
     $checkUserLevelsStmt->close();
 }
-
 
 
 
