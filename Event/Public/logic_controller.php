@@ -433,6 +433,37 @@ function initializeUserLevels($conn, $user_id) {
     $checkUserLevelsStmt->close();
 }
 
+function getSoftSkillData($conn, $skill) {
+    $query = "SELECT * FROM soft_skills WHERE name = ?";
+    $stmt = $conn->prepare($query);
 
+    if (!$stmt) {
+        die('Error in preparing statement: ' . $conn->error);
+    }
+
+    $stmt->bind_param("s", $skill);
+    $stmt->execute();
+
+    if ($stmt->error) {
+        die('Error in executing statement: ' . $stmt->error);
+    }
+
+    $result = $stmt->get_result();
+
+    if (!$result) {
+        die('Error in getting result: ' . $stmt->error);
+    }
+
+    if ($result->num_rows > 0) {
+        // Fetch the data as an associative array
+        $data = $result->fetch_assoc();
+        $stmt->close();
+        return $data;
+    } else {
+        // No data found for the selected skill
+        $stmt->close();
+        return null;
+    }
+}
 
 ?>

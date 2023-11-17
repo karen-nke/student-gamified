@@ -15,8 +15,8 @@ if (session_status() == PHP_SESSION_NONE) {
                 </button>
                 <div class="dropdown-content">
                     <a href="leadership.php">Leadership</a>
-                    <a href="communication.php">Communication</a>
-                    <a href="teamwork.php">Teamwork</a>
+                    <a href="soft_skills.php?skill=communication">Communication</a>
+                    <a href="soft_skills.php?skill=teamwork">Teamwork</a>
                 </div>
             </div>
             <a href="leaderboard.php">Leaderboard</a>
