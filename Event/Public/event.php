@@ -77,8 +77,6 @@ require_once('logic_controller.php');
 
                 </div>
 
-                <?php require_once 'Part/_footer.php' ?>
-
 </body>
 
 </html>
