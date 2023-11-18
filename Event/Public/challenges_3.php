@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Add points to user's points and record in point_history
     $points_to_add = 20;
-    $event_description = "Challenge 3 Point";
+    $event_description = "Challenge 3 Point - " . $data['name'];
 
     $update_points_query = "UPDATE users SET points = points + ? WHERE id = ?";
     $update_points_stmt = $conn->prepare($update_points_query);

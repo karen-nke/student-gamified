@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
                 // Add points to user's points and record in point_history
                 $points_to_add = 20; // Update with the correct points
-                $event_description = "Challenge 2 Point";
+                $event_description = "Challenge 2 Point - " . $data['name'];
     
                 // Update user's points
                 $update_points_query = "UPDATE users SET points = points + ? WHERE id = ?";

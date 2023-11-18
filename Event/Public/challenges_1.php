@@ -60,7 +60,7 @@ if (isset($_POST['done'])) {
 
         // Add 10 points to user's points and record in point_history
         $points_to_add = 20;
-        $event_description = "Challenge Point";
+        $event_description = "Challenge 1 Point - " . $data['name'];
 
         // Update user's points
         $update_points_query = "UPDATE users SET points = points + ? WHERE id = ?";
