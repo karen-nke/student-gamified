@@ -39,7 +39,7 @@ if ($challenge_completed_row !== null && $challenge_completed_row['completed']) 
     // User has already completed the challenge
     echo "<script>
             alert('You have already completed Challenge 3!');
-            window.location.href = 'leadership.php';
+            window.location.href = 'soft_skills.php?skill=" . urlencode($skill) . "';
         </script>";
     exit();
 }
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo "<script>
             alert('Challenge 3 completed!');
-            window.location.href = 'leadership.php';
+            window.location.href = 'soft_skills.php?skill=" . urlencode($skill) . "';
          </script>";
 }
 ?>
@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
 
                                 <div class="input-group">
-                                    <input type="text" id="description" placeholder="Describe your experience in leadership" name="description" required>
+                                    <input type="text" id="description" placeholder="Describe your experience in <?php echo $data['name']?>" name="description" required>
                                 </div>
 
                                 <button class="btn" type="submit">Submit</button>

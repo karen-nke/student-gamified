@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             echo "<script>
                     alert('Please answer all questions');
-                    window.location.href = 'challenge_2.php';
+                    window.location.href = 'challenges_2.php?skill=" . urlencode($skill) . "';
                  </script>";
                     
             exit();
@@ -126,14 +126,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 echo
                 "<script>
                     alert('Challenge 2 completed!');
-                    window.location.href = 'challenge_3.php?skill=" . urlencode($skill) . "';
+                    window.location.href = 'challenges_3.php?skill=" . urlencode($skill) . "';
                  </script>";
 
             } else {
                 // Challenge already completed
                 echo "<script>
                         alert('Challenge 2 already completed!');
-                        window.location.href = 'leadership.php';
+                        window.location.href = 'soft_skills.php?skill=" . urlencode($skill) . "';
                     </script>";
             }
         }
