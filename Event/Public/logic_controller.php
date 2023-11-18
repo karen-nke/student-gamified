@@ -151,22 +151,38 @@ function hasJoinedModule($conn, $user_id) {
     return $count > 0;
 }
 
-function hasCompletedModuleChallenges($conn, $user_id, $soft_skill_id) {
+function hasCompletedModuleChallenges($conn, $user_id, $soft_skill_ids) {
+    $soft_skill_ids_str = implode(",", $soft_skill_ids); // Convert array to comma-separated string
+
     $check_completion_query = "
-        SELECT COUNT(*) as count
+        SELECT soft_skill_id, COUNT(*) as count
         FROM user_soft_skill_progress
-        WHERE user_id = ? AND soft_skill_id = ? AND completed = 1
+        WHERE user_id = ? AND soft_skill_id IN ($soft_skill_ids_str) AND completed = 1
+        GROUP BY soft_skill_id
     ";
     $check_completion_stmt = $conn->prepare($check_completion_query);
-    $check_completion_stmt->bind_param("ii", $user_id, $soft_skill_id);
+    $check_completion_stmt->bind_param("i", $user_id);
     $check_completion_stmt->execute();
     $result = $check_completion_stmt->get_result();
-    $count = $result->fetch_assoc()['count'];
+
+    // Initialize an array to store completion status for each soft skill
+    $completion_status = array_fill_keys($soft_skill_ids, false);
+
+    while ($row = $result->fetch_assoc()) {
+        $soft_skill_id = $row['soft_skill_id'];
+        $count = $row['count'];
+        
+        // Check if the user has completed all challenges for the current soft skill
+        if ($count >= 3) {
+            $completion_status[$soft_skill_id] = true;
+        }
+    }
+
     $check_completion_stmt->close();
 
-    return $count >= 3; // Check if the count is greater than or equal to 3
+    // Check if the user has completed all challenges for any of the soft skills
+    return in_array(true, $completion_status);
 }
-
 //To check if user has completed Leadership Module 
 function hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers) {
     $check_completion_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number IN (?, ?, ?)";

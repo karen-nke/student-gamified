@@ -57,7 +57,8 @@ try {
     $completed_communcation_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $communication_id, $challenge_numbers);
     $completed_teamwork_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $teamwork_id, $challenge_numbers);
 
-    $completed_module_challenges = hasCompletedModuleChallenges($conn, $user_id, $soft_skill_id);
+    $soft_skill_ids = [1, 2, 3];
+    $completed_module_challenges = hasCompletedModuleChallenges($conn, $user_id, $soft_skill_ids);
 
 
     $leadershipAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'leadership');
