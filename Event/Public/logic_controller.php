@@ -466,4 +466,69 @@ function getSoftSkillData($conn, $skill) {
     }
 }
 
+function deleteAccount($conn, $user_id, $username)
+{
+    // Delete user data from related tables
+    // Modify the queries according to your database schema
+
+    // Delete user data from the users table
+    $deleteUserQuery = "DELETE FROM users WHERE id = ?";
+    $deleteUserStmt = $conn->prepare($deleteUserQuery);
+    $deleteUserStmt->bind_param("i", $user_id);
+    $deleteUserStmt->execute();
+    $deleteUserStmt->close();
+
+    // Delete check-in history
+    $deleteCheckinQuery = "DELETE FROM checkin_history WHERE user_id = ?";
+    $deleteCheckinStmt = $conn->prepare($deleteCheckinQuery);
+    $deleteCheckinStmt->bind_param("i", $user_id);
+    $deleteCheckinStmt->execute();
+    $deleteCheckinStmt->close();
+
+    // Delete practical form submissions
+    $deletePracticalFormQuery = "DELETE FROM practical_form WHERE user_id = ?";
+    $deletePracticalFormStmt = $conn->prepare($deletePracticalFormQuery);
+    $deletePracticalFormStmt->bind_param("i", $user_id);
+    $deletePracticalFormStmt->execute();
+    $deletePracticalFormStmt->close();
+
+    // Delete user alerts
+    $deleteUserAlertsQuery = "DELETE FROM user_alerts WHERE user_id = ?";
+    $deleteUserAlertsStmt = $conn->prepare($deleteUserAlertsQuery);
+    $deleteUserAlertsStmt->bind_param("i", $user_id);
+    $deleteUserAlertsStmt->execute();
+    $deleteUserAlertsStmt->close();
+
+    // Delete user levels
+    $deleteUserLevelsQuery = "DELETE FROM user_levels WHERE user_id = ?";
+    $deleteUserLevelsStmt = $conn->prepare($deleteUserLevelsQuery);
+    $deleteUserLevelsStmt->bind_param("i", $user_id);
+    $deleteUserLevelsStmt->execute();
+    $deleteUserLevelsStmt->close();
+
+    // Delete user soft skill progress
+    $deleteUserSoftSkillProgressQuery = "DELETE FROM user_soft_skill_progress WHERE user_id = ?";
+    $deleteUserSoftSkillProgressStmt = $conn->prepare($deleteUserSoftSkillProgressQuery);
+    $deleteUserSoftSkillProgressStmt->bind_param("i", $user_id);
+    $deleteUserSoftSkillProgressStmt->execute();
+    $deleteUserSoftSkillProgressStmt->close();
+
+    // Delete events associated with the username
+    $deleteEventsQuery = "DELETE FROM events WHERE username = ?";
+    $deleteEventsStmt = $conn->prepare($deleteEventsQuery);
+    $deleteEventsStmt->bind_param("s", $username);
+    $deleteEventsStmt->execute();
+    $deleteEventsStmt->close();
+
+    // Delete point history associated with the username
+    $deletePointHistoryQuery = "DELETE FROM point_history WHERE username = ?";
+    $deletePointHistoryStmt = $conn->prepare($deletePointHistoryQuery);
+    $deletePointHistoryStmt->bind_param("s", $username);
+    $deletePointHistoryStmt->execute();
+    $deletePointHistoryStmt->close();
+
+    return "Account deleted successfully.";
+}
+
+
 ?>

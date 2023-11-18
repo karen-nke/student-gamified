@@ -87,7 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
     echo "<script>
             var confirmed = confirm('Are you sure you want to delete your account? This action cannot be undone.');
             if (confirmed) {
-                window.location.href = 'delete_account.php'; // Redirect to delete_account.php for actual deletion
+                window.location.href = 'delete_account.php';
+                
             }
          </script>";
 }
