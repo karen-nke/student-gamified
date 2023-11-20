@@ -15,6 +15,8 @@ $username = $_SESSION["username"];
 initializeUserLevels($conn, $user_id);
 
 
+ /* ----- Function for User Checkin----- */
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["checkin"])) {
 
     // Perform the check-in logic
