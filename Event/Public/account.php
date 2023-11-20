@@ -32,34 +32,50 @@ try {
     $username = $_SESSION["username"];
     $user_id = $_SESSION["user_id"];
 
+
+    /* ----- Function for User Progress and Bagdes Function----- */
+
+    //Get User Data
     $userData = getUserData($conn, $username);
     $gender = $userData['gender'];
-
+   
+    //Get User Points
     $points = getUserPoints($conn, $username);
 
+    //Get User Level and Progress
     $levelData = getLevelData($points);
     $userLevel = $levelData['level'];
     $progress = $levelData['progress'];
     $remainingPoints = $levelData['remainingPoints'];
 
+    //Get User Rank
     $userRank = getRank($conn, $points);
 
-    $hasSubmittedThreeEvents = hasSubmittedThreeEvents($conn, $username);
-    $joined_module = hasJoinedModule($conn, $user_id);
-    
+ 
 
+    /* ----- Function for Module Completion Badges ----- */
+    
+    //Check Leadership Module Completion
     $soft_skill_id = 1;
     $challenge_numbers = [1, 2, 3];
     $completed_leadership_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers);
-    $communication_id = 2;
-    $teamwork_id = 3;
 
+     //Check Communication Module Completion
+    $communication_id = 2;
     $completed_communcation_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $communication_id, $challenge_numbers);
+
+    //Check Teamwork Module Completion
+    $teamwork_id = 3;
     $completed_teamwork_challenges = hasCompletedSoftSkillChallenges($conn, $user_id, $teamwork_id, $challenge_numbers);
+
+    /* ----- Function for Acheivement Badges ----- */
 
     $soft_skill_ids = [1, 2, 3];
     $completed_module_challenges = hasCompletedModuleChallenges($conn, $user_id, $soft_skill_ids);
+    $hasSubmittedThreeEvents = hasSubmittedThreeEvents($conn, $username);
+    $joined_module = hasJoinedModule($conn, $user_id);
 
+     /* ----- Function for Badges Alert ----- */
 
     $leadershipAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'leadership');
     $communicationAlertShown = hasBadgeAlertBeenShown($conn, $user_id, 'communication');
