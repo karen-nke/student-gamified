@@ -92,7 +92,17 @@ if (!$data) {
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Theory</p> <br>
                                                         <p class ="badge-desc">In this theoretical challenge, participants delve into the foundational aspects of <?php echo $data ['name'] ?>. The focus is on providing a comprehensive understanding and their significance in various aspects of personal and professional life.</p>
-                                                        <a href = "challenges_1.php?skill=<?php echo $skill; ?>"><button class ="challenge-button">Start Challenge</button></a>
+                                                        <?php if (isset($_SESSION["username"])) { ?>
+                                                                <a href = "challenges_1.php?skill=<?php echo $skill; ?>"><button class ="challenge-button">Start Challenge</button></a>
+                                                        <?php
+                                                        } else { ?>
+                                                                
+                                                                <a href = "Login/Login.php"><button class ="challenge-button">Login First</button></a>
+                                                        <?php        
+                                                        }
+                                                        ?>
+                                                
+                                                        
                                                                
                                                 </div>
 
@@ -108,7 +118,16 @@ if (!$data) {
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Test</p> <br>
                                                         <p class ="badge-desc">The second challenge involves a knowledge assessment through a series of Multiple-Choice Questions (MCQs). Participants test their understanding of the theoretical concepts introduced in Challenge 1, demonstrating their grasp of key <?php echo $data ['name'] ?> principles.</p>
-                                                        <a href = "challenges_2.php?skill=<?php echo $skill; ?>"><button class ="challenge-button">Start Challenge</button></a>
+                                                        <?php if (isset($_SESSION["username"])) { ?>
+                                                                <a href = "challenges_2.php?skill=<?php echo $skill; ?>"><button class ="challenge-button">Start Challenge</button></a>
+                                                        <?php
+                                                        } else { ?>
+                                                                
+                                                                <a href = "Login/Login.php"><button class ="challenge-button">Login First</button></a>
+                                                        <?php        
+                                                        }
+                                                        ?>
+                                                       
                                                 </div>
 
                                         </div>
@@ -121,7 +140,15 @@ if (!$data) {
                                                 <div class ="text-container">
                                                         <p class ="badge-title">Pratical</p> <br>
                                                         <p class ="badge-desc">The practical challenge is designed for participants to translate their theoretical understanding into practical application. Participants engage in real-world scenarios, exercises, or simulations that mirror situations where <?php echo $data ['name'] ?> are essential. This hands-on approach aims to reinforce the practical application of learned soft skills.</p>
-                                                        <a href = "challenges_3.php?skill=<?php echo $skill; ?>"><button class ="challenge-button">Start Challenge</button></a>
+                                                        <?php if (isset($_SESSION["username"])) { ?>
+                                                                <a href = "challenges_3.php?skill=<?php echo $skill; ?>"><button class ="challenge-button">Start Challenge</button></a>
+                                                        <?php
+                                                        } else { ?>
+                                                                
+                                                                <a href = "Login/Login.php"><button class ="challenge-button">Login First</button></a>
+                                                        <?php        
+                                                        }
+                                                        ?>
                                                 </div>
 
                                         </div>
