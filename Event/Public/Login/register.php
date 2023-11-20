@@ -99,8 +99,7 @@ if (isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7
-.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="login_style.css">
 
@@ -114,8 +113,7 @@ if (isset($_POST['submit'])) {
             <a href="../index.php"><img src="../Image/Login_Logo.png" width="200px"></a>
         </div>
 
-
-        <form action="register.php" method="POST" class="login-email" onSubmit ="return validate(this)">
+        <form action="register.php" method="POST" class="login-email" onSubmit="return validate(this)">
             <p class="login-text" style='font-size:2rem; font-weight:800;'>Register</p>
             <div class="input-group">
                 <input type="text" placeholder="Username" name="username" value="<?php echo $username; ?>" required>
@@ -123,57 +121,41 @@ if (isset($_POST['submit'])) {
             <div class="input-group">
                 <input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
             </div>
-            <select
- 
-                name="gender">
-
-                    
-                <option
-                
-                value="male">Male</option>
-
-                    
-                <option
-                
-                value="female">Female</option>
-
-                    
-                <option
-                
-                value="rather_not_to_say">Rather Not To Say</option>
-                </select>
+            <select name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="rather_not_to_say">Rather Not To Say</option>
+            </select>
             <div class="input-group">
                 <input type="password" placeholder="Password" name="password" id="password" value="<?php echo $_POST['password']; ?>" required>
+                <i class="fa fa-eye-slash password-toggle" onclick="togglePassword('password')"></i>
             </div>
-            <div class="input-group-cb">
-                 <input type="checkbox" onclick="togglePassword()"> Show Password   
-             </div>
             <div class="input-group">
-                <input type="password" placeholder="Confirm Password" name="confirmpassword" value="<?php echo $_POST['confirmpassword'] ?>" required>
+                <input type="password" placeholder="Confirm Password" id="confirmpassword" name="confirmpassword" value="<?php echo $_POST['confirmpassword'] ?>" required>
+                <i class="fa fa-eye-slash password-toggle" onclick="togglePassword('confirmpassword')"></i>
             </div>
             <div class="input-group">
                 <button name="submit" class="btn">Register</button>
             </div>
-            <p class="login-register-text">Already have account? <a href="login.php"><br>Login Here.</a></p>
+            <p class="login-register-text">Already have an account? <a href="login.php"><br>Login Here.</a></p>
         </form>
 
         <script>
-             function togglePassword() {
-                 var passwordField = document.getElementById("password");
-                 if (passwordField.type === "password") {
-                     passwordField.type = "text";
-                 } else {
-                     passwordField.type = "password";
-                 }
-             }
-         </script>
+            function togglePassword(inputId) {
+                const passwordInput = document.getElementById(inputId);
+                const passwordToggle = document.querySelector(`#${inputId} ~ .password-toggle`);
 
-
-
-
-
-
-
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    passwordToggle.classList.add('fa-eye');
+                    passwordToggle.classList.remove('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    passwordToggle.classList.add('fa-eye-slash');
+                    passwordToggle.classList.remove('fa-eye');
+                }
+            }
+        </script>
     </div>
 </body>
 
