@@ -24,6 +24,7 @@ require_once('logic_controller.php');
 
         <div class="page-container">
                 <div>
+                        <img src="Image/Events_Icon.png" style="width:200px;height:250px;" class="logo-centered"></a>
                         <h2 class="title"><br>Events Points Tracker</h2>
                 </div>
 

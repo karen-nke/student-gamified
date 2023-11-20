@@ -44,6 +44,7 @@ $eventHistoryData = getEventHistoryDataPaginated($conn, $username, $start_index,
 
     <div class="page-container">
         <h3>Event History <span class="current-page"><?php echo $current_page; ?></span></h3>
+       
         <table>
             <thead>
                 <tr>
