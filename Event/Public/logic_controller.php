@@ -31,7 +31,8 @@ function getUserPoints($conn, $username) {
 
 //To get user current rank
 function getRank($conn, $points) {
-    $rankQuery = "SELECT rank FROM (SELECT username, points, DENSE_RANK() OVER (ORDER BY points DESC) AS rank FROM users) AS ranked_users WHERE username IN (SELECT username FROM users WHERE points = ?)"; //Fixed same marks but different level using Dense_Rank()
+    $rankQuery = "SELECT rank FROM (SELECT username, points, DENSE_RANK() OVER (ORDER BY points DESC) AS rank FROM users) AS ranked_users WHERE username 
+    IN (SELECT username FROM users WHERE points = ?)"; //Fixed same marks but different level using Dense_Rank()
     $rankStmt = $conn->prepare($rankQuery);
     $rankStmt->bind_param("i", $points);
     $rankStmt->execute();
@@ -183,7 +184,7 @@ function hasCompletedModuleChallenges($conn, $user_id, $soft_skill_ids) {
     // Check if the user has completed all challenges for any of the soft skills
     return in_array(true, $completion_status);
 }
-//To check if user has completed Leadership Module 
+//To check if user has completed SoftSkill Module 
 function hasCompletedSoftSkillChallenges($conn, $user_id, $soft_skill_id, $challenge_numbers) {
     $check_completion_query = "SELECT COUNT(*) as count FROM user_soft_skill_progress WHERE user_id = ? AND soft_skill_id = ? AND challenge_number IN (?, ?, ?)";
     $check_completion_stmt = $conn->prepare($check_completion_query);

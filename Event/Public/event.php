@@ -45,9 +45,7 @@ require_once('logic_controller.php');
                                                 if (isset($_SESSION["username"])) {
                                                         $username = $_SESSION["username"];
                                                         echo "<input type='text' id='username' placeholder='Username' name='username' value='$username' readonly>";
-                                                } else {
-                                                        echo "<input type='text' id='username' placeholder='Username' name='username' required>";
-                                                }
+                                                } 
                                                 ?>
                                         </div>
 
