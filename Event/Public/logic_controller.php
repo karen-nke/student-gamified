@@ -222,6 +222,18 @@ function markBadgeAlertAsShown($conn, $user_id, $badgeName) {
     $stmt->close();
 }
 
+function getTotalUsers($conn) {
+    $totalUsersQuery = "SELECT COUNT(*) as totalUsers FROM users";
+    $totalUsersResult = $conn->query($totalUsersQuery);
+    
+    if ($totalUsersResult) {
+        $totalUsersRow = $totalUsersResult->fetch_assoc();
+        return $totalUsersRow['totalUsers'];
+    } else {
+        // Handle the error as needed
+        return 0;
+    }
+}
 
 
 /* End of Account */

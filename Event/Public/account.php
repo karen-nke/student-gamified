@@ -53,6 +53,9 @@ try {
     //Get User Rank
     $userRank = getRank($conn, $points);
 
+    //Get Amount of Users
+    $totalUsers = getTotalUsers($conn);
+
  
 
     /* ----- Function for Module Completion Badges ----- */
@@ -280,7 +283,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
                 echo '<img src="Image/Complete_Locked.png" alt="Module Locked Badge">';
             }
 
-            if ($userRank == 1) {
+            $minPointsForBadge = 50; 
+            $minUsersForBadge = 5; 
+
+            if ($userRank == 1 && $points >= $minPointsForBadge && $totalUsers > $minUsersForBadge) {
                 echo '<img src="Image/Rank_Unlocked.png" alt="Rank Unlocked Badge">';
                 if (!$rankAlertShown) {
                     echo "<script>alert('Congratulations! You\'ve earned a Lead VoyagerBadge!');</script>";
