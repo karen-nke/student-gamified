@@ -560,4 +560,41 @@ function deleteAccount($conn, $user_id, $username)
 }
 
 
+function hasCompletedChallenge($conn, $user_id, $soft_skill_id, $challenge_number) {
+    $completedQuery = "SELECT completed FROM user_soft_skill_progress
+                       WHERE user_id = ? AND soft_skill_id = ? AND challenge_number = ?";
+    
+    $completedStmt = $conn->prepare($completedQuery);
+    $completedStmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
+    $completedStmt->execute();
+    $completedResult = $completedStmt->get_result();
+    
+    // Check if there is a row for the completed challenge
+    if ($completedRow = $completedResult->fetch_assoc()) {
+        $completedStatus = $completedRow['completed'];
+    } else {
+        // No row found, challenge not completed
+        $completedStatus = 0;
+    }
+
+    $completedStmt->close();
+
+    return $completedStatus == 1;
+}
+
+function getSoftSkillIdByName($conn, $soft_skill_name) {
+    $query = "SELECT id FROM soft_skills WHERE name = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $soft_skill_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $soft_skill_id = $row['id'];
+    $stmt->close();
+
+    return $soft_skill_id;
+}
+
+
+
 ?>
