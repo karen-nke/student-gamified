@@ -400,6 +400,7 @@
   font-weight: 500;
   }
 
+ 
 
 
   .profile-info .container p{
@@ -425,6 +426,7 @@
 table {
   border-collapse: collapse;
   width: 100%;
+  margin-bottom:25px;
 }
 
 th, td {
@@ -561,10 +563,11 @@ td {
 }
 
 .box-container p {
-  color: #045174;
+  color: #E87A00;
   font-size: 18px;
   font-weight: 400;
   line-height: 30px;
+  margin-bottom:25px;
 
 }
 
@@ -585,6 +588,7 @@ td {
   font-weight: 400;
   line-height: 30px;
   margin-top:50px;
+
 
 }
 
