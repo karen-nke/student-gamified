@@ -7,25 +7,12 @@ if (session_status() == PHP_SESSION_NONE) {
 <div class="navbar">
     <div class="menu-item">
         <div class="menu">
-            <a href="index.php">Home</a>
-            <a href="event.php">Events</a>
-            <div class="dropdown">
-                <button class="dropbtn">Module
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="soft_skills.php?skill=leadership">Leadership</a>
-                    <a href="soft_skills.php?skill=communication">Communication</a>
-                    <a href="soft_skills.php?skill=teamwork">Teamwork</a>
-                </div>
-            </div>
-            <a href="leaderboard.php">Leaderboard</a>
+            <a href="../Public/index.php">Home</a>
         </div>
 
 <?php
         if (isset($_SESSION['username'])) {
             echo "
-                <button class=\"login-button\"><a href=\"account.php\">Account</a></button>
                 <button class=\"register-button\"><a href=\"Login/logout.php\">Logout</a></button>
             ";
         } else {
@@ -36,8 +23,10 @@ if (session_status() == PHP_SESSION_NONE) {
         }
 ?>
     </div>
-    <a href="index.php"><img src="Image/Logo.png" /></a>
+    <a href="../Public/index.php"><img src="../Public/Image/Logo.png" /></a>
+    
 </div>
+
 
 <style>
 

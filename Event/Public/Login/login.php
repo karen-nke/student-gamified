@@ -75,13 +75,15 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="input-group">
-                <input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>
+                <input type="password" placeholder="Password" name="password" id="password" value="<?php echo $_POST['password']; ?>" required>
+                <i class="fa fa-eye-slash password-toggle" onclick="togglePassword('password')"></i>
             </div>
 
             <div class="input-group">
                 <button name="submit" class="btn">Login</button>
                 
             </div>
+
 
             
 
@@ -95,6 +97,24 @@ if (isset($_POST['submit'])) {
 
 
     </div>
+
+    <script>
+            function togglePassword(inputId) {
+                const passwordInput = document.getElementById(inputId);
+                const passwordToggle = document.querySelector(`#${inputId} ~ .password-toggle`);
+
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    passwordToggle.classList.add('fa-eye');
+                    passwordToggle.classList.remove('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    passwordToggle.classList.add('fa-eye-slash');
+                    passwordToggle.classList.remove('fa-eye');
+                }
+            }
+</script>
 </body>
 
 </html>
+
