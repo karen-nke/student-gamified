@@ -22,6 +22,16 @@ $challenge3Completed = hasCompletedChallenge($conn, $user_id, $soft_skill_id, 3)
 
 $completionPercentage = ($challenge1Completed + $challenge2Completed + $challenge3Completed) / 3 * 100;
 
+$completionText = "{$data['name']} Challenges: ";
+$completedChallenges = [$challenge1Completed, $challenge2Completed, $challenge3Completed];
+$completedCount = array_sum($completedChallenges);
+$totalChallenges = count($completedChallenges);
+
+for ($i = 1; $i <= $totalChallenges; $i++) {
+    $completionText .= ($i <= $completedCount) ? "✔" : "◻";
+    $completionText .= ($i < $totalChallenges) ? " / " : "";
+}
+
 
 if (!$data) {
     die('Error: Failed to fetch data for the selected skill.');
@@ -68,6 +78,10 @@ if (!$data) {
 .percentage {
     margin-top: 10px;
 }
+
+.completion-text{
+        margin-top:25px;
+}
 </style>
 
 
@@ -96,7 +110,7 @@ if (!$data) {
                                         <div class="progress-bar">
                                                 <div class="progress" style="width: <?php echo $completionPercentage; ?>%;"></div>
                                         </div>
-                                        <p class="percentage"><?php echo $completionPercentage; ?>% Complete</p>
+                                        <p class="completion-text"><?php echo $completionText; ?></p>
                                 </div>
 
                                 <div class="box-container">
