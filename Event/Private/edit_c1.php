@@ -31,15 +31,12 @@ if (isset($_GET['id'])) {
 // Check if the update form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Extract data from the form
-    $updatedName = $_POST['name'];
-    $updatedDescription = $_POST['description'];
-    $updatedBadgePath = $_POST['badge_path'];
-    $updatedImagePath = $_POST['image_path'];
+    $updatedC1 = $_POST['c1_description'];
 
     // Update user information in the database
-    $updatesoftSkillQuery = "UPDATE soft_skills SET name = ?, description = ?, badge_path = ?, image_path = ? WHERE id = ?";
+    $updatesoftSkillQuery = "UPDATE soft_skills SET c1_description = ? WHERE id = ?";
     $updatesoftSkillStmt = $conn->prepare($updatesoftSkillQuery);
-    $updatesoftSkillStmt->bind_param("ssssi", $updatedName, $updatedDescription, $updatedBadgePath, $updatedImagePath, $skill_id);
+    $updatesoftSkillStmt->bind_param("si", $updatedC1, $skill_id);
 
     if ($updatesoftSkillStmt->execute()) {
         echo "<script>
@@ -124,26 +121,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <section class="hero">
             <div class="container">
-                <h2 class="title">Edit User</h2>
+                <h2 class="title">Edit Challenge 1</h2>
                 <form method="post">
-                    <label for="username">Name:</label>
-                    <input type="text" id="name" name="name" value="<?php echo $softSkill['name']; ?>" required>
+                    <label for="c1_description">Theory</label>
+                    <input type="textarea" id="c1_description" name="c1_description" value="<?php echo $softSkill['c1_description']; ?>" required>
 
-                    <label for="description">Description:</label>
-                    <input type="text" id="description" name="description" value="<?php echo $softSkill['description']; ?>" required>
-
-                    <label for="badge_path">Badge Path:</label>
-                    <input type="text" id="badge_path" name="badge_path" value="<?php echo $softSkill['badge_path']; ?>" required>
-
-                    <label for="image_path">Image Path:</label>
-                    <input type="text" id="image_path" name="image_path" value="<?php echo $softSkill['image_path']; ?>" required>
-
+                   
                     <button type="submit">Update</button>
                 </form>
             </div>
         </section>
 
-    
+
     </div>
 </body>
 

@@ -47,6 +47,7 @@ if (!$softSkillsResult) {
                                 <th>Badge Path</th>
                                 <th>Image Path</th>
                                 <th>Action</th>
+                                <th>Challenge</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,6 +59,11 @@ if (!$softSkillsResult) {
                                     <td><?php echo $row['badge_path']; ?></td>
                                     <td><?php echo $row['image_path']; ?></td>
                                     <td><a class="edit-link" href="edit_module.php?id=<?php echo $row['id']; ?>">Edit</a></td>
+                                    <td>
+                                        <a class="edit-link" href="edit_c1.php?id=<?php echo $row['id']; ?>">Challenge1</a><br><br>
+                                        <a class="edit-link" href="edit_c2.php?id=<?php echo $row['id']; ?>">Challenge2</a><br><br>
+                                        <a class="edit-link" href="edit_c3.php?id=<?php echo $row['id']; ?>">Challenge3</a>
+                                    </td>
                                   
                                 </tr>
                             <?php endwhile; ?>
