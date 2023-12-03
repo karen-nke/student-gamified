@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
     
 require_once('../Public/db_connect.php');
 require_once('Part/header.php');
-require_once('../Public/logic_controller.php');
+require_once('logic_controller.php');
 
 ?>
 
@@ -26,9 +26,18 @@ require_once('../Public/logic_controller.php');
 </head>
 
 <body>
-        <div class ="container">
+        <div class ="page-container">
        
-               <p>Hello</p>
+               <div class ="container">
+                        <h2 class="title"><br>Admin Control Panel</h2>
+               </div>
+
+               <div class ="box-container">
+                        <p> User Control </p>
+                        <button class="btn"><a href="user_edit.php">Edit or Delete User</a> </button>
+
+
+               </div>
         </div>
 
                 
