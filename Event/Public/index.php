@@ -88,7 +88,7 @@ require_once('logic_controller.php');
                                 <div class="event-card">
                                         <img src="Image/PointLevel_Icon.png" alt="Event Image">
                                         <h2>Earn Points & Up Level</h2>
-                                        <p>Lorem ipsum dolor sit amet consecte tur adipiscing elit semper </p>
+                                        <p>Complete Tasks & Activities to earn Points and Level Up your Account.</p>
                                                 
                                 </div>
 
@@ -97,7 +97,7 @@ require_once('logic_controller.php');
                                 <div class="event-card">
                                         <img src="Image/Rewards_Icon.png" alt="Event Image">
                                         <h2>Earn Badges</h2>
-                                        <p>Lorem ipsum dolor sit amet consecte tur adipiscing elit semper </p>
+                                        <p>Earn badges by completing different task and challenges.</p>
                                        
                                 </div>
 
@@ -107,7 +107,7 @@ require_once('logic_controller.php');
                                 <div class="event-card">
                                         <img src="Image/Leaderboard_Icon2.png" alt="Event Image">
                                         <h2>Leaderboard</h2>
-                                        <p>Lorem ipsum dolor sit amet consecte tur adipiscing elit semper </p>
+                                        <p>Compete with your peers and reach to the top of the Leaderboard</p>
                                         
                                 </div>
 
