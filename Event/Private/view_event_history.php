@@ -24,14 +24,14 @@ if (isset($_GET['id'])) {
     $username = $row['username'];  
     $stmt->close();
 
-    // Fetch point history for the user
-    $pointHistoryQuery = "SELECT * FROM point_history WHERE username = ?";
-    $pointHistoryStmt = $conn->prepare($pointHistoryQuery);
-    $pointHistoryStmt->bind_param("s", $username);  
-    $pointHistoryStmt->execute();
-    $pointHistoryResult = $pointHistoryStmt->get_result();
+    // Fetch event history for the user
+    $eventHistoryQuery = "SELECT * FROM events WHERE username = ?";
+    $eventHistoryStmt = $conn->prepare($eventHistoryQuery);
+    $eventHistoryStmt->bind_param("s", $username);  
+    $eventHistoryStmt->execute();
+    $eventHistoryResult = $eventHistoryStmt->get_result();
 
-    $pointHistoryStmt->close();
+    $eventHistoryStmt->close();
 } else {
     die('Error: User ID not provided.');
 }
@@ -56,28 +56,28 @@ if (isset($_GET['id'])) {
 <div class="container">
         <section class="hero">
             <div class="container">
-                <h2>Point History for <?php echo $username; ?></h2>
-                <?php if ($pointHistoryResult->num_rows > 0) : ?>
+                <h2>Event History for <?php echo $username; ?></h2>
+                <?php if ($eventHistoryResult->num_rows > 0) : ?>
                     <table>
                         <thead>
                             <tr>
                                 <th>Date</th>
-                                <th>Description</th>
-                                <th>Points Earned</th>
+                                <th>Event</th>
+                                <th>Club</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while ($row = $pointHistoryResult->fetch_assoc()) : ?>
+                            <?php while ($row = $eventHistoryResult->fetch_assoc()) : ?>
                                 <tr>
-                                    <td><?php echo $row['added_at']; ?></td>
-                                    <td><?php echo $row['event_description']; ?></td>
-                                    <td><?php echo $row['points_added']; ?></td>
+                                    <td><?php echo $row['datetime']; ?></td>
+                                    <td><?php echo $row['event']; ?></td>
+                                    <td><?php echo $row['club']; ?></td>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
                     </table>
                 <?php else : ?>
-                    <p>No point history available.</p>
+                    <p>No event history available.</p>
                 <?php endif; ?>
             </div>
         </section>
