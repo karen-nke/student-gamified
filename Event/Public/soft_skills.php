@@ -33,6 +33,7 @@ for ($i = 1; $i <= $totalChallenges; $i++) {
 }
 
 
+
 if (!$data) {
     die('Error: Failed to fetch data for the selected skill.');
 }
@@ -109,9 +110,39 @@ if (!$data) {
                                      
                                         <div class="progress-bar">
                                                 <div class="progress" style="width: <?php echo $completionPercentage; ?>%;"></div>
+                        
                                         </div>
                                         <p class="completion-text"><?php echo $completionText; ?></p>
                                 </div>
+
+                                
+
+                                
+                                <?php
+                                        if ($completedCount === $totalChallenges) { ?>
+
+                                          <div class="box-container">
+                                                <p class="title">Congratulations</p>
+                                                <div class ="badge-container">
+                                                        <div class ="image-container">
+                                                                <img src="<?php echo getSkillImage($soft_skill_id); ?>" />  
+                                                        </div>
+
+                                                        <div class ="text-container">
+                                                                <p class ="badge-title">You've already earned <?php echo $data ['name'] ?> Completion Badge</p> <br>
+                                                                <a href="account.php"><button class="challenge-button">View in Account</button></a>
+                                                        
+                                                        </div>
+
+                                                </div>
+                                        </div>        
+
+                                        
+
+                                      
+                                <?php } ?>
+
+                              
 
                                 <div class="box-container">
                                         <p class="title">Completion Reward</p>

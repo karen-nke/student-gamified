@@ -441,26 +441,7 @@ function processEventForm($conn)
 /* End of Event Form Process */
 
 
-function initializeUserLevels($conn, $user_id) {
-    // Check if the user already has a record in user_levels
-    $checkUserLevelsQuery = "SELECT * FROM user_levels WHERE user_id = ?";
-    $checkUserLevelsStmt = $conn->prepare($checkUserLevelsQuery);
-    $checkUserLevelsStmt->bind_param("i", $user_id);
-    $checkUserLevelsStmt->execute();
-    $checkUserLevelsResult = $checkUserLevelsStmt->get_result();
-
-    if ($checkUserLevelsResult->num_rows == 0) {
-        // User does not have a record in user_levels, insert a new record
-        $initializeUserLevelsQuery = "INSERT INTO user_levels (user_id, current_level, alert_level, level_up_alert_shown)
-                                      VALUES (?, 0, 0, 0)";
-        $initializeUserLevelsStmt = $conn->prepare($initializeUserLevelsQuery);
-        $initializeUserLevelsStmt->bind_param("i", $user_id);
-        $initializeUserLevelsStmt->execute();
-        $initializeUserLevelsStmt->close();
-    }
-
-    $checkUserLevelsStmt->close();
-}
+/* Soft Skills Page*/
 
 function getSoftSkillData($conn, $skill) {
     $query = "SELECT * FROM soft_skills WHERE name = ?";
@@ -494,6 +475,83 @@ function getSoftSkillData($conn, $skill) {
         return null;
     }
 }
+
+function hasCompletedChallenge($conn, $user_id, $soft_skill_id, $challenge_number) {
+    $completedQuery = "SELECT completed FROM user_soft_skill_progress
+                       WHERE user_id = ? AND soft_skill_id = ? AND challenge_number = ?";
+    
+    $completedStmt = $conn->prepare($completedQuery);
+    $completedStmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
+    $completedStmt->execute();
+    $completedResult = $completedStmt->get_result();
+    
+    // Check if there is a row for the completed challenge
+    if ($completedRow = $completedResult->fetch_assoc()) {
+        $completedStatus = $completedRow['completed'];
+    } else {
+        // No row found, challenge not completed
+        $completedStatus = 0;
+    }
+
+    $completedStmt->close();
+
+    return $completedStatus == 1;
+}
+
+function getSoftSkillIdByName($conn, $soft_skill_name) {
+    $query = "SELECT id FROM soft_skills WHERE name = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $soft_skill_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $soft_skill_id = $row['id'];
+    $stmt->close();
+
+    return $soft_skill_id;
+}
+
+function getSkillImage($soft_skill_id) {
+    switch ($soft_skill_id) {
+        case 1:
+            return 'Image/Leadership_Unlocked.png';
+        case 2:
+            return 'Image/Communication_Unlocked.png';
+        case 3:
+            return 'Image/Teamwork_Unlocked.png';
+       
+        default:
+            return ''; 
+    }
+}
+
+
+/* End of Soft Skills Page*/
+
+
+
+function initializeUserLevels($conn, $user_id) {
+    // Check if the user already has a record in user_levels
+    $checkUserLevelsQuery = "SELECT * FROM user_levels WHERE user_id = ?";
+    $checkUserLevelsStmt = $conn->prepare($checkUserLevelsQuery);
+    $checkUserLevelsStmt->bind_param("i", $user_id);
+    $checkUserLevelsStmt->execute();
+    $checkUserLevelsResult = $checkUserLevelsStmt->get_result();
+
+    if ($checkUserLevelsResult->num_rows == 0) {
+        // User does not have a record in user_levels, insert a new record
+        $initializeUserLevelsQuery = "INSERT INTO user_levels (user_id, current_level, alert_level, level_up_alert_shown)
+                                      VALUES (?, 0, 0, 0)";
+        $initializeUserLevelsStmt = $conn->prepare($initializeUserLevelsQuery);
+        $initializeUserLevelsStmt->bind_param("i", $user_id);
+        $initializeUserLevelsStmt->execute();
+        $initializeUserLevelsStmt->close();
+    }
+
+    $checkUserLevelsStmt->close();
+}
+
+
 
 function deleteAccount($conn, $user_id, $username)
 {
@@ -558,43 +616,5 @@ function deleteAccount($conn, $user_id, $username)
 
     return "Account deleted successfully.";
 }
-
-
-function hasCompletedChallenge($conn, $user_id, $soft_skill_id, $challenge_number) {
-    $completedQuery = "SELECT completed FROM user_soft_skill_progress
-                       WHERE user_id = ? AND soft_skill_id = ? AND challenge_number = ?";
-    
-    $completedStmt = $conn->prepare($completedQuery);
-    $completedStmt->bind_param("iii", $user_id, $soft_skill_id, $challenge_number);
-    $completedStmt->execute();
-    $completedResult = $completedStmt->get_result();
-    
-    // Check if there is a row for the completed challenge
-    if ($completedRow = $completedResult->fetch_assoc()) {
-        $completedStatus = $completedRow['completed'];
-    } else {
-        // No row found, challenge not completed
-        $completedStatus = 0;
-    }
-
-    $completedStmt->close();
-
-    return $completedStatus == 1;
-}
-
-function getSoftSkillIdByName($conn, $soft_skill_name) {
-    $query = "SELECT id FROM soft_skills WHERE name = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $soft_skill_name);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $soft_skill_id = $row['id'];
-    $stmt->close();
-
-    return $soft_skill_id;
-}
-
-
 
 ?>
