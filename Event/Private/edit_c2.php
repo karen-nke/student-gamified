@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <title>Edit User</title>
+    <title>Edit Challenge 2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Public/public.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <section class="hero">
             <div class="container">
-                <h2 class="title">Edit Challenge 1</h2>
+                <h2 class="title">Edit Challenge 2</h2>
                 <form method="post">
                 <label for="question_1">Set Question 1</label>
                 <input type="text" id="question_1" name="question_1" value="<?php echo $softSkill['question_1']; ?>" required>

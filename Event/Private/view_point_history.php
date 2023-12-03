@@ -43,7 +43,7 @@ if (isset($_GET['id'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>User Edit</title>
+    <title>Point History</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Public/public.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">

@@ -42,7 +42,7 @@ require_once('logic_controller.php');
                <div class ="box-container">
                         <p> Module Control </p>
                         <button class="btn"><a href="module_edit.php">Edit Module</a> </button>
-                        <button class="btn"><a href="user_edit.php">Add Module</a> </button>
+                        <button class="btn"><a href="module_add.php">Add Module</a> </button>
 
 
                </div>
