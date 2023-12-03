@@ -11,14 +11,16 @@ $skill = $_GET['skill'];
 $soft_skill_id = getSoftSkillIdByName($conn, $skill);
 $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : null;
 
-echo "User ID: " . $user_id . "<br>";
-echo "Soft Skill ID: " . $soft_skill_id . "<br>";
+//echo "User ID: " . $user_id . "<br>";
+//echo "Soft Skill ID: " . $soft_skill_id . "<br>";
 
 
 $data = getSoftSkillData($conn, $skill);
 $challenge1Completed = hasCompletedChallenge($conn, $user_id, $soft_skill_id, 1);
 $challenge2Completed = hasCompletedChallenge($conn, $user_id, $soft_skill_id, 2);
 $challenge3Completed = hasCompletedChallenge($conn, $user_id, $soft_skill_id, 3);
+
+$completionPercentage = ($challenge1Completed + $challenge2Completed + $challenge3Completed) / 3 * 100;
 
 
 if (!$data) {
@@ -39,6 +41,35 @@ if (!$data) {
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
+<style>
+.progress-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    height:20px;
+    margin-top:25px;
+
+    
+}
+
+.progress {
+    height: 20px;
+    background-color: #4caf50;
+    transition: width 0.3s ease-in-out;
+    margin-left: unset;
+}
+
+.percentage {
+    margin-top: 10px;
+}
+</style>
+
 
 <body>
 <div class ="container">
@@ -57,6 +88,15 @@ if (!$data) {
 
                                         <img src="<?php echo $data['image_path']; ?>" />
                                 
+                                </div>
+
+                                <div class="progress-container">
+                                        <p class="title">Challenges Progress</p>
+                                     
+                                        <div class="progress-bar">
+                                                <div class="progress" style="width: <?php echo $completionPercentage; ?>%;"></div>
+                                        </div>
+                                        <p class="percentage"><?php echo $completionPercentage; ?>% Complete</p>
                                 </div>
 
                                 <div class="box-container">
