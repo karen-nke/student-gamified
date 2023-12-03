@@ -106,6 +106,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     button:hover {
         background-color: #E87A00;
     }
+
+    .additional-info {
+            margin-top: 20px;
+        }
+
+        .additional-info a {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #E87A00;
+            font-weight: bold;
+        }
 </style>
 </style>
 
@@ -135,6 +147,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>
             </div>
         </section>
+
+        <div class="additional-info">
+            <a href="view_point_history.php?id=<?php echo $user_id; ?>" target="_blank">View Point History</a><br>
+            <a href="view_module_progress.php?id=<?php echo $user_id; ?>" target="_blank">View Module Progress</a><br>
+            <a href="view_event_history.php?id=<?php echo $user_id; ?>" target="_blank">View Event History</a><br>
+         </div>
+
     </div>
 </body>
 
