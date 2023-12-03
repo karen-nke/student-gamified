@@ -122,9 +122,10 @@ if (isset($_POST['submit'])) {
                 <input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
             </div>
             <select name="gender">
+                <option value="rather_not_to_say">Rather Not To Say</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
-                <option value="rather_not_to_say">Rather Not To Say</option>
+                
             </select>
             <div class="input-group">
                 <input type="password" placeholder="Password" name="password" id="password" value="<?php echo $_POST['password']; ?>" required>
