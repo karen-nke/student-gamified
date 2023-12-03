@@ -62,7 +62,7 @@ if (!$softSkillsResult) {
                                     <td>
                                         <a class="edit-link" href="edit_c1.php?id=<?php echo $row['id']; ?>">Challenge1</a><br><br>
                                         <a class="edit-link" href="edit_c2.php?id=<?php echo $row['id']; ?>">Challenge2</a><br><br>
-                                        <a class="edit-link" href="edit_c3.php?id=<?php echo $row['id']; ?>">Challenge3</a>
+                                    
                                     </td>
                                   
                                 </tr>
