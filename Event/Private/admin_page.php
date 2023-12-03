@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
     
 require_once('../Public/db_connect.php');
 require_once('Part/header.php');
-require_once('logic_controller.php');
+
 
 ?>
 

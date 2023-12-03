@@ -33,6 +33,7 @@ if (isset($_POST['submit'])) {
 
         if($row ['user_role_id'] === "1"){
             header("Location: ../../Private/admin_page.php");
+            $_SESSION['username'] = $row['username'];
 
         }else("Location:../index.php");
        
