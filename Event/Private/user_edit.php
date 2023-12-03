@@ -63,16 +63,17 @@ if (!$userInfoResult) {
                     </thead>
                     <tbody>
                         <?php
-                        while ($row = $userInfoResult->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>{$row['id']}</td>";
-                            echo "<td>{$row['username']}</td>";
-                            echo "<td>{$row['email']}</td>";
-                            echo "<td>{$row['points']}</td>";
-                            echo "<td>{$row['gender']}</td>";
-                            echo "<td><a href='edit_user.php?id={$row['id']}'>Edit</a></td>";
-                            echo "</tr>";
-                        }
+                        while ($row = $userInfoResult->fetch_assoc()){ ?>
+                            <tr>
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo $row['username']; ?></td>
+                                <td><?php echo $row['email']; ?></td>
+                                <td><?php echo $row['points']; ?></td>
+                                <td><?php echo $row['gender']; ?></td>
+                                <td><a class='edit-link' href='edit_user.php?id=<?php echo $row['id']; ?>'>Edit</a></td>
+                            </tr>
+                        <?php }
+
                         ?>
                     </tbody>
                 </table>

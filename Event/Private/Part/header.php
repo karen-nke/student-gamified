@@ -8,6 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <div class="menu-item">
         <div class="menu">
             <a href="../Public/index.php">Home</a>
+            <a href="admin_page.php">Admin</a>
         </div>
 
 <?php
