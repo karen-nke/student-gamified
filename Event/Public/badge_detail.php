@@ -1,10 +1,24 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
-session_start();
+// Start the session if not already started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Include necessary files
 require_once('db_connect.php');
 require_once('Part/header.php');
+require_once('logic_controller.php');
+
+// Check if the user is authenticated
+if (!isset($_SESSION["user_id"])) {
+    // Redirect to the login page if not authenticated
+    header("Location: login.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>

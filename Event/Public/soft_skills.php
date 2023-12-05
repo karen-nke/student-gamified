@@ -1,8 +1,14 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
-session_start();
+// Start the session if not already started
+if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+    
+// Include necessary files
 require_once('db_connect.php');
 require_once('Part/header.php');
 require_once('logic_controller.php');
@@ -113,6 +119,10 @@ if (!$data) {
                         
                                         </div>
                                         <p class="completion-text"><?php echo $completionText; ?></p>
+
+                                        <?php if (!isset($_SESSION["username"])) { ?>
+                                                <a href="Login/Login.php"><button class="challenge-button">Login to Make Progress</button></a>
+                                           <?php } ?>
                                 </div>
 
                                 
