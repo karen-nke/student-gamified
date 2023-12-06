@@ -14,7 +14,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <?php
         if (isset($_SESSION['username'])) {
             echo "
-                <button class=\"register-button\"><a href=\"Login/logout.php\">Logout</a></button>
+                <button class=\"register-button\"><a href=\"../Public/Login/logout.php\">Logout</a></button>
             ";
         } else {
             echo "
