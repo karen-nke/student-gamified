@@ -528,8 +528,6 @@ function getSkillImage($soft_skill_id) {
 
 /* End of Soft Skills Page*/
 
-
-
 function initializeUserLevels($conn, $user_id) {
     // Check if the user already has a record in user_levels
     $checkUserLevelsQuery = "SELECT * FROM user_levels WHERE user_id = ?";
