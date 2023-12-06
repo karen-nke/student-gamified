@@ -171,62 +171,6 @@ require_once('logic_controller.php');
 </html>
 
 <style>
-   .section-container{
-        display:flex;
-        flex-direction:column;
-        margin-top:50px;
-    }
 
-    .section-container .card-container {
-        display:flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-
-
-    .card-container .event-card {
-            width: 300px;
-            margin: 20px;
-            padding: 15px;
-            border: 1px solid #D89C60;
-            border-radius: 8px;
-            float: left;
-            background-color: white;
-     }
-
-    .event-card img{
-   
-    max-width: 100%;
-    height: auto;
-    border-radius: 6px;
-
-   
-    
-    }
-
-   .section-container .event-card h2{
-        color: #E87A00;
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 42px;
-        text-align: center;
-    }
-
-    .section-container .event-card p{
-        
-        color: #045174;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 30px;
-        text-align: center;
-    }
-    .section-container h2{
-        color: #E87A00;
-        font-size: 32px;
-        font-weight: 700;
-        line-height: 18px;
-        padding-bottom:25px;
-        margin:auto;
-    }
 
 </style>

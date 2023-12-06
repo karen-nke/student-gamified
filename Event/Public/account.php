@@ -353,9 +353,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
   
     <button class="btn"><a href="point_history.php">Point History</a></button>
 
+    <!--Account Deletion - Not Workable 
+
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <button class="btn-delete" type="submit" name="delete_account_confirm">Delete Account</button>
-    </form>
+    </form> -->
 
 </div>    
 
