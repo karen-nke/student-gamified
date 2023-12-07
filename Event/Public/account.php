@@ -303,7 +303,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_account_confirm
             }
 
             $minPointsForBadge = 50; 
-            $minUsersForBadge = 5; 
+            $minUsersForBadge = 4; 
 
             if ($userRank == 1 && $points >= $minPointsForBadge && $totalUsers > $minUsersForBadge) {
                 echo '<img src="Image/Rank_Unlocked.png" alt="Rank Unlocked Badge">';

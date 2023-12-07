@@ -1,0 +1,118 @@
+User Creation & Login 
+
+@startuml
+participant User
+participant System
+database Database
+
+activate User
+User -> System: Register with email and password
+deactivate User
+
+activate System
+System -> Database: Check if email exists
+alt Email doesn't exist
+    activate Database
+    Database --> System: Email does not exist
+    deactivate Database
+    System -> Database: Create new user
+    activate Database
+    Database --> System: User created
+    deactivate Database
+    System --> User: Registration successful
+else Email exists
+    activate Database
+    Database --> System: Email already exists
+    deactivate Database
+    System --> User: Registration failed\nEmail already in use
+end
+deactivate System
+
+activate User
+User -> System: Login with email and password
+deactivate User
+
+activate System
+System -> Database: Fetch user data
+activate Database
+Database --> System: User data
+deactivate Database
+System --> User: Authentication successful
+deactivate System
+@enduml
+
+// Level System 
+@startuml
+participant User
+participant "Points System" as PointsSystem
+participant "Level-Up System" as LevelUpSystem
+database Database
+
+activate User
+User -> PointsSystem: Earn Points
+activate PointsSystem
+PointsSystem -> LevelUpSystem: Check Points for Level-Up
+activate LevelUpSystem
+LevelUpSystem -> LevelUpSystem: Determine if user can level up
+deactivate LevelUpSystem
+PointsSystem -> Database: Update User's Level (if level up)
+activate Database
+Database --> PointsSystem: Confirmation (if level up)
+deactivate Database
+PointsSystem --> User: Display Updated Level (if level up)
+deactivate PointsSystem
+deactivate User
+@enduml
+
+//Challenge System 
+@startuml
+participant User
+participant "Challenge System" as ChallengeSystem
+participant "Points System" as PointsSystem
+participant "Reward System" as RewardSystem
+database Database
+
+activate User
+User -> ChallengeSystem: Start Challenge
+activate ChallengeSystem
+ChallengeSystem -> ChallengeSystem: Record user started challenge
+deactivate ChallengeSystem
+
+activate User
+User -> ChallengeSystem: Complete Challenge
+activate ChallengeSystem
+ChallengeSystem -> ChallengeSystem: Record challenge completion
+ChallengeSystem -> PointsSystem: Earn Points for Challenge Completion
+ChallengeSystem -> RewardSystem: Earn Challenge Completion Badge
+deactivate ChallengeSystem
+
+activate User
+User -> ChallengeSystem: Complete Module Challenges
+activate ChallengeSystem
+ChallengeSystem -> ChallengeSystem: Record module challenges completion
+ChallengeSystem -> PointsSystem: Earn Points for Module Completion
+ChallengeSystem -> RewardSystem: Earn Module Completion Badge
+deactivate ChallengeSystem
+
+activate User
+User -> RewardSystem: Earn Badges
+activate RewardSystem
+RewardSystem -> Database: Fetch user's earned badges
+activate Database
+Database --> RewardSystem: User's earned badges
+deactivate Database
+RewardSystem --> User: Display Earned Badges
+deactivate RewardSystem
+deactivate User
+
+
+User -> PointsSystem: View Point History
+activate PointsSystem
+PointsSystem -> Database: Fetch point history
+activate Database
+Database --> PointsSystem: User's point history
+deactivate Database
+PointsSystem --> User: Display Point History
+deactivate PointsSystem
+deactivate User
+@enduml
