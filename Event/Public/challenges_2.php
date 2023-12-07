@@ -177,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <a href="challenges_3.php?skill=<?php echo $skill; ?>"><button class ="button" type="button">Next Challenge</button></a>
                 
                 <?php else: ?>
-                <p>For testing purposes, the answer is all 'A'</p>
+                
                 <form method="post">
                     <?php foreach ($questions as $index => $question): ?>
                             <div class="question-container">
@@ -193,6 +193,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <?php endforeach; ?>
 
                     <button class ="button" type="submit" name="submit">Submit Answers</button>
+
+                    <p> Answer </p>
+                    <p><?php echo $data['correct_answer_1']?></p>
+                    <p><?php echo $data['correct_answer_2']?></p>
+                    <p><?php echo $data['correct_answer_3']?></p>
                 </form>
             <?php endif; ?>
         </div>
