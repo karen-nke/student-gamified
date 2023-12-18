@@ -46,7 +46,6 @@ require_once('logic_controller.php');
 
                                         <div class="input-group">
                                                 <?php
-                                                // Assuming you have a login system and the username is stored in the session
                                                 if (isset($_SESSION["username"])) {
                                                         $username = $_SESSION["username"];
                                                         echo "<input type='text' id='username' placeholder='Username' name='username' value='$username' readonly>";

@@ -27,9 +27,9 @@ require_once('logic_controller.php');
 
 <body>
 
-    <section class="leaderboard">
+    <section class="page-container">
         <img src="Image/Leaderboard_Icon.png" style="width:200px;height:250px;" class="logo-centered"></a>
-        <h2>Leaderboard</h2>
+        <h2 class="title">Leaderboard</h2>
 
         <div class="container">
             <?php
