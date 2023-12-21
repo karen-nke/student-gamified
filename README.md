@@ -47,6 +47,7 @@ Open your web browser and go to ` http://localhost/your-folder`
     ![Screenshot 2023-11-20 at 9 24 30 PM](https://github.com/karen-nke/student-gamified/assets/103889430/8d5b2da9-45b5-4b36-8e01-b0e7eee0ced9)
 
   - There are two type of Bagdes, Completion Badges and Acheivement Badges. User can see their unlocked badges (showed in color) in their profile
+    
     ![Screenshot 2023-11-20 at 9 24 44 PM](https://github.com/karen-nke/student-gamified/assets/103889430/68996c88-04af-446b-9ffb-93406b381282)
 
 - **Leaderboard:**
