@@ -1,4 +1,4 @@
-# Soft Skill Gamification
+# Soft Skill Gamification (Final Year Project)
 
 A soft skills development platform for higher eduction with gamification element
 
@@ -53,5 +53,8 @@ Open your web browser and go to ` http://localhost/your-folder`
 - **Leaderboard:**
    - User can view the ranking of other users on the Leaderboard. 
     <img width="889" alt="Screenshot 2023-12-04 at 4 06 44 PM" src="https://github.com/karen-nke/student-gamified/assets/103889430/4d9a6fb7-ba2e-4e6a-8f5e-71aa003e9422">
+
+
+_Bachelor of Software Engineering Final Year Project (September 2023 - December 2023)_
 
      
